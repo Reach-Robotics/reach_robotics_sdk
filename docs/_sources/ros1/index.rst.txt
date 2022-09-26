@@ -1,7 +1,7 @@
 ROS
 ================================================
 
-Here are details for usage of the Blueprint lab ROS1 Packages
+Here are details for usage of the Reach Robotics ROS1 Packages
 
 Installation
 ---------------------
@@ -12,13 +12,13 @@ First clone the repository to your workspace
 .. code-block:: bash
 
    cd ~/catkin_ws/src
-   git clone https://github.com/blueprint-lab/Blueprint_Lab_Software.git
+   git clone https://github.com/Reach-Robotics/reach_robotics_sdk.git
 
 Now install the bplprotocol python package
 
 .. code-block:: bash
 
-   cd Blueprint_Lab_Software/bplprotocol
+   cd reach_robotics_sdk/bplprotocol
    pip install .
 
 To build all packages

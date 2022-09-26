@@ -1,7 +1,7 @@
 ROS2
 ================================================
 
-Here are details for usage of the Blueprint lab ROS2 Packages
+Here are details for usage of the Reach Robotics ROS2 Packages
 
 Installation
 ---------------------
