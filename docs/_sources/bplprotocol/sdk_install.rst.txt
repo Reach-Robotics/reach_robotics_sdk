@@ -1,7 +1,7 @@
 Access to the SDK
 =====================================
 
-For Full use access to the SDK download the required files from the 'Reach Robotics Website. <https://reachrobotics.com/github-page/>`_.
+For Full use access to the SDK download the required files from the `Reach Robotics Website. <https://reachrobotics.com/github-page/>`_
 Use the password provided to you from Reach Robotics.
 
 
