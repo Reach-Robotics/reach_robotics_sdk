@@ -1,0 +1,11 @@
+from bplprotocol import BPLProtocol
+
+data = [0x01, 0x05, 0x50, 0xCE, 0x05, 0xD6]#  , 0x00]
+
+data2 = [0x06, 0x05, 0x50, 0xCE, 0x05, 0x36]
+
+
+# print(list(BPLProtocol.encode_floats([1.1, 2.2, 3.0])))
+
+
+print(BPLProtocol.parse_packet(bytes(data2)))

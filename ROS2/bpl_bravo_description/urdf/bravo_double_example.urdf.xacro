@@ -1,0 +1,15 @@
+<?xml version="1.0" ?>
+<robot name="bravo_7_example" xmlns:xacro="http://ros.org/wiki/xacro">
+  <xacro:include filename="$(find bpl_bravo_description)/urdf/bravo_7.urdf.xacro"/>
+    <link name="base_link"/>
+
+    <xacro:bravo_7 parent="base_link" name="bravo_a">
+      <origin xyz="0.430 0 0" rpy="0 0 0"/>
+    </xacro:bravo_7>
+
+  <xacro:include filename="$(find bpl_bravo_description)/urdf/bravo_5.urdf.xacro"/>
+    <xacro:bravo_5 parent="base_link" name="bravo_b">
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+    </xacro:bravo_5>
+
+</robot>
