@@ -10,7 +10,7 @@ Please see https://reach-robotics.github.io/reach_robotics_sdk/ for more documen
 
 ## Documentation
 For Documents and manuals please see: 
-https://reach-robotics.github.io/reach_robotics_sdk//documentation/index.html
+https://reach-robotics.github.io/reach_robotics_sdk/documentation/index.html
 
 
 ## License
