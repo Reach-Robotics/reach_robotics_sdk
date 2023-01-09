@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ROS &mdash; Reach Robotics Software 1.0.0 documentation</title>
+  <title>ROS &mdash; Reach Robotics Software 1.1.0 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
@@ -16,7 +16,9 @@
         <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -79,8 +81,8 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>ROS</li>
+      <li><a href="../index.html" class="icon icon-home"></a></li>
+      <li class="breadcrumb-item active">ROS</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/ros1/index.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -91,63 +93,63 @@
            <div itemprop="articleBody">
              
   <section id="ros">
-<h1>ROS<a class="headerlink" href="#ros" title="Permalink to this headline"></a></h1>
+<h1>ROS<a class="headerlink" href="#ros" title="Permalink to this heading"></a></h1>
 <p>Here are details for usage of the Reach Robotics ROS1 Packages</p>
 <section id="installation">
-<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline"></a></h2>
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this heading"></a></h2>
 <p>To install ROS please follow instructions at <a class="reference external" href="http://wiki.ros.org/ROS/Installation">http://wiki.ros.org/ROS/Installation</a>.</p>
 <p>First clone the repository to your workspace</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> ~/catkin_ws/src
-git clone https://github.com/Reach-Robotics/reach_robotics_sdk.git
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~/catkin_ws/src
+git<span class="w"> </span>clone<span class="w"> </span>https://github.com/Reach-Robotics/reach_robotics_sdk.git
 </pre></div>
 </div>
 <p>Now install the bplprotocol python package</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> reach_robotics_sdk/bplprotocol
-pip install .
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>reach_robotics_sdk/bplprotocol
+pip<span class="w"> </span>install<span class="w"> </span>.
 </pre></div>
 </div>
 <p>To build all packages</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> ~/catkin_ws
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~/catkin_ws
 catkin_make
 </pre></div>
 </div>
 </section>
 <section id="usage">
-<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline"></a></h2>
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this heading"></a></h2>
 <p>The ROS Folder is split into several ROS packages.</p>
 <section id="bpl-passthrough">
-<h3>bpl_passthrough<a class="headerlink" href="#bpl-passthrough" title="Permalink to this headline"></a></h3>
+<h3>bpl_passthrough<a class="headerlink" href="#bpl-passthrough" title="Permalink to this heading"></a></h3>
 <p>The BPL Passthrough is the core package that allows communication to bpl products.
 You can connect to a manipulator via serial or UDP (Bravo arms only).
 The <code class="code docutils literal notranslate"><span class="pre">bpl_msgs/Packet</span></code> data field is structured as a list of uint8. This is a list of bytes.
 For incoming floats, they will be encoded as 4 bytes. Refer to the bplprotocol SDK on how to decode these bytes into floats.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>roslaunch bpl_passthrough udp_passthrough.launch
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>roslaunch<span class="w"> </span>bpl_passthrough<span class="w"> </span>udp_passthrough.launch
 </pre></div>
 </div>
 <p>or</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>roslaunch bpl_passthrough serial_passthrough.launch
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>roslaunch<span class="w"> </span>bpl_passthrough<span class="w"> </span>serial_passthrough.launch
 </pre></div>
 </div>
 <section id="published-topics">
-<h4>Published Topics<a class="headerlink" href="#published-topics" title="Permalink to this headline"></a></h4>
+<h4>Published Topics<a class="headerlink" href="#published-topics" title="Permalink to this heading"></a></h4>
 <p><code class="code docutils literal notranslate"><span class="pre">/rx</span></code> (<code class="code docutils literal notranslate"><span class="pre">bpl_msgs/Packet</span></code>) - Received Packets from the manipulator</p>
 </section>
 <section id="subscribed-topics">
-<h4>Subscribed Topics<a class="headerlink" href="#subscribed-topics" title="Permalink to this headline"></a></h4>
+<h4>Subscribed Topics<a class="headerlink" href="#subscribed-topics" title="Permalink to this heading"></a></h4>
 <p><code class="code docutils literal notranslate"><span class="pre">/tx</span></code> (<code class="code docutils literal notranslate"><span class="pre">bpl_msgs/Packet</span></code>) - Packets that will be sent to the manipulator</p>
 </section>
 <section id="parameters-udp-passthrough-py">
-<h4>Parameters - udp_passthrough.py<a class="headerlink" href="#parameters-udp-passthrough-py" title="Permalink to this headline"></a></h4>
+<h4>Parameters - udp_passthrough.py<a class="headerlink" href="#parameters-udp-passthrough-py" title="Permalink to this heading"></a></h4>
 <p><code class="code docutils literal notranslate"><span class="pre">ip_address</span></code> (string) - IP Address of the arm. (Defaults to 192.168.2.3)</p>
 <p><code class="code docutils literal notranslate"><span class="pre">port</span></code> (int) - UDP Port of the arm. (Defaults to 6789)</p>
 </section>
 <section id="parameters-serial-passthrough-py">
-<h4>Parameters - serial_passthrough.py<a class="headerlink" href="#parameters-serial-passthrough-py" title="Permalink to this headline"></a></h4>
+<h4>Parameters - serial_passthrough.py<a class="headerlink" href="#parameters-serial-passthrough-py" title="Permalink to this heading"></a></h4>
 <p><code class="code docutils literal notranslate"><span class="pre">serial_port</span></code> (string) - Serial Port to connect to the arm (Defaults to “/dev/ttyUSB0”)</p>
 <p><code class="code docutils literal notranslate"><span class="pre">baudrate</span></code> (int) - Baudrate port of the serial connection. (Defaults to 115200)</p>
 </section>
 <section id="examples">
-<h4>Examples<a class="headerlink" href="#examples" title="Permalink to this headline"></a></h4>
+<h4>Examples<a class="headerlink" href="#examples" title="Permalink to this heading"></a></h4>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="bpl_passthrough/request_joint_positions.html">Using bpl_passthrough to get joint positions</a></li>
@@ -156,19 +158,19 @@ For incoming floats, they will be encoded as 4 bytes. Refer to the bplprotocol S
 </section>
 </section>
 <section id="bpl-alpha-description">
-<h3>bpl_alpha_description<a class="headerlink" href="#bpl-alpha-description" title="Permalink to this headline"></a></h3>
+<h3>bpl_alpha_description<a class="headerlink" href="#bpl-alpha-description" title="Permalink to this heading"></a></h3>
 <p>The BPL Alpha Description package contains the Universal Robot Description File (URDF) files of the alpha range of manipulators.</p>
 <p>Supported Products:</p>
 <ul class="simple">
 <li><p>RA-5001 - Reach Alpha 5</p></li>
 </ul>
 <p>To view an Alpha 5 URDF:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>roslaunch bpl_alpha_description view_urdf.launch
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>roslaunch<span class="w"> </span>bpl_alpha_description<span class="w"> </span>view_urdf.launch
 </pre></div>
 </div>
 </section>
 <section id="bpl-bravo-description">
-<h3>bpl_bravo_description<a class="headerlink" href="#bpl-bravo-description" title="Permalink to this headline"></a></h3>
+<h3>bpl_bravo_description<a class="headerlink" href="#bpl-bravo-description" title="Permalink to this heading"></a></h3>
 <p>The BPL Bravo Description package contains the Universal Robot Description File (URDF) files for the bravo range of manipulators.</p>
 <p>Supported Products:</p>
 <ul class="simple">
@@ -176,16 +178,16 @@ For incoming floats, they will be encoded as 4 bytes. Refer to the bplprotocol S
 <li><p>RB-5001 - Reach Bravo 5</p></li>
 </ul>
 <p>To view an Bravo 7 URDF:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>roslaunch bpl_bravo_description view_bravo_7.launch
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>roslaunch<span class="w"> </span>bpl_bravo_description<span class="w"> </span>view_bravo_7.launch
 </pre></div>
 </div>
 <p>To view an Bravo 5 URDF:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>roslaunch bpl_bravo_description view_bravo_5.launch
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>roslaunch<span class="w"> </span>bpl_bravo_description<span class="w"> </span>view_bravo_5.launch
 </pre></div>
 </div>
 </section>
 <section id="bpl-bravo-description-mk2">
-<h3>bpl_bravo_description_mk2<a class="headerlink" href="#bpl-bravo-description-mk2" title="Permalink to this headline"></a></h3>
+<h3>bpl_bravo_description_mk2<a class="headerlink" href="#bpl-bravo-description-mk2" title="Permalink to this heading"></a></h3>
 <p>The BPL Bravo Description MK2 package contains the Universal Robot Description File (URDF) files for the bravo mk2 range of manipulators.</p>
 <p>Supported Products:</p>
 <ul class="simple">
@@ -194,15 +196,15 @@ For incoming floats, they will be encoded as 4 bytes. Refer to the bplprotocol S
 <li><p>RB-7201 - Reach Bravo 7 MK2 with FT sensor</p></li>
 </ul>
 <p>To view an Bravo 5 URDF:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>roslaunch bpl_bravo_description_mk2 view_bravo_5.launch
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>roslaunch<span class="w"> </span>bpl_bravo_description_mk2<span class="w"> </span>view_bravo_5.launch
 </pre></div>
 </div>
 <p>To view an Bravo 7 URDF:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>roslaunch bpl_bravo_description_mk2 view_bravo_7.launch
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>roslaunch<span class="w"> </span>bpl_bravo_description_mk2<span class="w"> </span>view_bravo_7.launch
 </pre></div>
 </div>
 <p>To view an Bravo 7 with FT URDF:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>roslaunch bpl_bravo_description_mk2 view_bravo_7_ft.launch
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>roslaunch<span class="w"> </span>bpl_bravo_description_mk2<span class="w"> </span>view_bravo_7_ft.launch
 </pre></div>
 </div>
 </section>

@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Using bpl_passthrough to get joint positions &mdash; Reach Robotics Software 1.0.0 documentation</title>
+  <title>Using bpl_passthrough to get joint positions &mdash; Reach Robotics Software 1.1.0 documentation</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
@@ -16,7 +16,9 @@
         <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
         <script src="../../_static/jquery.js"></script>
         <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
         <script src="../../_static/tabs.js"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
@@ -80,9 +82,9 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="../index.html">ROS</a> &raquo;</li>
-      <li>Using bpl_passthrough to get joint positions</li>
+      <li><a href="../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">ROS</a></li>
+      <li class="breadcrumb-item active">Using bpl_passthrough to get joint positions</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../_sources/ros1/bpl_passthrough/request_joint_positions.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -93,15 +95,15 @@
            <div itemprop="articleBody">
              
   <section id="using-bpl-passthrough-to-get-joint-positions">
-<h1>Using bpl_passthrough to get joint positions<a class="headerlink" href="#using-bpl-passthrough-to-get-joint-positions" title="Permalink to this headline"></a></h1>
+<h1>Using bpl_passthrough to get joint positions<a class="headerlink" href="#using-bpl-passthrough-to-get-joint-positions" title="Permalink to this heading"></a></h1>
 <p>This example demonstrates how to request read joint
 positions from joints on a manipulator.</p>
 <p>To launch this example run the launch file.</p>
 <div class="sphinx-tabs docutils container">
-<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-0-0-0" aria-selected="true" class="sphinx-tabs-tab" id="tab-0-0-0" name="0-0" role="tab" tabindex="0">Serial</button><button aria-controls="panel-0-0-1" aria-selected="false" class="sphinx-tabs-tab" id="tab-0-0-1" name="0-1" role="tab" tabindex="-1">UDP</button></div><div aria-labelledby="tab-0-0-0" class="sphinx-tabs-panel" id="panel-0-0-0" name="0-0" role="tabpanel" tabindex="0"><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>roslaunch bpl_passthrough request_joint_positions_serial.launch serial_port:<span class="o">=</span>/dev/ttyUSB0 frequency:<span class="o">=</span><span class="m">20</span>
+<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-0-0-0" aria-selected="true" class="sphinx-tabs-tab" id="tab-0-0-0" name="0-0" role="tab" tabindex="0">Serial</button><button aria-controls="panel-0-0-1" aria-selected="false" class="sphinx-tabs-tab" id="tab-0-0-1" name="0-1" role="tab" tabindex="-1">UDP</button></div><div aria-labelledby="tab-0-0-0" class="sphinx-tabs-panel" id="panel-0-0-0" name="0-0" role="tabpanel" tabindex="0"><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>roslaunch<span class="w"> </span>bpl_passthrough<span class="w"> </span>request_joint_positions_serial.launch<span class="w"> </span>serial_port:<span class="o">=</span>/dev/ttyUSB0<span class="w"> </span>frequency:<span class="o">=</span><span class="m">20</span>
 </pre></div>
 </div>
-</div><div aria-labelledby="tab-0-0-1" class="sphinx-tabs-panel" hidden="true" id="panel-0-0-1" name="0-1" role="tabpanel" tabindex="0"><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>roslaunch bpl_passthrough request_joint_positions_udp.launch ip_address:<span class="o">=</span><span class="m">192</span>.168.2.4 port:<span class="o">=</span><span class="m">6789</span> frequency:<span class="o">=</span><span class="m">20</span>
+</div><div aria-labelledby="tab-0-0-1" class="sphinx-tabs-panel" hidden="true" id="panel-0-0-1" name="0-1" role="tabpanel" tabindex="0"><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>roslaunch<span class="w"> </span>bpl_passthrough<span class="w"> </span>request_joint_positions_udp.launch<span class="w"> </span>ip_address:<span class="o">=</span><span class="m">192</span>.168.2.4<span class="w"> </span>port:<span class="o">=</span><span class="m">6789</span><span class="w"> </span>frequency:<span class="o">=</span><span class="m">20</span>
 </pre></div>
 </div>
 </div></div>
