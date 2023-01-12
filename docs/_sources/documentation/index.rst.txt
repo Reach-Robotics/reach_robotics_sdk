@@ -25,5 +25,5 @@ Master Arm Integration Manual :download:`pdf </docs/Master-Arm-Manual-V3.0.pdf>`
 Reach System Communication Protocol
 ---------------------------------------
 
-Reach System Communication Protocol (Lite) :download:`pdf </docs/Reach System - Communication Protocol Lite (V1.11.2).pdf>`
+Reach System Communication Protocol (Lite) :download:`pdf </docs/Reach System - Communication Protocol Lite (V1.11.3).pdf>`
 
