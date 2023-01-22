@@ -1,0 +1,9 @@
+<?xml version="1.0" ?>
+<robot name="RA_2141_example" xmlns:xacro="http://ros.org/wiki/xacro">
+  <xacro:include filename="$(find bpl_alpha_description)/urdf/RA_2141.urdf.xacro"/>
+    <link name="base_link"/>
+
+    <xacro:RA_2141 parent="base_link" name="RA_2141">
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+    </xacro:RA_2141>
+</robot>

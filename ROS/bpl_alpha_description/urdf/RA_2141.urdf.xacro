@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
-<robot name="RA_2130" xmlns:xacro="http://ros.org/wiki/xacro">
+<robot name="RA_2141" xmlns:xacro="http://ros.org/wiki/xacro">
 
 
-    <xacro:macro name="RA_2130" params="parent *origin name:=RA_2130">
+    <xacro:macro name="RA_2141" params="parent *origin name:=RA_2141">
         <joint name="${name}_joint" type="fixed">
             <xacro:insert_block name="origin" />
             <parent link="${parent}"/>
