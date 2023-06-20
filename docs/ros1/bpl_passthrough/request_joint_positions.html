@@ -7,6 +7,7 @@
   <title>Using bpl_passthrough to get joint positions &mdash; Reach Robotics Software 1.1.0 documentation</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/tabs.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -16,14 +17,14 @@
         <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
         <script src="../../_static/jquery.js"></script>
         <script src="../../_static/underscore.js"></script>
-        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../../_static/doctools.js"></script>
-        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="../../_static/clipboard.min.js"></script>
+        <script src="../../_static/copybutton.js"></script>
         <script src="../../_static/tabs.js"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="ROS2" href="../../ros2/index.html" />
+    <link rel="next" title="ROS 2" href="../../ros2/index.html" />
     <link rel="prev" title="ROS" href="../index.html" /> 
 </head>
 
@@ -32,12 +33,16 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../../index.html" class="icon icon-home"> Reach Robotics Software
-            <img src="../../_static/Reach.Robotics-Logo.White.png" class="logo" alt="Logo"/>
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Reach Robotics Software
+              <img src="../../_static/Reach.Robotics-Logo.White.png" class="logo" alt="Logo"/>
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -45,8 +50,7 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../../bplprotocol/index.html">BPL Protocol</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../C/index.html">BPL Protocol - C/C++ SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../gettingstarted/index.html">Getting Started</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">ROS</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../index.html#installation">Installation</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../index.html#usage">Usage</a><ul class="current">
@@ -65,7 +69,7 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../../ros2/index.html">ROS2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ros2/index.html">ROS 2</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../documentation/index.html">Documentation</a></li>
 </ul>
 
@@ -82,7 +86,7 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../../index.html" class="icon icon-home"></a></li>
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../index.html">ROS</a></li>
       <li class="breadcrumb-item active">Using bpl_passthrough to get joint positions</li>
       <li class="wy-breadcrumbs-aside">
@@ -95,15 +99,15 @@
            <div itemprop="articleBody">
              
   <section id="using-bpl-passthrough-to-get-joint-positions">
-<h1>Using bpl_passthrough to get joint positions<a class="headerlink" href="#using-bpl-passthrough-to-get-joint-positions" title="Permalink to this heading"></a></h1>
+<h1>Using bpl_passthrough to get joint positions<a class="headerlink" href="#using-bpl-passthrough-to-get-joint-positions" title="Permalink to this headline"></a></h1>
 <p>This example demonstrates how to request read joint
 positions from joints on a manipulator.</p>
 <p>To launch this example run the launch file.</p>
 <div class="sphinx-tabs docutils container">
-<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-0-0-0" aria-selected="true" class="sphinx-tabs-tab" id="tab-0-0-0" name="0-0" role="tab" tabindex="0">Serial</button><button aria-controls="panel-0-0-1" aria-selected="false" class="sphinx-tabs-tab" id="tab-0-0-1" name="0-1" role="tab" tabindex="-1">UDP</button></div><div aria-labelledby="tab-0-0-0" class="sphinx-tabs-panel" id="panel-0-0-0" name="0-0" role="tabpanel" tabindex="0"><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>roslaunch<span class="w"> </span>bpl_passthrough<span class="w"> </span>request_joint_positions_serial.launch<span class="w"> </span>serial_port:<span class="o">=</span>/dev/ttyUSB0<span class="w"> </span>frequency:<span class="o">=</span><span class="m">20</span>
+<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-0-0-0" aria-selected="true" class="sphinx-tabs-tab" id="tab-0-0-0" name="0-0" role="tab" tabindex="0">Serial</button><button aria-controls="panel-0-0-1" aria-selected="false" class="sphinx-tabs-tab" id="tab-0-0-1" name="0-1" role="tab" tabindex="-1">UDP</button></div><div aria-labelledby="tab-0-0-0" class="sphinx-tabs-panel" id="panel-0-0-0" name="0-0" role="tabpanel" tabindex="0"><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>roslaunch bpl_passthrough request_joint_positions_serial.launch serial_port:<span class="o">=</span>/dev/ttyUSB0 frequency:<span class="o">=</span><span class="m">20</span>
 </pre></div>
 </div>
-</div><div aria-labelledby="tab-0-0-1" class="sphinx-tabs-panel" hidden="true" id="panel-0-0-1" name="0-1" role="tabpanel" tabindex="0"><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>roslaunch<span class="w"> </span>bpl_passthrough<span class="w"> </span>request_joint_positions_udp.launch<span class="w"> </span>ip_address:<span class="o">=</span><span class="m">192</span>.168.2.4<span class="w"> </span>port:<span class="o">=</span><span class="m">6789</span><span class="w"> </span>frequency:<span class="o">=</span><span class="m">20</span>
+</div><div aria-labelledby="tab-0-0-1" class="sphinx-tabs-panel" hidden="true" id="panel-0-0-1" name="0-1" role="tabpanel" tabindex="0"><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>roslaunch bpl_passthrough request_joint_positions_udp.launch ip_address:<span class="o">=</span><span class="m">192</span>.168.2.4 port:<span class="o">=</span><span class="m">6789</span> frequency:<span class="o">=</span><span class="m">20</span>
 </pre></div>
 </div>
 </div></div>
@@ -156,13 +160,13 @@ It subscribes the to <code class="code docutils literal notranslate"><span class
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="../index.html" class="btn btn-neutral float-left" title="ROS" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="../../ros2/index.html" class="btn btn-neutral float-right" title="ROS2" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../../ros2/index.html" class="btn btn-neutral float-right" title="ROS 2" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2022, Reach Robotics.</p>
+    <p>&#169; Copyright 2023, Reach Robotics.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
