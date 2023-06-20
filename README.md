@@ -1,19 +1,3 @@
-   
-
-<style>
-div {
-  margin-bottom: 1px;
-  padding: 4px 12px;
-}
-
-.note {
-  background-color:  #e7f3fe;
-  border-left: 6px solid #2196F3;
-  color: #000000;
-}
-</style>
-
-
 [![Logo](docsrc/source/images/Reach.Robotics-Logo.White.png)](#) 
 
 The Reach Robotics SDK provides support for custom control of Reach Robotics products. Currently we offer support for Python, C and C++ as well as ROS/ROS 2 nodes. Follow the [instructions to get started](https://reach-robotics.github.io/reach_robotics_sdk/) and run some examples.
@@ -28,11 +12,7 @@ The Reach Robotics SDK provides support for custom control of Reach Robotics pro
     <img src="docsrc/source/images/Ros_logo.png" style="width: 100%;">
 </div>
 
-<div class="note">
-  <p><strong>Note!</strong> Full access of this SDK is reserved for customers who have purchased a PRO package. If you are interested in our products or full access to the SDK, visit our <a href="https://reachrobotics.com/">Website</a>, or contact our <a href="mailto:sales@reachrobotics.com/">Sales Team</a> (sales@reachrobotics.com).</p> 
-</div>
-
-<!-- **_NOTE:_** Full access of this SDK is reserved for customers who have purchased a PRO package. If you are interested in our products or full access to the SDK, visit our [Website](https://reachrobotics.com/), or contact our [Sales Team](mailto:sales%40reachrobotics.com/). -->
+**Note** Full access of this SDK is reserved for customers who have purchased a PRO package. If you are interested in our products or full access to the SDK, visit our [Website](https://reachrobotics.com/), or contact our sales team (sales@reachrobotics.com).
 
 ## Documentation
 Detailed SDK documentation is available on our GitHub pages
