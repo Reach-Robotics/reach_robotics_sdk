@@ -8,7 +8,7 @@ import logging
 try:
     from .packetID import PacketID
 except ModuleNotFoundError:
-    raise ImportError("Please install the Reach Robotics SDK Critical Components. See https://reach-robotics.github.io/reach_robotics_sdk/bplprotocol/sdk_install.html")
+    raise ImportError("Please install the Reach Robotics SDK Critical Components.")
 
 
 
