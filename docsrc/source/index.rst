@@ -40,3 +40,4 @@ the instructions to :ref:`Get Started<getting_started>` and run some examples.
    ros1/index
    ros2/index
    documentation/index
+   license/index
