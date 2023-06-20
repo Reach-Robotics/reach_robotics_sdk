@@ -9,7 +9,7 @@ The Reach Robotics SDK provides support for custom control of Reach Robotics pro
 </div>
 
 <div style="display: flex; justify-content: space-between;">
-    <img src="docsrc/source/images/Ros_logo.png" style="width: 100%;">
+    <img src="docsrc/source/images/Ros_logo.png" style="width: 90%;">
 </div>
 
 &nbsp;
