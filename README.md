@@ -12,7 +12,9 @@ The Reach Robotics SDK provides support for custom control of Reach Robotics pro
     <img src="docsrc/source/images/Ros_logo.png" style="width: 100%;">
 </div>
 
-**Note** Full access of this SDK is reserved for customers who have purchased a PRO package. If you are interested in our products or full access to the SDK, visit our [Website](https://reachrobotics.com/), or contact our sales team (sales@reachrobotics.com).
+&nbsp;
+
+> **Note** Full access of this SDK is reserved for customers who have purchased a PRO package. If you are interested in our products or full access to the SDK, visit our [Website](https://reachrobotics.com/), or contact our sales team (sales@reachrobotics.com).
 
 ## Documentation
 Detailed SDK documentation is available on our GitHub pages
