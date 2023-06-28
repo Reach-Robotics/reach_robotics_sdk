@@ -2,14 +2,11 @@
 
 The Reach Robotics SDK provides support for custom control of Reach Robotics products. Currently we offer support for Python, C and C++ as well as ROS/ROS 2 nodes. Follow the [instructions to get started](https://reach-robotics.github.io/reach_robotics_sdk/) and run some examples.
 
-<div style="display: flex; justify-content: space-between;">
-    <img src="docsrc/source/images/python-logo-only.png" style="width: 30%;">
-    <img src="docsrc/source/images/C_Logo.png" style="width: 30%;">
-    <img src="docsrc/source/images/ISO_C++_Logo.png" style="width: 30%;">
-</div>
-
-<div style="display: flex; justify-content: space-between;">
-    <img src="docsrc/source/images/Ros_logo.png" style="width: 90%;">
+<div align="center">
+    <img src="docsrc/source/images/python-logo-only.png" style="width: 10%;">
+    <img src="docsrc/source/images/C_Logo.png" style="width: 10%;">
+    <img src="docsrc/source/images/ISO_C++_Logo.png" style="width: 10%;">
+    <img src="docsrc/source/images/Ros_logo.png" style="width: 42%;">
 </div>
 
 &nbsp;
