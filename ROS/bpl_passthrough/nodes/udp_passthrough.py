@@ -40,7 +40,7 @@ class BPLPassthroughNode:
 
     def rx_receive(self):
         packet_reader = PacketReader()
-        # rate = rospy.Rate(10000)
+        rate = rospy.Rate(10000)
         while not rospy.is_shutdown():
 
             data = bytearray([])
@@ -68,7 +68,7 @@ class BPLPassthroughNode:
                     # rospy.loginfo("Publishing {}".format(ros_packet))
                     self.rx_publisher.publish(ros_packet)
 
-            # rate.sleep()
+            rate.sleep()
             pass
 
 
