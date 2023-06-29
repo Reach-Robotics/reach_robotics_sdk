@@ -7,6 +7,7 @@
   <title>ROS &mdash; Reach Robotics Software 1.1.0 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
       <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
       <link rel="stylesheet" href="../_static/tabs.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -16,14 +17,15 @@
         <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
-        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
-        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/clipboard.min.js"></script>
+        <script src="../_static/copybutton.js"></script>
+        <script src="../_static/tabs.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Using bpl_passthrough to get joint positions" href="bpl_passthrough/request_joint_positions.html" />
-    <link rel="prev" title="Decoding Packets" href="../C/examples/decoding_packets.html" /> 
+    <link rel="next" title="ROS 2" href="../ros2/index.html" />
+    <link rel="prev" title="Decoding Packets" href="../gettingstarted/examples/decoding_packets.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -31,12 +33,16 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../index.html" class="icon icon-home"> Reach Robotics Software
-            <img src="../_static/Reach.Robotics-Logo.White.png" class="logo" alt="Logo"/>
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Reach Robotics Software
+              <img src="../_static/Reach.Robotics-Logo.White.png" class="logo" alt="Logo"/>
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -44,16 +50,11 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../bplprotocol/index.html">BPL Protocol</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../C/index.html">BPL Protocol - C/C++ SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gettingstarted/index.html">Getting Started</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">ROS</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#usage">Usage</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#setup">Setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#packages">Packages</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#bpl-passthrough">bpl_passthrough</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#published-topics">Published Topics</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#subscribed-topics">Subscribed Topics</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#parameters-udp-passthrough-py">Parameters - udp_passthrough.py</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#parameters-serial-passthrough-py">Parameters - serial_passthrough.py</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#examples">Examples</a></li>
 </ul>
 </li>
@@ -64,8 +65,9 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../ros2/index.html">ROS2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ros2/index.html">ROS 2</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../documentation/index.html">Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license/index.html">License</a></li>
 </ul>
 
         </div>
@@ -81,7 +83,7 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../index.html" class="icon icon-home"></a></li>
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
       <li class="breadcrumb-item active">ROS</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/ros1/index.rst.txt" rel="nofollow"> View page source</a>
@@ -93,84 +95,119 @@
            <div itemprop="articleBody">
              
   <section id="ros">
-<h1>ROS<a class="headerlink" href="#ros" title="Permalink to this heading"></a></h1>
-<p>Here are details for usage of the Reach Robotics ROS1 Packages</p>
-<section id="installation">
-<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this heading"></a></h2>
-<p>To install ROS please follow instructions at <a class="reference external" href="http://wiki.ros.org/ROS/Installation">http://wiki.ros.org/ROS/Installation</a>.</p>
-<p>First clone the repository to your workspace</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~/catkin_ws/src
-git<span class="w"> </span>clone<span class="w"> </span>https://github.com/Reach-Robotics/reach_robotics_sdk.git
+<h1>ROS<a class="headerlink" href="#ros" title="Permalink to this headline"></a></h1>
+<p>This tutorial assumes you have pre-installed ROS for desktop on your computer.
+You can install ROS by following the instructions at <a class="reference external" href="http://wiki.ros.org/ROS/Installation">http://wiki.ros.org/ROS/Installation</a>.
+Additionally, you’ll need to install the Reach Robotics SDK and critical components. Instructions
+for installation can found in the <a class="reference internal" href="../gettingstarted/index.html#getting-started"><span class="std std-ref">Getting Started</span></a> section.</p>
+<section id="setup">
+<h2>Setup<a class="headerlink" href="#setup" title="Permalink to this headline"></a></h2>
+<p>To get started, source the ROS underlay,</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span> /opt/ros/noetic/setup.bash
 </pre></div>
 </div>
-<p>Now install the bplprotocol python package</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>reach_robotics_sdk/bplprotocol
-pip<span class="w"> </span>install<span class="w"> </span>.
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>It can be convenient to automatically source this script every time a new shell is launched.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span> <span class="s2">&quot;source /opt/ros/noetic/setup.bash&quot;</span> &gt;&gt; ~/.bashrc
+<span class="nb">source</span> ~/.bashrc
 </pre></div>
 </div>
-<p>To build all packages</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~/catkin_ws
+<p>Keep in mind, if you have more than one ROS distribution installed, ~/.bashrc must only source
+the setup.bash for the version you are currently using.</p>
+</div>
+<p>Now build the workspace by invoking catkin_make from the root of your catkin workspace,</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> ~/workspace
 catkin_make
 </pre></div>
 </div>
+<p>source the ROS overlay packages,</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span> /devel/setup.bash
+</pre></div>
+</div>
+<p>At this point the Reach Robotics nodes have been built and are ready to use.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you are using a ROS distribution other than noetic you’ll need to modify the source
+command accordingly i.e. <code class="docutils literal notranslate"><span class="pre">`source</span> <span class="pre">/opt/ros/melodic/setup.bash`</span></code></p>
+</div>
 </section>
-<section id="usage">
-<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this heading"></a></h2>
-<p>The ROS Folder is split into several ROS packages.</p>
+<section id="packages">
+<h2>Packages<a class="headerlink" href="#packages" title="Permalink to this headline"></a></h2>
+<p>The ROS folder is split into several packages. Each package is briefly described below.</p>
 <section id="bpl-passthrough">
-<h3>bpl_passthrough<a class="headerlink" href="#bpl-passthrough" title="Permalink to this heading"></a></h3>
-<p>The BPL Passthrough is the core package that allows communication to bpl products.
-You can connect to a manipulator via serial or UDP (Bravo arms only).
-The <code class="code docutils literal notranslate"><span class="pre">bpl_msgs/Packet</span></code> data field is structured as a list of uint8. This is a list of bytes.
-For incoming floats, they will be encoded as 4 bytes. Refer to the bplprotocol SDK on how to decode these bytes into floats.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>roslaunch<span class="w"> </span>bpl_passthrough<span class="w"> </span>udp_passthrough.launch
+<h3>bpl_passthrough<a class="headerlink" href="#bpl-passthrough" title="Permalink to this headline"></a></h3>
+<p>The BPL passthrough is the core package that facilitates communication to Reach
+Robotics products. This passthrough converts ROS messages into Serial or UDP
+packets that can be read by the connected product. Each node in the passthrough
+uses <code class="code docutils literal notranslate"><span class="pre">bpl_msgs/Packet</span></code> for messaging. The packet construct is defined as,</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">uint8</span> <span class="n">device_id</span>
+<span class="n">uint8</span> <span class="n">packet_id</span>
+<span class="n">uint8</span><span class="p">[]</span> <span class="n">data</span>
 </pre></div>
 </div>
-<p>or</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>roslaunch<span class="w"> </span>bpl_passthrough<span class="w"> </span>serial_passthrough.launch
+<p>where, <code class="docutils literal notranslate"><span class="pre">device_id</span></code> is the device identifier, <code class="docutils literal notranslate"><span class="pre">packet_id</span></code> is the packet identifier, and
+<code class="docutils literal notranslate"><span class="pre">data</span></code> is a list of 8 bit integers representing the data to be sent. To launch the
+passthrough run,</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-0-0-0" aria-selected="true" class="sphinx-tabs-tab" id="tab-0-0-0" name="0-0" role="tab" tabindex="0">Serial</button><button aria-controls="panel-0-0-1" aria-selected="false" class="sphinx-tabs-tab" id="tab-0-0-1" name="0-1" role="tab" tabindex="-1">UDP</button></div><div aria-labelledby="tab-0-0-0" class="sphinx-tabs-panel" id="panel-0-0-0" name="0-0" role="tabpanel" tabindex="0"><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>roslaunch bpl_passthrough serial_passthrough.launch serial_port:<span class="o">=</span>/dev/ttyUSB0
 </pre></div>
 </div>
-<section id="published-topics">
-<h4>Published Topics<a class="headerlink" href="#published-topics" title="Permalink to this heading"></a></h4>
-<p><code class="code docutils literal notranslate"><span class="pre">/rx</span></code> (<code class="code docutils literal notranslate"><span class="pre">bpl_msgs/Packet</span></code>) - Received Packets from the manipulator</p>
-</section>
-<section id="subscribed-topics">
-<h4>Subscribed Topics<a class="headerlink" href="#subscribed-topics" title="Permalink to this heading"></a></h4>
-<p><code class="code docutils literal notranslate"><span class="pre">/tx</span></code> (<code class="code docutils literal notranslate"><span class="pre">bpl_msgs/Packet</span></code>) - Packets that will be sent to the manipulator</p>
-</section>
-<section id="parameters-udp-passthrough-py">
-<h4>Parameters - udp_passthrough.py<a class="headerlink" href="#parameters-udp-passthrough-py" title="Permalink to this heading"></a></h4>
-<p><code class="code docutils literal notranslate"><span class="pre">ip_address</span></code> (string) - IP Address of the arm. (Defaults to 192.168.2.3)</p>
-<p><code class="code docutils literal notranslate"><span class="pre">port</span></code> (int) - UDP Port of the arm. (Defaults to 6789)</p>
-</section>
-<section id="parameters-serial-passthrough-py">
-<h4>Parameters - serial_passthrough.py<a class="headerlink" href="#parameters-serial-passthrough-py" title="Permalink to this heading"></a></h4>
-<p><code class="code docutils literal notranslate"><span class="pre">serial_port</span></code> (string) - Serial Port to connect to the arm (Defaults to “/dev/ttyUSB0”)</p>
-<p><code class="code docutils literal notranslate"><span class="pre">baudrate</span></code> (int) - Baudrate port of the serial connection. (Defaults to 115200)</p>
-</section>
-<section id="examples">
-<h4>Examples<a class="headerlink" href="#examples" title="Permalink to this heading"></a></h4>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="bpl_passthrough/request_joint_positions.html">Using bpl_passthrough to get joint positions</a></li>
+<p>where,</p>
+<ul class="simple">
+<li><p><code class="code docutils literal notranslate"><span class="pre">serial_port</span></code> (string) - Serial Port to connect to the arm (Defaults to “/dev/ttyUSB0”)</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">baudrate</span></code> (int) - Baudrate port of the serial connection. (Defaults to 115200)</p></li>
 </ul>
+</div><div aria-labelledby="tab-0-0-1" class="sphinx-tabs-panel" hidden="true" id="panel-0-0-1" name="0-1" role="tabpanel" tabindex="0"><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>roslaunch bpl_passthrough udp_passthrough.launch ip_address:<span class="o">=</span><span class="m">192</span>.168.2.4 port:<span class="o">=</span><span class="m">6789</span>
+</pre></div>
+</div>
+<p>where,</p>
+<ul class="simple">
+<li><p><code class="code docutils literal notranslate"><span class="pre">ip_address</span></code> (string) - IP Address of the arm. (Defaults to 192.168.2.3)</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">port</span></code> (int) - UDP Port of the arm. (Defaults to 6789)</p></li>
+</ul>
+</div></div>
+<p>For both passthrough nodes the published topic, and subscribed topic are,</p>
+<ul class="simple">
+<li><p><code class="code docutils literal notranslate"><span class="pre">/rx</span></code> (<code class="code docutils literal notranslate"><span class="pre">bpl_msgs/Packet</span></code>) - Received Packets from the manipulator</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">/tx</span></code> (<code class="code docutils literal notranslate"><span class="pre">bpl_msgs/Packet</span></code>) - Packets that will be sent to the manipulator</p></li>
+</ul>
+<p>respectively.</p>
+<section id="examples">
+<h4>Examples<a class="headerlink" href="#examples" title="Permalink to this headline"></a></h4>
+<p>This example demonstrates how to request read joint positions from joints on a manipulator.
+To launch this example run the launch file.</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-1-1-0" aria-selected="true" class="sphinx-tabs-tab" id="tab-1-1-0" name="1-0" role="tab" tabindex="0">Serial</button><button aria-controls="panel-1-1-1" aria-selected="false" class="sphinx-tabs-tab" id="tab-1-1-1" name="1-1" role="tab" tabindex="-1">UDP</button></div><div aria-labelledby="tab-1-1-0" class="sphinx-tabs-panel" id="panel-1-1-0" name="1-0" role="tabpanel" tabindex="0"><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>roslaunch bpl_passthrough request_joint_positions_serial.launch serial_port:<span class="o">=</span>/dev/ttyUSB0 frequency:<span class="o">=</span><span class="m">20</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-1-1-1" class="sphinx-tabs-panel" hidden="true" id="panel-1-1-1" name="1-1" role="tabpanel" tabindex="0"><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>roslaunch bpl_passthrough request_joint_positions_udp.launch ip_address:<span class="o">=</span><span class="m">192</span>.168.2.4 port:<span class="o">=</span><span class="m">6789</span> frequency:<span class="o">=</span><span class="m">20</span>
+</pre></div>
+</div>
+</div></div>
+<p>The script communicates the to passthrough node via the <code class="code docutils literal notranslate"><span class="pre">/tx</span></code> and <code class="code docutils literal notranslate"><span class="pre">/rx</span></code> topics.
+It publishes request packets to the <code class="code docutils literal notranslate"><span class="pre">/tx</span></code> topic at a set frequency.
+It subscribes the to <code class="code docutils literal notranslate"><span class="pre">/rx</span></code> topic and listens for positions packets.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This script has been tested to work at 400 Hz over a UDP Connection to the Base MCU.</p>
 </div>
 </section>
 </section>
 <section id="bpl-alpha-description">
-<h3>bpl_alpha_description<a class="headerlink" href="#bpl-alpha-description" title="Permalink to this heading"></a></h3>
+<h3>bpl_alpha_description<a class="headerlink" href="#bpl-alpha-description" title="Permalink to this headline"></a></h3>
 <p>The BPL Alpha Description package contains the Universal Robot Description File (URDF) files of the alpha range of manipulators.</p>
 <p>Supported Products:</p>
 <ul class="simple">
 <li><p>RA-5001 - Reach Alpha 5</p></li>
 </ul>
 <p>To view an Alpha 5 URDF:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>roslaunch<span class="w"> </span>bpl_alpha_description<span class="w"> </span>view_urdf.launch
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>roslaunch bpl_alpha_description view_urdf.launch
 </pre></div>
 </div>
 </section>
 <section id="bpl-bravo-description">
-<h3>bpl_bravo_description<a class="headerlink" href="#bpl-bravo-description" title="Permalink to this heading"></a></h3>
+<h3>bpl_bravo_description<a class="headerlink" href="#bpl-bravo-description" title="Permalink to this headline"></a></h3>
 <p>The BPL Bravo Description package contains the Universal Robot Description File (URDF) files for the bravo range of manipulators.</p>
 <p>Supported Products:</p>
 <ul class="simple">
@@ -178,16 +215,16 @@ For incoming floats, they will be encoded as 4 bytes. Refer to the bplprotocol S
 <li><p>RB-5001 - Reach Bravo 5</p></li>
 </ul>
 <p>To view an Bravo 7 URDF:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>roslaunch<span class="w"> </span>bpl_bravo_description<span class="w"> </span>view_bravo_7.launch
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>roslaunch bpl_bravo_description view_bravo_7.launch
 </pre></div>
 </div>
 <p>To view an Bravo 5 URDF:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>roslaunch<span class="w"> </span>bpl_bravo_description<span class="w"> </span>view_bravo_5.launch
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>roslaunch bpl_bravo_description view_bravo_5.launch
 </pre></div>
 </div>
 </section>
 <section id="bpl-bravo-description-mk2">
-<h3>bpl_bravo_description_mk2<a class="headerlink" href="#bpl-bravo-description-mk2" title="Permalink to this heading"></a></h3>
+<h3>bpl_bravo_description_mk2<a class="headerlink" href="#bpl-bravo-description-mk2" title="Permalink to this headline"></a></h3>
 <p>The BPL Bravo Description MK2 package contains the Universal Robot Description File (URDF) files for the bravo mk2 range of manipulators.</p>
 <p>Supported Products:</p>
 <ul class="simple">
@@ -196,15 +233,15 @@ For incoming floats, they will be encoded as 4 bytes. Refer to the bplprotocol S
 <li><p>RB-7201 - Reach Bravo 7 MK2 with FT sensor</p></li>
 </ul>
 <p>To view an Bravo 5 URDF:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>roslaunch<span class="w"> </span>bpl_bravo_description_mk2<span class="w"> </span>view_bravo_5.launch
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>roslaunch bpl_bravo_description_mk2 view_bravo_5.launch
 </pre></div>
 </div>
 <p>To view an Bravo 7 URDF:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>roslaunch<span class="w"> </span>bpl_bravo_description_mk2<span class="w"> </span>view_bravo_7.launch
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>roslaunch bpl_bravo_description_mk2 view_bravo_7.launch
 </pre></div>
 </div>
 <p>To view an Bravo 7 with FT URDF:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>roslaunch<span class="w"> </span>bpl_bravo_description_mk2<span class="w"> </span>view_bravo_7_ft.launch
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>roslaunch bpl_bravo_description_mk2 view_bravo_7_ft.launch
 </pre></div>
 </div>
 </section>
@@ -215,14 +252,14 @@ For incoming floats, they will be encoded as 4 bytes. Refer to the bplprotocol S
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="../C/examples/decoding_packets.html" class="btn btn-neutral float-left" title="Decoding Packets" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="bpl_passthrough/request_joint_positions.html" class="btn btn-neutral float-right" title="Using bpl_passthrough to get joint positions" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../gettingstarted/examples/decoding_packets.html" class="btn btn-neutral float-left" title="Decoding Packets" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../ros2/index.html" class="btn btn-neutral float-right" title="ROS 2" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2022, Reach Robotics.</p>
+    <p>&#169; Copyright 2023, Reach Robotics.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

@@ -1,13 +1,31 @@
-# Reach Robotics SDK
-The Reach Robotics SDK Contains tools and interfaces for intergration with Reach Robotics Products.
+[![Logo](docsrc/source/images/Reach.Robotics-Logo.White.png)](#) 
 
-##  Usage and Instructions
-Please see https://reach-robotics.github.io/reach_robotics_sdk/ for documentation on 
-installation and usage.
+The Reach Robotics SDK provides support for custom control of Reach Robotics products. Currently we offer support for Python, C and C++ as well as ROS/ROS 2 nodes. Follow the [instructions to get started](https://reach-robotics.github.io/reach_robotics_sdk/) and run some examples.
+
+<div align="center">
+    <img src="docsrc/source/images/python-logo-only.png" style="width: 10%;">
+    <img src="docsrc/source/images/C_Logo.png" style="width: 10%;">
+    <img src="docsrc/source/images/ISO_C++_Logo.png" style="width: 10%;">
+    <img src="docsrc/source/images/Ros_logo.png" style="width: 42%;">
+</div>
+
+&nbsp;
+
+> **Note** Full access of this SDK is reserved for customers who have purchased a PRO package. If you are interested in our products or full access to the SDK, visit our [Website](https://reachrobotics.com/), or contact our sales team (sales@reachrobotics.com).
 
 ## Documentation
-For Documents and manuals please see: 
-https://reach-robotics.github.io/reach_robotics_sdk/documentation/index.html
+Detailed SDK documentation is available on our GitHub pages
+https://reach-robotics.github.io/reach_robotics_sdk/. All Reach Robotics product documentation can be downloaded from our [website](https://reachrobotics.com/resources/documentation-and-software/).
+
 
 ## License
-This software and all included documents are confidential and not for re-distrbution.
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), limited exclusively to use with products produced by Reach Robotics Pty Ltd, subject to the following conditions:
+
+1. The Software may only be used in conjunction with products manufactured or developed by Reach Robotics Pty Ltd.
+
+2. Redistributions or use of the Software in any other context, including but not limited to, integration, combination, or use with other products or software, are strictly prohibited without prior written authorization from Reach Robotics Pty Ltd.
+
+3. All copies of the Software, in whole or in part, must retain this notice and the above copyright notice.
+
+THIS SOFTWARE IS PROVIDED "AS IS," WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NONINFRINGEMENT. IN NO EVENT SHALL REACH ROBOTICS PTY LTD BE LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT, OR OTHERWISE, ARISING FROM, OUT OF, OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.

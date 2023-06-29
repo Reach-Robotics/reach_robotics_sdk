@@ -19,8 +19,8 @@ import sphinx_rtd_theme
 # -- Project information -----------------------------------------------------
 
 project = 'Reach Robotics Software'
-copyright = '2022, Reach Robotics'
-author = 'John Sumskas'
+copyright = '2023, Reach Robotics'
+author = 'Reach Robotics'
 
 # The full version, including alpha/beta/rc tags
 release = '1.1.0'
@@ -36,7 +36,8 @@ extensions = ["sphinx_rtd_theme",
               'sphinx.ext.coverage',
               'sphinx.ext.napoleon',
               'sphinx.ext.viewcode',
-              'sphinx_tabs.tabs']
+              'sphinx_tabs.tabs',
+              'sphinx_copybutton']
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -59,7 +60,7 @@ html_theme = 'sphinx_rtd_theme'
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
 
-html_logo = "Reach.Robotics-Logo.White.png"
+html_logo = "images/Reach.Robotics-Logo.White.png"
 
 autodoc_member_order = 'bysource'
 

@@ -7,6 +7,7 @@
   <title>Reach Robotics SDK &mdash; Reach Robotics Software 1.1.0 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/copybutton.css" type="text/css" />
       <link rel="stylesheet" href="_static/custom.css" type="text/css" />
       <link rel="stylesheet" href="_static/tabs.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -16,13 +17,13 @@
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
-        <script src="_static/sphinx_highlight.js"></script>
+        <script src="_static/clipboard.min.js"></script>
+        <script src="_static/copybutton.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="BPL Protocol" href="bplprotocol/index.html" /> 
+    <link rel="next" title="Getting Started" href="gettingstarted/index.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -30,12 +31,16 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="#" class="icon icon-home"> Reach Robotics Software
-            <img src="_static/Reach.Robotics-Logo.White.png" class="logo" alt="Logo"/>
+
+          
+          
+          <a href="#" class="icon icon-home">
+            Reach Robotics Software
+              <img src="_static/Reach.Robotics-Logo.White.png" class="logo" alt="Logo"/>
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -43,11 +48,11 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="bplprotocol/index.html">BPL Protocol</a></li>
-<li class="toctree-l1"><a class="reference internal" href="C/index.html">BPL Protocol - C/C++ SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gettingstarted/index.html">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ros1/index.html">ROS</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ros2/index.html">ROS2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ros2/index.html">ROS 2</a></li>
 <li class="toctree-l1"><a class="reference internal" href="documentation/index.html">Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license/index.html">License</a></li>
 </ul>
 
         </div>
@@ -63,7 +68,7 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="#" class="icon icon-home"></a></li>
+      <li><a href="#" class="icon icon-home" aria-label="Home"></a></li>
       <li class="breadcrumb-item active">Reach Robotics SDK</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
@@ -75,82 +80,46 @@
            <div itemprop="articleBody">
              
   <section id="reach-robotics-sdk">
-<h1>Reach Robotics SDK<a class="headerlink" href="#reach-robotics-sdk" title="Permalink to this heading"></a></h1>
-<p>The Reach Robotics SDK contains software tools and interfaces for Reach Robotics Products.
-It enables users to easilty interface and control the different products that Reach Robotics Offers.</p>
-<p>The Reach Robotics SDK Support various platforms and programming languages.</p>
-<section id="programming-interfaces">
-<h2>Programming Interfaces<a class="headerlink" href="#programming-interfaces" title="Permalink to this heading"></a></h2>
+<h1>Reach Robotics SDK<a class="headerlink" href="#reach-robotics-sdk" title="Permalink to this headline"></a></h1>
+<p>The <a class="reference external" href="https://github.com/Reach-Robotics/reach_robotics_sdk.git/">Reach Robotics SDK</a> provides support for custom control of Reach Robotics products.
+Currently we offer support for Python, C and C++ as well as ROS/ROS 2 nodes. Follow
+the instructions to <a class="reference internal" href="gettingstarted/index.html#getting-started"><span class="std std-ref">Get Started</span></a> and run some examples.</p>
 <p class="centered">
-<strong><a class="reference internal" href="_images/python-logo-only.png"><img alt="python" class="align-middle" src="_images/python-logo-only.png" style="width: 25%;" /></a>     <a class="reference internal" href="_images/C_Logo.png"><img alt="c" class="align-middle" src="_images/C_Logo.png" style="width: 25%;" /></a>     <a class="reference internal" href="_images/ISO_C++_Logo.png"><img alt="c++" class="align-middle" src="_images/ISO_C%2B%2B_Logo.png" style="width: 25%;" /></a></strong></p><p>The Reach Robotics SDK Support Python, C and C++ Programming languages.
-We support a range of programming languages. You can interface your product with high level langauges like python.
-Also you to easily interface your product with low level systems using the C/C++ SDK even allowing you to easily intergrate with embedded systems.</p>
-</section>
-<section id="ros-and-ros-2-support">
-<h2>ROS and ROS 2 Support<a class="headerlink" href="#ros-and-ros-2-support" title="Permalink to this heading"></a></h2>
-<figure class="align-center">
-<a class="reference internal image-reference" href="_images/Ros_logo.png"><img alt="_images/Ros_logo.png" src="_images/Ros_logo.png" style="width: 50%;" /></a>
+<strong><a class="reference internal" href="_images/python-logo-only.png"><img alt="python" class="align-middle" src="_images/python-logo-only.png" style="width: 25%;" /></a>     <a class="reference internal" href="_images/C_Logo.png"><img alt="c" class="align-middle" src="_images/C_Logo.png" style="width: 25%;" /></a>     <a class="reference internal" href="_images/ISO_C++_Logo.png"><img alt="c++" class="align-middle" src="_images/ISO_C++_Logo.png" style="width: 25%;" /></a></strong></p><figure class="align-center">
+<a class="reference internal image-reference" href="_images/Ros_logo.png"><img alt="_images/Ros_logo.png" src="_images/Ros_logo.png" style="width: 75%;" /></a>
 </figure>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
-<p>The Reach Robotics SDK Support ROS and ROS2 allowing you to easily and quickly intergrate your product into
-your robotic system. Visualisation Tools and configurations files are included to get you running from the start.</p>
-</section>
-<section id="download">
-<h2>Download<a class="headerlink" href="#download" title="Permalink to this heading"></a></h2>
-<p>Download the Reach Robotics SDK from the <a class="reference external" href="https://github.com/Reach-Robotics/reach_robotics_sdk">Reach Robotics Github.</a></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Full access of this SDK is reserved for customers who have purchased a PRO package.
+If you are interested in our products or full access to the SDK, visit our
+<a class="reference external" href="https://reachrobotics.com//">Website</a>, or contact our <a class="reference external" href="mailto:sales&#37;&#52;&#48;reachrobotics&#46;com/">Sales Team</a> (<a class="reference external" href="mailto:sales&#37;&#52;&#48;reachrobotics&#46;com">sales<span>&#64;</span>reachrobotics<span>&#46;</span>com</a>).</p>
+</div>
 <div class="toctree-wrapper compound">
 <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="bplprotocol/index.html">BPL Protocol</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="bplprotocol/index.html#enable-use-of-the-sdk">Enable use of the SDK</a></li>
-<li class="toctree-l2"><a class="reference internal" href="bplprotocol/index.html#sdk">SDK</a></li>
-<li class="toctree-l2"><a class="reference internal" href="bplprotocol/index.html#python-installation">Python Installation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="bplprotocol/index.html#usage">Usage</a></li>
-<li class="toctree-l2"><a class="reference internal" href="bplprotocol/index.html#examples">Examples</a></li>
-<li class="toctree-l2"><a class="reference internal" href="bplprotocol/index.html#id1">SDK</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="C/index.html">BPL Protocol - C/C++ SDK</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="C/index.html#enable-use-of-the-sdk">Enable use of the SDK</a></li>
-<li class="toctree-l2"><a class="reference internal" href="C/index.html#sdk">SDK</a></li>
-<li class="toctree-l2"><a class="reference internal" href="C/index.html#examples">Examples</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="ros1/index.html">ROS</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="ros1/index.html#installation">Installation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ros1/index.html#usage">Usage</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="ros2/index.html">ROS2</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="ros2/index.html#installation">Installation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ros2/index.html#usage">Usage</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="documentation/index.html">Documentation</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="documentation/index.html#reach-alpha">Reach Alpha</a></li>
-<li class="toctree-l2"><a class="reference internal" href="documentation/index.html#reach-bravo">Reach Bravo</a></li>
-<li class="toctree-l2"><a class="reference internal" href="documentation/index.html#master-arm">Master Arm</a></li>
-<li class="toctree-l2"><a class="reference internal" href="documentation/index.html#reach-system-communication-protocol">Reach System Communication Protocol</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="gettingstarted/index.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ros1/index.html">ROS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ros2/index.html">ROS 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="documentation/index.html">Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license/index.html">License</a></li>
 </ul>
 </div>
-</section>
 </section>
 
 
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="bplprotocol/index.html" class="btn btn-neutral float-right" title="BPL Protocol" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="gettingstarted/index.html" class="btn btn-neutral float-right" title="Getting Started" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2022, Reach Robotics.</p>
+    <p>&#169; Copyright 2023, Reach Robotics.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Controlling Joints &mdash; Reach Robotics Software 1.1.0 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/tabs.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/clipboard.min.js"></script>
+        <script src="../../_static/copybutton.js"></script>
+        <script src="../../_static/tabs.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Controlling Joints Simultaneously" href="simultaneous_joint_control.html" />
+    <link rel="prev" title="Accessing the Force Torque Sensor" href="force_torque_sensor.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Reach Robotics Software
+              <img src="../../_static/Reach.Robotics-Logo.White.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Getting Started</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index.html#downloading-the-sdk">Downloading the SDK</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#installing-critical-components">Installing Critical Components</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#getting-started-with-python">Getting Started With Python</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../index.html#examples">Examples</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="requesting_joint_positions.html">Requesting Joint Positions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="setting_heartbeats.html">Setting Heartbeats</a></li>
+<li class="toctree-l4"><a class="reference internal" href="master_arm_passthrough.html">Master Arm Passthrough</a></li>
+<li class="toctree-l4"><a class="reference internal" href="master_arm_information.html">Master Arm Information</a></li>
+<li class="toctree-l4"><a class="reference internal" href="force_torque_sensor.html">Accessing the Force Torque Sensor</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Controlling Joints</a></li>
+<li class="toctree-l4"><a class="reference internal" href="simultaneous_joint_control.html">Controlling Joints Simultaneously</a></li>
+<li class="toctree-l4"><a class="reference internal" href="voltage_threshold_parameters.html">Voltage Threshold Parameters - Auto Stow on Voltage Change</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#getting-started-with-c-c">Getting Started With C/C++</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../ros1/index.html">ROS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ros2/index.html">ROS 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../documentation/index.html">Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../license/index.html">License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Reach Robotics Software</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Getting Started</a></li>
+      <li class="breadcrumb-item active">Controlling Joints</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/gettingstarted/examples/joint_control.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="controlling-joints">
+<h1>Controlling Joints<a class="headerlink" href="#controlling-joints" title="Permalink to this headline"></a></h1>
+<p>Joints can be controlled by sending packets to the individual joints.</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-0-0-0" aria-selected="true" class="sphinx-tabs-tab" id="tab-0-0-0" name="0-0" role="tab" tabindex="0">Serial</button><button aria-controls="panel-0-0-1" aria-selected="false" class="sphinx-tabs-tab" id="tab-0-0-1" name="0-1" role="tab" tabindex="-1">UDP</button></div><div aria-labelledby="tab-0-0-0" class="sphinx-tabs-panel" id="panel-0-0-0" name="0-0" role="tabpanel" tabindex="0"><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">bplprotocol</span> <span class="kn">import</span> <span class="n">BPLProtocol</span><span class="p">,</span> <span class="n">PacketID</span>
+
+
+<span class="c1"># install pyserial with pip install pyserial</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+<span class="kn">import</span> <span class="nn">serial</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+
+    <span class="n">device_id</span> <span class="o">=</span> <span class="mh">0x02</span>  <span class="c1"># Joint B</span>
+
+    <span class="n">serial_port_name</span> <span class="o">=</span> <span class="s2">&quot;COM10&quot;</span>
+
+    <span class="n">serial_port</span> <span class="o">=</span> <span class="n">serial</span><span class="o">.</span><span class="n">Serial</span><span class="p">(</span><span class="n">serial_port_name</span><span class="p">,</span> <span class="n">baudrate</span><span class="o">=</span><span class="mi">115200</span><span class="p">,</span> <span class="n">parity</span><span class="o">=</span><span class="n">serial</span><span class="o">.</span><span class="n">PARITY_NONE</span><span class="p">,</span>
+                                <span class="n">stopbits</span><span class="o">=</span><span class="n">serial</span><span class="o">.</span><span class="n">STOPBITS_ONE</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+    <span class="c1"># Send to a position of 0.5 radians</span>
+    <span class="n">serial_port</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">BPLProtocol</span><span class="o">.</span><span class="n">encode_packet</span><span class="p">(</span><span class="n">device_id</span><span class="p">,</span> <span class="n">PacketID</span><span class="o">.</span><span class="n">POSITION</span><span class="p">,</span> <span class="n">BPLProtocol</span><span class="o">.</span><span class="n">encode_floats</span><span class="p">([</span><span class="mf">0.5</span><span class="p">])))</span>
+
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+
+    <span class="c1"># Send a velocity command of 0.3</span>
+    <span class="n">serial_port</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">BPLProtocol</span><span class="o">.</span><span class="n">encode_packet</span><span class="p">(</span><span class="n">device_id</span><span class="p">,</span> <span class="n">PacketID</span><span class="o">.</span><span class="n">VELOCITY</span><span class="p">,</span> <span class="n">BPLProtocol</span><span class="o">.</span><span class="n">encode_floats</span><span class="p">([</span><span class="mf">0.3</span><span class="p">])))</span>
+
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+    <span class="c1"># Send a velocity of 0</span>
+    <span class="n">serial_port</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">BPLProtocol</span><span class="o">.</span><span class="n">encode_packet</span><span class="p">(</span><span class="n">device_id</span><span class="p">,</span> <span class="n">PacketID</span><span class="o">.</span><span class="n">VELOCITY</span><span class="p">,</span> <span class="n">BPLProtocol</span><span class="o">.</span><span class="n">encode_floats</span><span class="p">([</span><span class="mf">0.0</span><span class="p">])))</span>
+
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+    <span class="c1"># Send a relative position command of 0</span>
+    <span class="n">serial_port</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">BPLProtocol</span><span class="o">.</span><span class="n">encode_packet</span><span class="p">(</span><span class="n">device_id</span><span class="p">,</span> <span class="n">PacketID</span><span class="o">.</span><span class="n">RELATIVE_POSITION</span><span class="p">,</span> <span class="n">BPLProtocol</span><span class="o">.</span><span class="n">encode_floats</span><span class="p">([</span><span class="o">-</span><span class="mf">0.5</span><span class="p">])))</span>
+
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-0-0-1" class="sphinx-tabs-panel" hidden="true" id="panel-0-0-1" name="0-1" role="tabpanel" tabindex="0"><div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
+
+<span class="kn">from</span> <span class="nn">bplprotocol</span> <span class="kn">import</span> <span class="n">BPLProtocol</span><span class="p">,</span> <span class="n">PacketID</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+<span class="kn">import</span> <span class="nn">socket</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+
+    <span class="n">device_id</span> <span class="o">=</span> <span class="mh">0x02</span>  <span class="c1"># Joint B</span>
+
+    <span class="n">MANIPULATOR_IP_ADDRESS</span> <span class="o">=</span> <span class="s1">&#39;192.168.2.4&#39;</span>
+    <span class="n">MANIPULATOR_PORT</span> <span class="o">=</span> <span class="mi">6789</span>
+    <span class="n">manipulator_address</span> <span class="o">=</span> <span class="p">(</span><span class="n">MANIPULATOR_IP_ADDRESS</span><span class="p">,</span> <span class="n">MANIPULATOR_PORT</span><span class="p">)</span>
+
+    <span class="n">sock</span> <span class="o">=</span> <span class="n">socket</span><span class="o">.</span><span class="n">socket</span><span class="p">(</span><span class="n">socket</span><span class="o">.</span><span class="n">AF_INET</span><span class="p">,</span> <span class="n">socket</span><span class="o">.</span><span class="n">SOCK_DGRAM</span><span class="p">)</span>
+
+    <span class="c1"># Send to a position of 0.5 radians</span>
+    <span class="n">sock</span><span class="o">.</span><span class="n">sendto</span><span class="p">(</span><span class="n">BPLProtocol</span><span class="o">.</span><span class="n">encode_packet</span><span class="p">(</span><span class="n">device_id</span><span class="p">,</span> <span class="n">PacketID</span><span class="o">.</span><span class="n">POSITION</span><span class="p">,</span> <span class="n">BPLProtocol</span><span class="o">.</span><span class="n">encode_floats</span><span class="p">([</span><span class="mf">0.5</span><span class="p">])),</span> <span class="n">manipulator_address</span><span class="p">)</span>
+
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+
+    <span class="c1"># Send a velocity command of 0.3</span>
+    <span class="n">sock</span><span class="o">.</span><span class="n">sendto</span><span class="p">(</span><span class="n">BPLProtocol</span><span class="o">.</span><span class="n">encode_packet</span><span class="p">(</span><span class="n">device_id</span><span class="p">,</span> <span class="n">PacketID</span><span class="o">.</span><span class="n">VELOCITY</span><span class="p">,</span> <span class="n">BPLProtocol</span><span class="o">.</span><span class="n">encode_floats</span><span class="p">([</span><span class="mf">0.3</span><span class="p">])),</span> <span class="n">manipulator_address</span><span class="p">)</span>
+
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+    <span class="c1"># Send a velocity of 0</span>
+    <span class="n">sock</span><span class="o">.</span><span class="n">sendto</span><span class="p">(</span><span class="n">BPLProtocol</span><span class="o">.</span><span class="n">encode_packet</span><span class="p">(</span><span class="n">device_id</span><span class="p">,</span> <span class="n">PacketID</span><span class="o">.</span><span class="n">VELOCITY</span><span class="p">,</span> <span class="n">BPLProtocol</span><span class="o">.</span><span class="n">encode_floats</span><span class="p">([</span><span class="mf">0.0</span><span class="p">])),</span> <span class="n">manipulator_address</span><span class="p">)</span>
+
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+    <span class="c1"># Send a relative position command of 0</span>
+    <span class="n">sock</span><span class="o">.</span><span class="n">sendto</span><span class="p">(</span><span class="n">BPLProtocol</span><span class="o">.</span><span class="n">encode_packet</span><span class="p">(</span><span class="n">device_id</span><span class="p">,</span> <span class="n">PacketID</span><span class="o">.</span><span class="n">RELATIVE_POSITION</span><span class="p">,</span> <span class="n">BPLProtocol</span><span class="o">.</span><span class="n">encode_floats</span><span class="p">([</span><span class="o">-</span><span class="mf">0.5</span><span class="p">])),</span> <span class="n">manipulator_address</span><span class="p">)</span>
+
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="force_torque_sensor.html" class="btn btn-neutral float-left" title="Accessing the Force Torque Sensor" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="simultaneous_joint_control.html" class="btn btn-neutral float-right" title="Controlling Joints Simultaneously" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Reach Robotics.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

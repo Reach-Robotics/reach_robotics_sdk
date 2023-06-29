@@ -1,83 +1,127 @@
 ROS
 ================================================
+This tutorial assumes you have pre-installed ROS for desktop on your computer. 
+You can install ROS by following the instructions at http://wiki.ros.org/ROS/Installation. 
+Additionally, you'll need to install the Reach Robotics SDK and critical components. Instructions
+for installation can found in the :ref:`Getting Started<getting_started>` section. 
 
-Here are details for usage of the Reach Robotics ROS1 Packages
-
-Installation
+Setup
 ---------------------
-To install ROS please follow instructions at http://wiki.ros.org/ROS/Installation.
 
-First clone the repository to your workspace
-
-.. code-block:: bash
-
-   cd ~/catkin_ws/src
-   git clone https://github.com/Reach-Robotics/reach_robotics_sdk.git
-
-Now install the bplprotocol python package
+To get started, source the ROS underlay, 
 
 .. code-block:: bash
 
-   cd reach_robotics_sdk/bplprotocol
-   pip install .
+   source /opt/ros/noetic/setup.bash
 
-To build all packages
+.. note::
+   It can be convenient to automatically source this script every time a new shell is launched. 
+
+   .. code-block:: bash
+
+      echo "source /opt/ros/noetic/setup.bash" >> ~/.bashrc
+      source ~/.bashrc
+
+   Keep in mind, if you have more than one ROS distribution installed, ~/.bashrc must only source 
+   the setup.bash for the version you are currently using.
+   
+
+Now build the workspace by invoking catkin_make from the root of your catkin workspace,
 
 .. code-block:: bash
 
-   cd ~/catkin_ws
-   catkin_make
+    cd ~/workspace
+    catkin_make
 
-Usage
+source the ROS overlay packages,
+
+.. code-block:: bash
+
+   source /devel/setup.bash
+
+At this point the Reach Robotics nodes have been built and are ready to use. 
+
+.. note::
+   If you are using a ROS distribution other than noetic you'll need to modify the source 
+   command accordingly i.e. ```source /opt/ros/melodic/setup.bash```
+
+Packages
 ---------------------------
-The ROS Folder is split into several ROS packages.
+The ROS folder is split into several packages. Each package is briefly described below.
 
 bpl_passthrough
 ^^^^^^^^^^^^^^^^^^^^^^^^
-The BPL Passthrough is the core package that allows communication to bpl products.
-You can connect to a manipulator via serial or UDP (Bravo arms only).
-The :code:`bpl_msgs/Packet` data field is structured as a list of uint8. This is a list of bytes.
-For incoming floats, they will be encoded as 4 bytes. Refer to the bplprotocol SDK on how to decode these bytes into floats.
+The BPL passthrough is the core package that facilitates communication to Reach 
+Robotics products. This passthrough converts ROS messages into Serial or UDP
+packets that can be read by the connected product. Each node in the passthrough 
+uses :code:`bpl_msgs/Packet` for messaging. The packet construct is defined as, 
+ 
+.. code-block::
 
-.. code-block:: bash
+   uint8 device_id
+   uint8 packet_id
+   uint8[] data
 
-   roslaunch bpl_passthrough udp_passthrough.launch
+where, ``device_id`` is the device identifier, ``packet_id`` is the packet identifier, and 
+``data`` is a list of 8 bit integers representing the data to be sent. To launch the 
+passthrough run,
 
-or
+.. tabs::
 
-.. code-block:: bash
+    .. tab:: Serial
 
-   roslaunch bpl_passthrough serial_passthrough.launch
+         .. code-block:: bash
 
-Published Topics
-""""""""""""""""""""""
-:code:`/rx` (:code:`bpl_msgs/Packet`) - Received Packets from the manipulator
+            roslaunch bpl_passthrough serial_passthrough.launch serial_port:=/dev/ttyUSB0
 
+         where,
 
-Subscribed Topics
-""""""""""""""""""""""
-:code:`/tx` (:code:`bpl_msgs/Packet`) - Packets that will be sent to the manipulator
+         * :code:`serial_port` (string) - Serial Port to connect to the arm (Defaults to "/dev/ttyUSB0")
+         * :code:`baudrate` (int) - Baudrate port of the serial connection. (Defaults to 115200)
+            
+    .. tab:: UDP
 
-Parameters - udp_passthrough.py
-"""""""""""""""""""""""""""""""""""""""""""""""""
+         .. code-block:: bash
 
-:code:`ip_address` (string) - IP Address of the arm. (Defaults to 192.168.2.3)
+            roslaunch bpl_passthrough udp_passthrough.launch ip_address:=192.168.2.4 port:=6789
+         
+         where,
 
-:code:`port` (int) - UDP Port of the arm. (Defaults to 6789)
+         * :code:`ip_address` (string) - IP Address of the arm. (Defaults to 192.168.2.3)
+         * :code:`port` (int) - UDP Port of the arm. (Defaults to 6789)
 
+For both passthrough nodes the published topic, and subscribed topic are,
 
-Parameters - serial_passthrough.py
-"""""""""""""""""""""""""""""""""""""""""""""""""
-:code:`serial_port` (string) - Serial Port to connect to the arm (Defaults to "/dev/ttyUSB0")
+* :code:`/rx` (:code:`bpl_msgs/Packet`) - Received Packets from the manipulator
+* :code:`/tx` (:code:`bpl_msgs/Packet`) - Packets that will be sent to the manipulator
 
-:code:`baudrate` (int) - Baudrate port of the serial connection. (Defaults to 115200)
+respectively.
 
 Examples
 """""""""""""""""""""""""""""""""""""""""""""""""
-.. toctree::
-    :maxdepth: 3
+This example demonstrates how to request read joint positions from joints on a manipulator.
+To launch this example run the launch file. 
 
-    bpl_passthrough/request_joint_positions
+.. tabs::
+
+    .. tab:: Serial
+
+        .. code-block:: bash
+
+            roslaunch bpl_passthrough request_joint_positions_serial.launch serial_port:=/dev/ttyUSB0 frequency:=20
+
+    .. tab:: UDP
+
+        .. code-block:: bash
+
+            roslaunch bpl_passthrough request_joint_positions_udp.launch ip_address:=192.168.2.4 port:=6789 frequency:=20
+
+The script communicates the to passthrough node via the :code:`/tx` and :code:`/rx` topics.
+It publishes request packets to the :code:`/tx` topic at a set frequency.
+It subscribes the to :code:`/rx` topic and listens for positions packets.
+
+.. note::
+    This script has been tested to work at 400 Hz over a UDP Connection to the Base MCU.
 
 bpl_alpha_description
 ^^^^^^^^^^^^^^^^^^^^^^^^
