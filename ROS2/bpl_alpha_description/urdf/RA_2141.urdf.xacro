@@ -1,0 +1,91 @@
+<?xml version="1.0"?>
+<robot name="RA_2141" xmlns:xacro="http://ros.org/wiki/xacro">
+
+
+    <xacro:macro name="RA_2141" params="parent *origin name:=RA_2141">
+        <joint name="${name}_joint" type="fixed">
+            <xacro:insert_block name="origin" />
+            <parent link="${parent}"/>
+            <child link="${name}_base_link" />
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+        </joint>
+        <material name="${name}_black">
+            <color rgba="0.2 0.2 0.2 1"/>
+        </material>
+        <joint name="${name}_base_joint" type="fixed">
+            <parent link="base_link"/>
+            <child link="${name}_base_link"/>
+            <origin rpy="0 0 0" xyz="0 0 0"/>
+        </joint>
+        <joint name="${name}_base_link_joint" type="fixed">
+            <parent link="${name}_base_link"/>
+            <child link="${name}_rs1_106_link"/>
+            <origin rpy="0 0 0"/>
+        </joint>
+
+        <link name="${name}_base_link"/>
+        <link name="${name}_rs1_106_link">
+            <visual>
+              <geometry>
+                <mesh filename="package://bpl_alpha_description/meshes/RS1-106.stl"/>
+              </geometry>
+              <material name="${name}_black"/>
+            </visual>
+            <collision>
+            	<geometry>
+                    <cylinder length="0.007" radius="0.020" />
+                </geometry>
+                <origin rpy="0 1.5707 0" xyz="0.0035 0 0" />
+            </collision>
+        </link>
+
+
+        <joint name="${name}_axis_b" type="revolute">
+            <parent link="${name}_rs1_106_link"/>
+            <child link="${name}_ra_2140"/>
+            <origin rpy="0 0 0" xyz="0.0077 0 0"/>
+            <axis xyz="-1 0 0"/>
+            <limit effort="9.0" lower="0.0" upper="6.2" velocity="0.5"/>
+        </joint>
+        <link name="${name}_ra_2140">
+            <visual>
+              <geometry>
+                <mesh filename="package://bpl_alpha_description/meshes/RA-2140.stl"/>
+              </geometry>
+              <material name="${name}_black"/>
+            </visual>
+            
+            <collision>
+            	<geometry>
+                    <cylinder length="0.1483" radius="0.020" />
+                </geometry>
+                <origin rpy="0 1.5707 0" xyz="0.07415 0 0" />
+            </collision>
+        </link>
+
+        <joint name="${name}_axis_a" type="revolute">
+            <parent link="${name}_ra_2140"/>
+            <child link="${name}_ra_335"/>
+            <origin rpy="0 0 0" xyz="0.1283 0.004 0.0135"/>
+            <axis xyz="0 0 1"/>
+            <limit effort="9.0" lower="0.0" upper="6.2" velocity="0.5"/>
+        </joint>
+
+        <link name="${name}_ra_335">
+            <visual>
+              <geometry>
+                <mesh filename="package://bpl_alpha_description/meshes/RS1-335.stl"/>
+              </geometry>
+              <material name="${name}_black"/>
+            </visual>
+            <collision>
+            	<geometry>
+                    <cylinder length="0.025" radius="0.020" />
+                </geometry>
+                <origin rpy="0 0 0" xyz="0.0 0 0.0125" />
+            </collision>
+        </link>
+
+
+    </xacro:macro>
+</robot>
