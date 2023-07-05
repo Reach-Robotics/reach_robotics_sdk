@@ -37,7 +37,7 @@ source the ROS overlay packages,
 
 .. code-block:: bash
 
-   source /devel/setup.bash
+   source ~/workspace/devel/setup.bash
 
 At this point the Reach Robotics nodes have been built and are ready to use. 
 
