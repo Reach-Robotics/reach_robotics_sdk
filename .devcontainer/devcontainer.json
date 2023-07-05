@@ -1,0 +1,30 @@
+{
+	"name": "ROS Development Environment",
+
+	// Sets the run context to one level up instead of the .devcontainer folder.
+	"context": "..",
+
+	// Switch between ROS and ROS 2 dev environments
+	"dockerFile": "./foxy-dockerfile",
+
+  // Set privileged mode, --net=host for display exporting & set XDG_RUNTIME_DIR for qt runtime. 
+  "runArgs": ["--privileged",
+              "--net", "host",
+              "-e", "XDG_RUNTIME_DIR=/tmp"],
+
+  // Mount x11 for display exporting and /dev for tty connections 
+  "mounts": [
+    "source=/tmp/.X11-unix,target=/tmp/.X11-unix,type=bind",
+    "source=/dev,target=/dev,type=bind"
+  ],
+
+  // Mount host development workspace to root/workspace/src
+  "workspaceMount": "source=${localWorkspaceFolder},target=/root/workspace/src/reach_robotics_sdk,type=bind",
+  "workspaceFolder": "/root/workspace/src/reach_robotics_sdk",
+
+  // Install protocol 
+  "postCreateCommand": "cd /root/workspace/src/reach_robotics_sdk/bplprotocol && python3 -m pip install .",
+  
+  // Connect to sever root user
+  "remoteUser": "root"
+}

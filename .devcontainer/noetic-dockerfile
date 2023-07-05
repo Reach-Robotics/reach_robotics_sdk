@@ -1,0 +1,21 @@
+
+ARG ROS_DISTRO=noetic
+FROM osrf/ros:$ROS_DISTRO-desktop
+
+RUN apt-get update
+RUN apt-get install -y git
+RUN apt-get install -y vim
+RUN apt-get install -y ros-$ROS_DISTRO-turtlesim
+RUN apt-get install -y python3-pip zip
+
+RUN apt install ros-$ROS_DISTRO-xacro 
+RUN apt install ros-$ROS_DISTRO-joint-state-publisher
+RUN apt install ros-$ROS_DISTRO-joint-state-publisher-gui
+
+RUN python3 -m pip install --upgrade pip
+RUN python3 -m pip install cobs crcmod pyserial scipy
+
+RUN ln -sf /bin/bash /bin/sh
+
+RUN echo "source /opt/ros/$ROS_DISTRO/setup.bash" >> ~/.bashrc
+RUN source ~/.bashrc
