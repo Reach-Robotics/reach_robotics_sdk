@@ -64,47 +64,6 @@ Visualization Manager:
         Expand Link Details: false
         Expand Tree: false
         Link Tree Style: Links in Alphabetic Order
-        alpha_base_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        alpha_jaws_base_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        alpha_m1_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        alpha_m2_1_1_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        alpha_m2_1_2_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        alpha_m2_joint_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        alpha_m3_inline_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        alpha_push_rod:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        base_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
       Name: RobotModel
       Robot Description: robot_description
       TF Prefix: ""
