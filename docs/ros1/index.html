@@ -116,13 +116,18 @@ for installation can found in the <a class="reference internal" href="../getting
 <p>Keep in mind, if you have more than one ROS distribution installed, ~/.bashrc must only source
 the setup.bash for the version you are currently using.</p>
 </div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Before building the catkin packages, you must remove the COLCON_IGONRE file from the ROS directory.
+If this file is not removed, catkin_make will skip the ROS packages.</p>
+</div>
 <p>Now build the workspace by invoking catkin_make from the root of your catkin workspace,</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> ~/workspace
 catkin_make
 </pre></div>
 </div>
 <p>source the ROS overlay packages,</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span> /devel/setup.bash
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span> ~/workspace/devel/setup.bash
 </pre></div>
 </div>
 <p>At this point the Reach Robotics nodes have been built and are ready to use.</p>

@@ -25,6 +25,10 @@ To get started, source the ROS underlay,
    Keep in mind, if you have more than one ROS distribution installed, ~/.bashrc must only source 
    the setup.bash for the version you are currently using.
    
+.. warning::
+   Before building the catkin packages, you must remove the COLCON_IGONRE file from the ROS directory. 
+   If this file is not removed, catkin_make will skip the ROS packages. Ensure that a CATKIN_IGNORE
+   file is present in the ROS 2 directory, otherwise there will be conflicting package names. 
 
 Now build the workspace by invoking catkin_make from the root of your catkin workspace,
 

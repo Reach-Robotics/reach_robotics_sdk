@@ -25,6 +25,10 @@ To get started, source the ROS 2 underlay,
    Keep in mind, if you have more than one ROS distribution installed, ~/.bashrc must only source 
    the setup.bash for the version you are currently using.
    
+.. warning::
+   Before building the colcon packages, you must remove the CATKIN_IGNORE file from the ROS 2 directory. 
+   If this file is not removed, catkin_make will skip the ROS packages. Ensure that a COLCON_IGNORE
+   file is present in the ROS directory, otherwise there will be conflicting package names. 
 
 build the ROS 2 packages,
 
@@ -37,7 +41,7 @@ source the ROS 2 overlay packages,
 
 .. code-block:: bash
 
-   source /install/local_setup.bash
+   source source ~/workspace/install/local_setup.bash
 
 At this point the Reach Robotics nodes have been built and are ready to use. 
 
