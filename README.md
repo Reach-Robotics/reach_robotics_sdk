@@ -1,4 +1,4 @@
-[![Logo](docsrc/source/images/Reach.Robotics-Logo.White.png)](#) 
+[![Logo](docsrc/source/images/Reach.Robotics-Logo.Navy-01.png)](#) 
 
 The Reach Robotics SDK provides support for custom control of Reach Robotics products. Currently we offer support for Python, C and C++ as well as ROS/ROS 2 nodes. Follow the [instructions to get started](https://reach-robotics.github.io/reach_robotics_sdk/) and run some examples.
 
