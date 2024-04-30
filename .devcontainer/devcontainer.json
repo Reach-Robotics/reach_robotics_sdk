@@ -7,24 +7,21 @@
 	// Switch between ROS and ROS 2 dev environments
 	"dockerFile": "./foxy-dockerfile",
 
-  // Set privileged mode, --net=host for display exporting & set XDG_RUNTIME_DIR for qt runtime. 
-  "runArgs": ["--privileged",
-              "--net", "host",
-              "-e", "XDG_RUNTIME_DIR=/tmp"],
+  // For Windows, privileged mode is not typically needed, and networking differs.
+  "runArgs": ["-e", "XDG_RUNTIME_DIR=/tmp"],
 
-  // Mount x11 for display exporting and /dev for tty connections 
+  // For Windows, X11 forwarding is not applicable. Mounting your development workspace and necessary directories.
   "mounts": [
-    "source=/tmp/.X11-unix,target=/tmp/.X11-unix,type=bind",
+    "source=${localWorkspaceFolder},target=/root/workspace/src/reach_robotics_sdk,type=bind",
     "source=/dev,target=/dev,type=bind"
   ],
 
-  // Mount host development workspace to root/workspace/src
-  "workspaceMount": "source=${localWorkspaceFolder},target=/root/workspace/src/reach_robotics_sdk,type=bind",
+  // Define your workspace folder within the container
   "workspaceFolder": "/root/workspace/src/reach_robotics_sdk",
 
   // Install protocol 
   "postCreateCommand": "cd /root/workspace/src/reach_robotics_sdk/bplprotocol && python3 -m pip install .",
   
-  // Connect to sever root user
+  // Connect to server root user
   "remoteUser": "root"
 }
