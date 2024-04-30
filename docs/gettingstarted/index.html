@@ -1,25 +1,28 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Getting Started &mdash; Reach Robotics Software 1.1.0 documentation</title>
-      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/tabs.css" type="text/css" />
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=3fb7a366" />
+      <link rel="stylesheet" type="text/css" href="../_static/tabs.css?v=a5c4661c" />
+
+  
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/underscore.js"></script>
-        <script src="../_static/doctools.js"></script>
-        <script src="../_static/clipboard.min.js"></script>
-        <script src="../_static/copybutton.js"></script>
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=def9ab29"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
+        <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../_static/copybutton.js?v=f281be69"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -108,7 +111,7 @@
            <div itemprop="articleBody">
              
   <section id="getting-started">
-<span id="id1"></span><h1>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this headline"></a></h1>
+<span id="id1"></span><h1>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this heading"></a></h1>
 <p>To get started with the Reach Robotics SDK, you’ll first need to install
 the critical components package. This package includes our internal packet
 descriptions for the C and Python communication protocols. These packages
@@ -121,10 +124,10 @@ our sales team (<a class="reference external" href="mailto:sales&#37;&#52;&#48;r
 This is the former trading name of Reach Robotics.</p>
 </div>
 <section id="downloading-the-sdk">
-<h2>Downloading the SDK<a class="headerlink" href="#downloading-the-sdk" title="Permalink to this headline"></a></h2>
+<h2>Downloading the SDK<a class="headerlink" href="#downloading-the-sdk" title="Permalink to this heading"></a></h2>
 <p>Clone the SDK from the Reach Robotics GitHub into your development workspace,</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> ~/workspace/src
-git clone https://github.com/Reach-Robotics/reach_robotics_sdk.git
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~/workspace/src
+git<span class="w"> </span>clone<span class="w"> </span>https://github.com/Reach-Robotics/reach_robotics_sdk.git
 </pre></div>
 </div>
 <div class="admonition note">
@@ -134,7 +137,7 @@ cloned into your ROS workspace src folder.</p>
 </div>
 </section>
 <section id="installing-critical-components">
-<h2>Installing Critical Components<a class="headerlink" href="#installing-critical-components" title="Permalink to this headline"></a></h2>
+<h2>Installing Critical Components<a class="headerlink" href="#installing-critical-components" title="Permalink to this heading"></a></h2>
 <p>The SDK critical components can be download from the <a class="reference external" href="https://reachrobotics.com/github-page/">Reach Robotics Website</a>.
 Use the password provided to you at the time of your purchase or contact our <a class="reference external" href="mailto:sales&#37;&#52;&#48;reachrobotics&#46;com/">Sales Team</a> for
 more information.</p>
@@ -159,11 +162,11 @@ more information.</p>
 </div>
 </section>
 <section id="getting-started-with-python">
-<h2>Getting Started With Python<a class="headerlink" href="#getting-started-with-python" title="Permalink to this headline"></a></h2>
+<h2>Getting Started With Python<a class="headerlink" href="#getting-started-with-python" title="Permalink to this heading"></a></h2>
 <p>To get started with the Reach Robotics python protocol install the package <code class="docutils literal notranslate"><span class="pre">`bplprotocol`</span></code>
 locally,</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> ./bplprotocol
-pip3 install .
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>./bplprotocol
+pip3<span class="w"> </span>install<span class="w"> </span>.
 </pre></div>
 </div>
 <div class="admonition note">
@@ -173,7 +176,7 @@ correctly. If this is the case, the following error will be raised during the in
 <span class="pre">Robotics</span> <span class="pre">SDK</span> <span class="pre">Critical</span> <span class="pre">Components</span></code>.</p>
 </div>
 <section id="examples">
-<h3>Examples<a class="headerlink" href="#examples" title="Permalink to this headline"></a></h3>
+<h3>Examples<a class="headerlink" href="#examples" title="Permalink to this heading"></a></h3>
 <p>Some examples using the bplprotocol can be found under bplprotocol/examples,</p>
 <div class="toctree-wrapper compound">
 <ul>
@@ -190,11 +193,11 @@ correctly. If this is the case, the following error will be raised during the in
 </section>
 </section>
 <section id="getting-started-with-c-c">
-<h2>Getting Started With C/C++<a class="headerlink" href="#getting-started-with-c-c" title="Permalink to this headline"></a></h2>
+<h2>Getting Started With C/C++<a class="headerlink" href="#getting-started-with-c-c" title="Permalink to this heading"></a></h2>
 <p>To get started with the C/C++ communications protocol, ensure you have the files
 <code class="docutils literal notranslate"><span class="pre">`bplprotocol.h`</span></code> and <code class="docutils literal notranslate"><span class="pre">`packetID.h`</span></code> in your file directory.</p>
 <section id="id2">
-<h3>Examples<a class="headerlink" href="#id2" title="Permalink to this headline"></a></h3>
+<h3>Examples<a class="headerlink" href="#id2" title="Permalink to this heading"></a></h3>
 <p>Some examples using the bplprotocol can be found under C/examples,</p>
 <div class="toctree-wrapper compound">
 <ul>
@@ -204,10 +207,10 @@ correctly. If this is the case, the following error will be raised during the in
 </div>
 </section>
 <section id="compilation-and-execution">
-<h3>Compilation and Execution<a class="headerlink" href="#compilation-and-execution" title="Permalink to this headline"></a></h3>
+<h3>Compilation and Execution<a class="headerlink" href="#compilation-and-execution" title="Permalink to this heading"></a></h3>
 <p>You can compile and execute examples using the GCC tool chain as shown below.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> ./C/examples/
-gcc decodePacketExample.c -I .. -o decode_example.o
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>./C/examples/
+gcc<span class="w"> </span>decodePacketExample.c<span class="w"> </span>-I<span class="w"> </span>..<span class="w"> </span>-o<span class="w"> </span>decode_example.o
 
 <span class="c1"># To run the example</span>
 ./decode_example.o
