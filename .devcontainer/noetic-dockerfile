@@ -14,7 +14,8 @@ RUN apt install ros-$ROS_DISTRO-joint-state-publisher
 RUN apt install ros-$ROS_DISTRO-joint-state-publisher-gui
 
 RUN python3 -m pip install --upgrade pip
-RUN python3 -m pip install cobs crcmod pyserial scipy
+RUN python3 -m pip install -r requirements.txt
+RUN python3 -m pip install -r sphinx_requirements.txt
 
 RUN ln -sf /bin/bash /bin/sh
 
