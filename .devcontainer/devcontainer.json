@@ -21,6 +21,9 @@
 
   // Install protocol 
   "postCreateCommand": "cd /root/workspace/src/reach_robotics_sdk/bplprotocol && python3 -m pip install .",
+
+  // Make script use unix line endings 
+  "postStartCommand": "dos2unix ./docsrc/*",
   
   // Connect to server root user
   "remoteUser": "root"
