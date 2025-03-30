@@ -9,6 +9,14 @@ or launched the included VS Code development container. For more detials please 
    Before preceeding, please install the Reach Robotics SDK. Instructions
    for installation can found in the :ref:`Getting Started<getting_started>` section. 
 
+.. warning::
+   
+   BPL Protocol will be depreciated in 2025 and replaced with Reach System protocol. 
+   The ROS 2 packages provided in this SDK are for the convenience of the user and are 
+   not currently supported by the Reach Robotics team. If you need support with your 
+   ROS 2 integration, please speak to your Reach Robotics sales representative for a quote 
+   (all services are subject to availability). 
+
 Setup
 ---------------------
 
@@ -51,12 +59,6 @@ At this point the Reach Robotics nodes have been built and are ready to use.
 Packages
 ---------------------------
 The ROS 2 folder is split into several packages. Each package is briefly described below.
-
-.. warning::
-   
-   BPL Protocol will be depreciated in 2025 and replaced with Reach System protocol. 
-   The ROS 2 packages provided below are for convenence of the user and are not currently
-   supported by the Reach Robotics team. 
 
 bpl_passthrough
 ^^^^^^^^^^^^^^^^^^^^^^^^

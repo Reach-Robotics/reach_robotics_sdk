@@ -2,7 +2,7 @@ Reach Robotics SDK
 =======================================================================
 
 The `Reach Robotics SDK <https://github.com/Reach-Robotics/reach_robotics_sdk.git/>`_ provides 
-the implimentation of the Reach System Protocol [V1.12.1] (:download:`pdf <Reach System - Communication Protocol [V1.12.1].pdf>`) 
+the implimentation of the `Reach System Protocol <https://github.com/Reach-Robotics/reach_robotics_sdk/tree/master/Reach%20System%20-%20Communication%20Protocol.pdf>`_ 
 in Python and C as well as a ROS 2 communication bridge. Additonally, the SDK provides some basic examples of how to use 
 the Reach System Protocol to communicate with the Reach Robotics hardware over serial and UDP connections. 
 Follow the instructions to :ref:`Get Started<getting_started>`. 
@@ -45,7 +45,7 @@ Documentation
 =====================
 
 All Reach Robotics product documentation can be downloaded from the Reach Robotics 
-`website <https://reachrobotics.com/resources/software-and-developer//>`_.
+`website <https://reachrobotics.com/resources/knowledge-hub/?tab=datasheets-and-manuals/>`_.
 
 .. toctree::
    :maxdepth: 1

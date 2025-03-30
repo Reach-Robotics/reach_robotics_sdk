@@ -20,9 +20,9 @@ The Reach Robotics SDK provides provides the implimentation of the Reach System 
 >The prices of supplementary support packages are dependent upon scope of request.
 
 ## Documentation
-Detailed SDK documentation is available on our GitHub pages
-https://reach-robotics.github.io/reach_robotics_sdk/. All Reach Robotics product documentation can be downloaded from our [website](https://reachrobotics.com/resources/software-and-developer/).
 
+Detailed SDK documentation is available on our GitHub pages
+https://reach-robotics.github.io/reach_robotics_sdk/. All Reach Robotics product documentation can be downloaded from our [website](https://reachrobotics.com/resources/knowledge-hub/?tab=datasheets-and-manuals/).
 
 ## License
 
