@@ -13,5 +13,4 @@ setup(
     version='1.0.0',
     packages=['bplprotocol'],
     install_requires=['cobs', 'crcmod'],
-    long_description=open('README.md').read(),
 )
