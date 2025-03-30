@@ -1,34 +1,32 @@
+
+
 <!DOCTYPE html>
 <html class="writer-html5" lang="en">
 <head>
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ROS 2 &mdash; Reach Robotics Software 1.1.0 documentation</title>
-      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+  <title>ROS 2 &mdash; Reach Robotics SDK 1.1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
       <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=3fb7a366" />
       <link rel="stylesheet" type="text/css" href="../_static/tabs.css?v=a5c4661c" />
 
   
-  <!--[if lt IE 9]>
-    <script src="../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script src="../_static/jquery.js?v=5d32c60e"></script>
-        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=def9ab29"></script>
-        <script src="../_static/doctools.js?v=888ff710"></script>
-        <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
-        <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
-        <script src="../_static/copybutton.js?v=f281be69"></script>
-        <script src="../_static/tabs.js?v=3030b3cb"></script>
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=def9ab29"></script>
+      <script src="../_static/doctools.js?v=888ff710"></script>
+      <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
+      <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../_static/copybutton.js?v=f281be69"></script>
+      <script src="../_static/tabs.js?v=3030b3cb"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Documentation" href="../documentation/index.html" />
-    <link rel="prev" title="ROS" href="../ros1/index.html" /> 
+    <link rel="next" title="License" href="../license/index.html" />
+    <link rel="prev" title="Getting Started" href="../gettingstarted/index.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -40,7 +38,7 @@
           
           
           <a href="../index.html" class="icon icon-home">
-            Reach Robotics Software
+            Reach Robotics SDK
               <img src="../_static/Reach.Robotics-Logo.White.png" class="logo" alt="Logo"/>
           </a>
 <div role="search">
@@ -54,7 +52,6 @@
               <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../gettingstarted/index.html">Getting Started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../ros1/index.html">ROS</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">ROS 2</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#setup">Setup</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#packages">Packages</a><ul>
@@ -63,14 +60,13 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#bpl-bravo-description">bpl_bravo_description</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id1">Examples</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id2">Examples</a></li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../documentation/index.html">Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../license/index.html">License</a></li>
 </ul>
 
@@ -80,7 +76,7 @@
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../index.html">Reach Robotics Software</a>
+          <a href="../index.html">Reach Robotics SDK</a>
       </nav>
 
       <div class="wy-nav-content">
@@ -100,13 +96,16 @@
              
   <section id="ros-2">
 <h1>ROS 2<a class="headerlink" href="#ros-2" title="Permalink to this heading"></a></h1>
-<p>This tutorial assumes you have pre-installed ROS 2 for desktop on your computer.
-You can install ROS 2 by following the instructions at <a class="reference external" href="http://wiki.ros.org/ROS/Installation">http://wiki.ros.org/ROS/Installation</a>.
-Additionally, you’ll need to install the Reach Robotics SDK and critical components. Instructions
+<p>This tutorial assumes you have either pre-installed <a class="reference external" href="http://wiki.ros.org/ROS/Installation/">ROS 2</a>
+or launched the included VS Code development container. For more detials please see <code class="docutils literal notranslate"><span class="pre">.devcontainer/readme.md</span></code>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Before preceeding, please install the Reach Robotics SDK. Instructions
 for installation can found in the <a class="reference internal" href="../gettingstarted/index.html#getting-started"><span class="std std-ref">Getting Started</span></a> section.</p>
+</div>
 <section id="setup">
 <h2>Setup<a class="headerlink" href="#setup" title="Permalink to this heading"></a></h2>
-<p>To get started, source the ROS 2 underlay,</p>
+<p>First, source the ROS 2 underlay,</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span><span class="w"> </span>/opt/ros/foxy/setup.bash
 </pre></div>
 </div>
@@ -119,12 +118,6 @@ for installation can found in the <a class="reference internal" href="../getting
 </div>
 <p>Keep in mind, if you have more than one ROS distribution installed, ~/.bashrc must only source
 the setup.bash for the version you are currently using.</p>
-</div>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>Before building the colcon packages, you must remove the CATKIN_IGNORE file from the ROS 2 directory.
-If this file is not removed, catkin_make will skip the ROS packages. Ensure that a COLCON_IGNORE
-file is present in the ROS directory, otherwise there will be conflicting package names.</p>
 </div>
 <p>build the ROS 2 packages,</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~/workspace
@@ -145,6 +138,12 @@ command accordingly i.e. <code class="docutils literal notranslate"><span class=
 <section id="packages">
 <h2>Packages<a class="headerlink" href="#packages" title="Permalink to this heading"></a></h2>
 <p>The ROS 2 folder is split into several packages. Each package is briefly described below.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>BPL Protocol will be depreciated in 2025 and replaced with Reach System protocol.
+The ROS 2 packages provided below are for convenence of the user and are not currently
+supported by the Reach Robotics team.</p>
+</div>
 <section id="bpl-passthrough">
 <h3>bpl_passthrough<a class="headerlink" href="#bpl-passthrough" title="Permalink to this heading"></a></h3>
 <p>The BPL passthrough is the core package that facilitates communication to Reach
@@ -212,8 +211,8 @@ It subscribes the to <code class="code docutils literal notranslate"><span class
 <li><p>RB-7002 - Reach Bravo 7 (PRO)</p></li>
 <li><p>RB-5002 - Reach Bravo 5 (PRO)</p></li>
 </ul>
-<section id="id1">
-<h4>Examples<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h4>
+<section id="id2">
+<h4>Examples<a class="headerlink" href="#id2" title="Permalink to this heading"></a></h4>
 <p>Examples on viewing URDFs in RVIZ.</p>
 <a class="reference internal image-reference" href="../_images/rviz_bravo_7.png"><img alt="../_images/rviz_bravo_7.png" src="../_images/rviz_bravo_7.png" style="width: 600px;" /></a>
 <p>Viewing a Bravo 7 URDF,</p>
@@ -237,14 +236,14 @@ It subscribes the to <code class="code docutils literal notranslate"><span class
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="../ros1/index.html" class="btn btn-neutral float-left" title="ROS" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="../documentation/index.html" class="btn btn-neutral float-right" title="Documentation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../gettingstarted/index.html" class="btn btn-neutral float-left" title="Getting Started" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../license/index.html" class="btn btn-neutral float-right" title="License" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2023, Reach Robotics.</p>
+    <p>&#169; Copyright Reach Robotics PTY LTD.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

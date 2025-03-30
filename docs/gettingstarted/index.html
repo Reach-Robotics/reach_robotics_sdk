@@ -1,32 +1,29 @@
+
+
 <!DOCTYPE html>
 <html class="writer-html5" lang="en">
 <head>
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Getting Started &mdash; Reach Robotics Software 1.1.0 documentation</title>
-      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+  <title>Getting Started &mdash; Reach Robotics SDK 1.1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
       <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=3fb7a366" />
-      <link rel="stylesheet" type="text/css" href="../_static/tabs.css?v=a5c4661c" />
 
   
-  <!--[if lt IE 9]>
-    <script src="../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script src="../_static/jquery.js?v=5d32c60e"></script>
-        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=def9ab29"></script>
-        <script src="../_static/doctools.js?v=888ff710"></script>
-        <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
-        <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
-        <script src="../_static/copybutton.js?v=f281be69"></script>
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=def9ab29"></script>
+      <script src="../_static/doctools.js?v=888ff710"></script>
+      <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
+      <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../_static/copybutton.js?v=f281be69"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Requesting Joint Positions" href="examples/requesting_joint_positions.html" />
+    <link rel="next" title="ROS 2" href="../ros2/index.html" />
     <link rel="prev" title="Reach Robotics SDK" href="../index.html" /> 
 </head>
 
@@ -39,7 +36,7 @@
           
           
           <a href="../index.html" class="icon icon-home">
-            Reach Robotics Software
+            Reach Robotics SDK
               <img src="../_static/Reach.Robotics-Logo.White.png" class="logo" alt="Logo"/>
           </a>
 <div role="search">
@@ -53,36 +50,11 @@
               <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Getting Started</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#downloading-the-sdk">Downloading the SDK</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#installing-critical-components">Installing Critical Components</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#getting-started-with-python">Getting Started With Python</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#examples">Examples</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="examples/requesting_joint_positions.html">Requesting Joint Positions</a></li>
-<li class="toctree-l4"><a class="reference internal" href="examples/setting_heartbeats.html">Setting Heartbeats</a></li>
-<li class="toctree-l4"><a class="reference internal" href="examples/master_arm_passthrough.html">Master Arm Passthrough</a></li>
-<li class="toctree-l4"><a class="reference internal" href="examples/master_arm_information.html">Master Arm Information</a></li>
-<li class="toctree-l4"><a class="reference internal" href="examples/force_torque_sensor.html">Accessing the Force Torque Sensor</a></li>
-<li class="toctree-l4"><a class="reference internal" href="examples/joint_control.html">Controlling Joints</a></li>
-<li class="toctree-l4"><a class="reference internal" href="examples/simultaneous_joint_control.html">Controlling Joints Simultaneously</a></li>
-<li class="toctree-l4"><a class="reference internal" href="examples/voltage_threshold_parameters.html">Voltage Threshold Parameters - Auto Stow on Voltage Change</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#getting-started-with-python">Getting Started With Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#getting-started-with-c-c">Getting Started With C/C++</a></li>
 </ul>
 </li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#getting-started-with-c-c">Getting Started With C/C++</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id2">Examples</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="examples/encoding_packets.html">Encoding Packets</a></li>
-<li class="toctree-l4"><a class="reference internal" href="examples/decoding_packets.html">Decoding Packets</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#compilation-and-execution">Compilation and Execution</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../ros1/index.html">ROS</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../ros2/index.html">ROS 2</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../documentation/index.html">Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../license/index.html">License</a></li>
 </ul>
 
@@ -92,7 +64,7 @@
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../index.html">Reach Robotics Software</a>
+          <a href="../index.html">Reach Robotics SDK</a>
       </nav>
 
       <div class="wy-nav-content">
@@ -112,104 +84,65 @@
              
   <section id="getting-started">
 <span id="id1"></span><h1>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this heading"></a></h1>
-<p>To get started with the Reach Robotics SDK, you’ll first need to install
-the critical components package. This package includes our internal packet
-descriptions for the C and Python communication protocols. These packages
-are provided to customers who have purchased a PRO package for any Reach
-Robotics product. For more information about PRO packages please contact
-our sales team (<a class="reference external" href="mailto:sales&#37;&#52;&#48;reachrobotics&#46;com">sales<span>&#64;</span>reachrobotics<span>&#46;</span>com</a>).</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Some parts of this documentation and SDK source code refer to Blueprint Lab (bpl).
-This is the former trading name of Reach Robotics.</p>
-</div>
-<section id="downloading-the-sdk">
-<h2>Downloading the SDK<a class="headerlink" href="#downloading-the-sdk" title="Permalink to this heading"></a></h2>
-<p>Clone the SDK from the Reach Robotics GitHub into your development workspace,</p>
+<p>To get started with the Reach Robotics SDK, you will first need to clone the SDK into
+your development workspace.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~/workspace/src
 git<span class="w"> </span>clone<span class="w"> </span>https://github.com/Reach-Robotics/reach_robotics_sdk.git
 </pre></div>
 </div>
+<p>The SDK is available for both Python and C/C++ and includes a ROS 2 node (communication bridge)
+for easy integration with ROS 2 applications. If you intend to use the ROS 2 node, ensure the
+repository is cloned into your ROS workspace src folder.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>If you intend to use the ROS or ROS 2 node, ensure the repository is
-cloned into your ROS workspace src folder.</p>
-</div>
-</section>
-<section id="installing-critical-components">
-<h2>Installing Critical Components<a class="headerlink" href="#installing-critical-components" title="Permalink to this heading"></a></h2>
-<p>The SDK critical components can be download from the <a class="reference external" href="https://reachrobotics.com/github-page/">Reach Robotics Website</a>.
-Use the password provided to you at the time of your purchase or contact our <a class="reference external" href="mailto:sales&#37;&#52;&#48;reachrobotics&#46;com/">Sales Team</a> for
-more information.</p>
-<a class="reference internal image-reference" href="../_images/website_page.png"><img alt="../_images/website_page.png" class="align-center" src="../_images/website_page.png" style="width: 600px;" /></a>
-<p>Once downloaded,</p>
-<ol class="arabic simple">
-<li><p>Open the ZIP File,</p></li>
-<li><p>Copy the contents to the reach_robotics_sdk Folder,</p></li>
-</ol>
-<a class="reference internal image-reference" href="../_images/instruction_install_sdk.png"><img alt="../_images/instruction_install_sdk.png" class="align-center" src="../_images/instruction_install_sdk.png" style="width: 600px;" /></a>
-<ol class="arabic simple" start="3">
-<li><p>Merge The folders if prompted.</p></li>
-</ol>
-<p>When completed, the folder structure should look similar to the tree below,</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>reach_robotics_sdk
-└── bplprotocol
-    │   └── bplprotocol
-    │      └── packetID.py
-    └── C
-        └── packetID.h
-</pre></div>
-</div>
-</section>
-<section id="getting-started-with-python">
-<h2>Getting Started With Python<a class="headerlink" href="#getting-started-with-python" title="Permalink to this heading"></a></h2>
-<p>To get started with the Reach Robotics python protocol install the package <code class="docutils literal notranslate"><span class="pre">`bplprotocol`</span></code>
-locally,</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>./bplprotocol
-pip3<span class="w"> </span>install<span class="w"> </span>.
-</pre></div>
-</div>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>If the package fails to install it is likely you have not installed the <a class="reference external" href="https://reachrobotics.com/github-page/">Critical components</a>
-correctly. If this is the case, the following error will be raised during the installation <code class="docutils literal notranslate"><span class="pre">&quot;ImportError:</span> <span class="pre">Please</span> <span class="pre">install</span> <span class="pre">the</span> <span class="pre">Reach</span>
-<span class="pre">Robotics</span> <span class="pre">SDK</span> <span class="pre">Critical</span> <span class="pre">Components</span></code>.</p>
-</div>
-<section id="examples">
-<h3>Examples<a class="headerlink" href="#examples" title="Permalink to this heading"></a></h3>
-<p>Some examples using the bplprotocol can be found under bplprotocol/examples,</p>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="examples/requesting_joint_positions.html">Requesting Joint Positions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="examples/setting_heartbeats.html">Setting Heartbeats</a></li>
-<li class="toctree-l1"><a class="reference internal" href="examples/master_arm_passthrough.html">Master Arm Passthrough</a></li>
-<li class="toctree-l1"><a class="reference internal" href="examples/master_arm_information.html">Master Arm Information</a></li>
-<li class="toctree-l1"><a class="reference internal" href="examples/force_torque_sensor.html">Accessing the Force Torque Sensor</a></li>
-<li class="toctree-l1"><a class="reference internal" href="examples/joint_control.html">Controlling Joints</a></li>
-<li class="toctree-l1"><a class="reference internal" href="examples/simultaneous_joint_control.html">Controlling Joints Simultaneously</a></li>
-<li class="toctree-l1"><a class="reference internal" href="examples/voltage_threshold_parameters.html">Voltage Threshold Parameters - Auto Stow on Voltage Change</a></li>
+<p>The Reach System communication protocol is only compled/tested on the following
+platforms/operating system combinations,</p>
+<ul class="simple">
+<li><p>aarch-64 (Linux)</p></li>
+<li><p>x86-64 (Linux &amp; Windows)</p></li>
 </ul>
 </div>
-</section>
+<section id="getting-started-with-python">
+<h2>Getting Started With Python<a class="headerlink" href="#getting-started-with-python" title="Permalink to this heading"></a></h2>
+<p>To get started with the Reach System python protocol, install the <code class="docutils literal notranslate"><span class="pre">rs_protocol</span></code> package and
+requirements using the provided setup script for your operating system.</p>
+<p><strong>Windows:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./scripts/setup_windows.bat
+</pre></div>
+</div>
+<p><strong>Linux:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./scripts/setup_linux.sh
+</pre></div>
+</div>
+<p>Once the setup script has been executed, you can run the
+examples provided in the  <code class="docutils literal notranslate"><span class="pre">rs_protocol/examples</span></code> folder.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="o">./</span><span class="n">rs_protocol</span><span class="o">/</span><span class="n">examples</span><span class="o">/</span>
+<span class="n">python3</span> <span class="n">basic_actuator_control</span><span class="o">.</span><span class="n">py</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The minimum supported python version for this package is 3.6.</p>
+</div>
 </section>
 <section id="getting-started-with-c-c">
 <h2>Getting Started With C/C++<a class="headerlink" href="#getting-started-with-c-c" title="Permalink to this heading"></a></h2>
-<p>To get started with the C/C++ communications protocol, ensure you have the files
-<code class="docutils literal notranslate"><span class="pre">`bplprotocol.h`</span></code> and <code class="docutils literal notranslate"><span class="pre">`packetID.h`</span></code> in your file directory.</p>
-<section id="id2">
-<h3>Examples<a class="headerlink" href="#id2" title="Permalink to this heading"></a></h3>
-<p>Some examples using the bplprotocol can be found under C/examples,</p>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="examples/encoding_packets.html">Encoding Packets</a></li>
-<li class="toctree-l1"><a class="reference internal" href="examples/decoding_packets.html">Decoding Packets</a></li>
-</ul>
+<p>To get started with the Reach System C/C++ communications protocol, navigate to the src folder.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>reach_robotics_sdk
+└── rs_protocol
+    └── src
+        └── examples
+            ├── decodePacketExample.c
+            └── encodePacketExample.c
+        └── packetID.h
+        └── rs_protocol.h
+</pre></div>
 </div>
-</section>
-<section id="compilation-and-execution">
-<h3>Compilation and Execution<a class="headerlink" href="#compilation-and-execution" title="Permalink to this heading"></a></h3>
-<p>You can compile and execute examples using the GCC tool chain as shown below.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>./C/examples/
+<p>In the src folder you will find the packetID.h file as well as the rs_protocol.h file. These files
+may be included in your c/c++ project to decode and encode Reach System packets. Some examples of
+decoding and encoding packets are provided in the examples folder. You can compile and execute
+examples using the GCC toolchain as shown below.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>./rs_protocol/srs/examples/
 gcc<span class="w"> </span>decodePacketExample.c<span class="w"> </span>-I<span class="w"> </span>..<span class="w"> </span>-o<span class="w"> </span>decode_example.o
 
 <span class="c1"># To run the example</span>
@@ -218,20 +151,19 @@ gcc<span class="w"> </span>decodePacketExample.c<span class="w"> </span>-I<span 
 </div>
 </section>
 </section>
-</section>
 
 
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="../index.html" class="btn btn-neutral float-left" title="Reach Robotics SDK" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="examples/requesting_joint_positions.html" class="btn btn-neutral float-right" title="Requesting Joint Positions" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../ros2/index.html" class="btn btn-neutral float-right" title="ROS 2" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2023, Reach Robotics.</p>
+    <p>&#169; Copyright Reach Robotics PTY LTD.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

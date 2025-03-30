@@ -1,28 +1,25 @@
+
+
 <!DOCTYPE html>
 <html class="writer-html5" lang="en">
 <head>
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Reach Robotics SDK &mdash; Reach Robotics Software 1.1.0 documentation</title>
-      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
-      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+  <title>Reach Robotics SDK &mdash; Reach Robotics SDK 1.1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
       <link rel="stylesheet" type="text/css" href="_static/custom.css?v=3fb7a366" />
-      <link rel="stylesheet" type="text/css" href="_static/tabs.css?v=a5c4661c" />
 
   
-  <!--[if lt IE 9]>
-    <script src="_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script src="_static/jquery.js?v=5d32c60e"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=def9ab29"></script>
-        <script src="_static/doctools.js?v=888ff710"></script>
-        <script src="_static/sphinx_highlight.js?v=4825356b"></script>
-        <script src="_static/clipboard.min.js?v=a7894cd8"></script>
-        <script src="_static/copybutton.js?v=f281be69"></script>
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=def9ab29"></script>
+      <script src="_static/doctools.js?v=888ff710"></script>
+      <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+      <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="_static/copybutton.js?v=f281be69"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -38,7 +35,7 @@
           
           
           <a href="#" class="icon icon-home">
-            Reach Robotics Software
+            Reach Robotics SDK
               <img src="_static/Reach.Robotics-Logo.White.png" class="logo" alt="Logo"/>
           </a>
 <div role="search">
@@ -52,9 +49,7 @@
               <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="gettingstarted/index.html">Getting Started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ros1/index.html">ROS</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ros2/index.html">ROS 2</a></li>
-<li class="toctree-l1"><a class="reference internal" href="documentation/index.html">Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="license/index.html">License</a></li>
 </ul>
 
@@ -64,7 +59,7 @@
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="#">Reach Robotics Software</a>
+          <a href="#">Reach Robotics SDK</a>
       </nav>
 
       <div class="wy-nav-content">
@@ -84,9 +79,11 @@
              
   <section id="reach-robotics-sdk">
 <h1>Reach Robotics SDK<a class="headerlink" href="#reach-robotics-sdk" title="Permalink to this heading"></a></h1>
-<p>The <a class="reference external" href="https://github.com/Reach-Robotics/reach_robotics_sdk.git/">Reach Robotics SDK</a> provides support for custom control of Reach Robotics products.
-Currently we offer support for Python, C and C++ as well as ROS/ROS 2 nodes. Follow
-the instructions to <a class="reference internal" href="gettingstarted/index.html#getting-started"><span class="std std-ref">Get Started</span></a> and run some examples.</p>
+<p>The <a class="reference external" href="https://github.com/Reach-Robotics/reach_robotics_sdk.git/">Reach Robotics SDK</a> provides
+the implimentation of the Reach System Protocol [V1.12.1] (<a class="reference download internal" download="" href="_downloads/3a809717fe90e7561a3a746de2d28651/Reach%20System%20-%20Communication%20Protocol%20%5BV1.12.1%5D.pdf"><code class="xref download docutils literal notranslate"><span class="pre">pdf</span></code></a>)
+in Python and C as well as a ROS 2 communication bridge. Additonally, the SDK provides some basic examples of how to use
+the Reach System Protocol to communicate with the Reach Robotics hardware over serial and UDP connections.
+Follow the instructions to <a class="reference internal" href="gettingstarted/index.html#getting-started"><span class="std std-ref">Get Started</span></a>.</p>
 <p class="centered">
 <strong><a class="reference internal" href="_images/python-logo-only.png"><img alt="python" class="align-middle" src="_images/python-logo-only.png" style="width: 25%;" /></a>     <a class="reference internal" href="_images/C_Logo.png"><img alt="c" class="align-middle" src="_images/C_Logo.png" style="width: 25%;" /></a>     <a class="reference internal" href="_images/ISO_C++_Logo.png"><img alt="c++" class="align-middle" src="_images/ISO_C%2B%2B_Logo.png" style="width: 25%;" /></a></strong></p><figure class="align-center">
 <a class="reference internal image-reference" href="_images/Ros_logo.png"><img alt="_images/Ros_logo.png" src="_images/Ros_logo.png" style="width: 75%;" /></a>
@@ -96,17 +93,26 @@ the instructions to <a class="reference internal" href="gettingstarted/index.htm
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Full access of this SDK is reserved for customers who have purchased a PRO package.
-If you are interested in our products or full access to the SDK, visit our
-<a class="reference external" href="https://reachrobotics.com//">Website</a>, or contact our <a class="reference external" href="mailto:sales&#37;&#52;&#48;reachrobotics&#46;com/">Sales Team</a> (<a class="reference external" href="mailto:sales&#37;&#52;&#48;reachrobotics&#46;com">sales<span>&#64;</span>reachrobotics<span>&#46;</span>com</a>).</p>
+<p>Integration support is not included as part of this SDK. The software is supplied as-is, without warranty
+of any kind. Integration support may be purchased through one of Reach Robotics support packages.
+However, all services are subject to availability. For more information contact our <a class="reference external" href="mailto:sales&#37;&#52;&#48;reachrobotics&#46;com/">Sales Team</a>.</p>
+<p>Reach Robotics provides the following support options:</p>
+<ul class="simple">
+<li><p>Python/C/C++ - 1 hour of engineering support included with any core or comprehensive support package.</p></li>
+<li><p>ROS2 Foxy - paid-for support only for Alpha 5, Bravo 5 and Bravo 7 standard configurations.</p></li>
+</ul>
+<p>The prices of supplementary support packages are dependent upon scope of request.</p>
 </div>
+</section>
+<section id="documentation">
+<h1>Documentation<a class="headerlink" href="#documentation" title="Permalink to this heading"></a></h1>
+<p>All Reach Robotics product documentation can be downloaded from the Reach Robotics
+<a class="reference external" href="https://reachrobotics.com/resources/software-and-developer//">website</a>.</p>
 <div class="toctree-wrapper compound">
 <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="gettingstarted/index.html">Getting Started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ros1/index.html">ROS</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ros2/index.html">ROS 2</a></li>
-<li class="toctree-l1"><a class="reference internal" href="documentation/index.html">Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="license/index.html">License</a></li>
 </ul>
 </div>
@@ -122,7 +128,7 @@ If you are interested in our products or full access to the SDK, visit our
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2023, Reach Robotics.</p>
+    <p>&#169; Copyright Reach Robotics PTY LTD.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
