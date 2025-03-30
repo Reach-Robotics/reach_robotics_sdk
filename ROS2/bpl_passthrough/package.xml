@@ -3,10 +3,9 @@
 <package format="3">
   <name>bpl_passthrough</name>
   <version>0.0.1</version>
-  <description>Package that allows for communication to BPL Products.</description>
-  <maintainer email="j.sumskas@reachrobotics.com">jsumskasbpl</maintainer>
+  <description>Reach Robotics communication protocol</description>
+  <maintainer email="general@reachrobotics.com"></maintainer>
   <license>Properitary Software, No Public License</license>
-
 
   <test_depend>ament_copyright</test_depend>
   <test_depend>ament_flake8</test_depend>

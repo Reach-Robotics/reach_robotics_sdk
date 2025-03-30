@@ -1,0 +1,75 @@
+/*
+ * File: packetID.h
+ * Author: Reach Robotics PTY LTD
+ * 
+ * Description: rs-protocol packet IDs.
+ */
+#ifndef PACKET_ID_H
+#define PACKET_ID_H
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+typedef enum packetID{
+	/* Request */
+    REQUEST = 0x60,
+    HEARTBEAT_SET = 0x91,
+    HEARTBEAT_FREQUENCY = 0x92,
+
+    /* Control */
+    MODE = 0x01,
+	VELOCITY = 0X02,
+	POSITION = 0x03,
+	CURRENT = 0x05,
+    INDEXED_RELATIVE_POSITION = 0x0D,
+    INVERSE_KINEMATICS_GLOBAL_POSITION = 0xA1,
+    INVERSE_KINEMATICS_GLOBAL_VELOCITY = 0xA2, 
+    INVERSE_KINEMATICS_LOCAL_VELOCITY = 0xCB,
+
+    /* Position presets */
+    POSITION_PRESET_GO = 0x55,
+    POSITION_PRESET_CAPTURE = 0x56,
+
+    POSITION_PRESET_SET_0 = 0x57,
+    POSITION_PRESET_SET_1 = 0x58,
+    POSITION_PRESET_SET_2 = 0x59,
+    POSITION_PRESET_SET_3 = 0x5A,
+
+    POSITION_PRESET_NAME_0 = 0x5B,
+    POSITION_PRESET_NAME_1 = 0x5C,
+    POSITION_PRESET_NAME_2 = 0x5D,
+    POSITION_PRESET_NAME_3 = 0x5E,
+
+    /* Configure */
+    SAVE = 0x50,
+    POSITION_LIMITS = 0x10, 
+    VELOCITY_LIMITS = 0x11,
+    CURRENT_LIMITS = 0x12,
+
+    /* Workspace restrictions */
+    KM_BOX_OBSTACLE_02 = 0xA5,
+    KM_BOX_OBSTACLE_03 = 0xA5,
+    KM_BOX_OBSTACLE_04 = 0xA5,
+    KM_BOX_OBSTACLE_05 = 0xA5,
+
+    KM_CYLINDER_OBSTACLE_02 = 0xAB,
+    KM_CYLINDER_OBSTACLE_03 = 0xAC,
+    KM_CYLINDER_OBSTACLE_04 = 0xAD,
+    KM_CYLINDER_OBSTACLE_05 = 0xAE,
+
+    /* Monitor */
+    VOLTAGE=0x90,
+    INTERNAL_HUMIDITY = 0x65,
+    INTERNAL_TEMPERATURE = 0x66, 
+    INTERNAL_PRESSURE = 0x67,
+    FACTORY_CLIMATE = 0x28,
+    SOFTWARE_VERSION = 0x6C, 
+    HARDWARE_STATUS_FLAG = 0x68
+}packetID;
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif  /* PACKET_ID_H */

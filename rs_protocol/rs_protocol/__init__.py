@@ -1,0 +1,370 @@
+import os
+import re
+import struct
+import enum
+import ctypes as c
+import platform
+import serial
+import time
+import logging
+import socket
+
+from typing import Union, Tuple, List, Optional
+
+from .packetID import PacketID
+from .mode import Mode
+
+DATA_BYTES_PER_PACKET = 64
+RESPONSE_TIMEOUT = 0.001
+
+logger = logging.getLogger()
+drivers = None
+
+
+class PacketOption(enum.IntFlag):
+    FWD_ALLOW = 0b00000001
+    IS_DEMAND = 0b00000010
+    PROTOCOL_V2 = 0b00000100
+
+
+class Packet_t(c.Structure):
+    _fields_ = [
+        ("length",          c.c_uint8),
+        ("address",         c.c_uint8),
+        ("code",            c.c_uint16),
+        ("crc",             c.c_uint16),
+        ("data",            c.c_uint8 * DATA_BYTES_PER_PACKET),
+        ("transmitData",    c.c_uint8 * DATA_BYTES_PER_PACKET),
+        ("protocol",        c.c_uint8),
+        ("option",          c.c_uint8),
+        ("useOption",       c.c_uint8),
+        ("receiveRegister", c.c_uint16),
+        ("totalFrames",     c.c_uint8),
+    ]
+
+
+driver_name = "librs_protocol"
+install_path = f"{os.path.dirname(__file__)}/.."
+if platform.system() == "Windows" and (platform.processor() == "x86_64" or platform.machine() == 'AMD64'):
+    lib_path = f"{install_path}/lib/{driver_name}_windows_x86_64.dll"
+elif platform.system() == "Linux" and platform.processor() == "x86_64":
+    lib_path = f"{install_path}/lib/{driver_name}_linux_x86_64.so"
+elif platform.system() == "Linux" and platform.processor() == "aarch64":
+    lib_path = f"{install_path}/lib/{driver_name}_linux_aarch64.so"
+elif platform.system() == "Linux":
+    lib_path = f"{install_path}/lib/{driver_name}_linux_x86_64.so"
+
+
+def import_drivers():
+    logger.info("IMPORTING RS1 DRIVERS")
+    global drivers
+    drivers = c.cdll.LoadLibrary(lib_path)
+
+
+def encode_packet(device_id: int, packet_id: int, data: bytes, option: Optional[int] = None) -> bytes:
+    global drivers
+    if drivers is None:
+        import_drivers()
+    p = Packet_t()
+    p_pointer = c.byref(p)
+    address = c.c_uint8(device_id)
+    code = c.c_uint16(packet_id)
+    length = c.c_uint8(len(data)+4)
+
+    # Unpack data into buffer
+    buffer = (c.c_uint8 * DATA_BYTES_PER_PACKET)(*data)
+
+    # Parse options if required
+    p.useOption, c_option = (c.c_uint8(1), c.c_uint8(int(option))) if option is not None else (c.c_uint8(0), c.c_uint8(0))
+
+    # Encode packet
+    ret = drivers.coms_encodePacket(p_pointer, address, code, length, c.byref(buffer), c_option)  # type: ignore defined in the driver lib
+
+    if ret == 1:
+        return bytes(p.transmitData[0:p.length])
+    elif ret == -1:
+        logger.warning(f"encode_packet(): length ({length}) is less than PKT_HEADER_LEN ({4})")
+        return b''
+    elif ret == -2:
+        logger.warning(f"encode_packet(): length ({length}) is greater than MAX_PACKET_DATA_SIZE ({DATA_BYTES_PER_PACKET})")
+        return b''
+    elif ret == -3:
+        logger.warning(f"encode_packet(): unsupported packet ID")
+        return b''
+    else:
+        logger.warning(f"encode_packet(): unknown error code")
+        return b''
+
+
+def parse_packet(packet_in: bytes) -> Tuple[int, int, bytes, Optional[int]]:
+    global drivers
+    if drivers is None:
+        import_drivers()
+    if len(packet_in) < 4:
+        return 0, 0, b'', None
+
+    # Add terminating byte for driver compatibility
+    if packet_in[-1] != 0:
+        packet_in += b'\x00'
+
+    # HACK: Extract length from end of packet and add CRC and termination to index and drop excess data
+    # Shouldn't need to do this, however, have seen some stray bytes in the serial data. 
+    buffLength = (packet_in[-3] & 0x7F) + 2
+    packetStart = len(packet_in)-buffLength
+    if (packetStart < 0):
+        logger.warning(f"parse_packet(): missing data in packet. Data is corrupt.")
+        return 0, 0, b'', None
+    packet_in = packet_in[len(packet_in)-buffLength:]
+
+    # Check if packets in are in a valid range
+    if len(packet_in) > DATA_BYTES_PER_PACKET:
+        logger.warning(f"parse_packet(): packet_in is too large to parse. packet_in: {packet_in}")
+        return 0, 0, b'', None
+
+    # Generate packet and unpack data into buffer
+    p = Packet_t()
+    buffer = (c.c_uint8 * DATA_BYTES_PER_PACKET)(*packet_in)
+
+    ret = drivers.coms_decodePacket(c.byref(p), c.byref(buffer), buffLength)  # type: ignore defined in the driver lib
+
+    if ret == 1:
+        out_data = bytes([p.data[i] for i in range(p.length - 4)])
+        options = p.option if p.useOption else None
+        return p.address, p.code, out_data, options
+    elif ret == -1:
+        logger.warning(f"parse_packet(): length ({p.length}) is less than PKT_HEADER_LEN ({4}). packet_in: {packet_in}")
+        return 0, 0, b'', None
+    elif ret == -2:
+        logger.warning(f"parse_packet(): length ({p.length}) is greater than MAX_PACKET_DATA_SIZE ({DATA_BYTES_PER_PACKET}). packet_in: {packet_in}")
+        return 0, 0, b'', None
+    elif ret == -3:
+        logger.warning(f"parse_packet(): COBS decoding error. packet_in: {packet_in}")
+        return 0, 0, b'', None
+    elif ret == -4:
+        logger.warning(f"parse_packet(): CRC error. packet_in: {packet_in}")
+        return 0, 0, b'', None
+    elif ret == -6:
+        logger.warning(f"parse_packet(): packet does not end with PKT_TERMINATING_BYTE. packet_in: {packet_in}")
+        return 0, 0, b'', None
+    elif ret == -7:
+        zeroIndex = len(packet_in) - 1
+        length = buffer[zeroIndex-2] & 0x7F    
+        logger.warning(f"parse_packet(): length ({len(packet_in)}) does not match buff length ({length}). packet_in: {packet_in}")
+        return 0, 0, b'', None
+    else:
+        logger.warning(f"parse_packet(): unknown error code {ret}. packet_in: {packet_in}")
+        return 0, 0, b'', None
+
+
+def packet_splitter(buff: bytes) -> Tuple[List[bytes], bytes]:
+    """ Split packets are delimited by 0x00. """
+    incomplete_packet = b''
+    packets = re.split(b'\x00', buff)
+    if buff[-1] != b'0x00':
+        incomplete_packet = packets.pop()
+    return packets, incomplete_packet
+
+
+def decode_floats(data: Union[bytes, bytearray]) -> List[float]:
+    """ Decode a received byte list, into a float list as specified by the rr protocol"""
+    list_data = list(struct.unpack(str(int(len(data)/4)) + "f", data))
+    return list_data
+
+
+def decode_ints(data: Union[bytes, bytearray]) -> List[int]:
+    """ Decode a received byte list, into a float list as specified by the rr protocol"""
+    list_data = list(struct.unpack(str(int(len(data))) + "B", data))
+    return list_data
+
+
+def encode_floats(float_list: List[float]) -> bytes:
+    """ Decode a received byte list, into a float list as specified by the rr protocol"""
+    data = struct.pack('%sf' % len(float_list), *float_list)
+    return data
+
+
+def encode_single_packet(device_id: int, packet_id: int, data: Union[List[float], List[int]]) -> bytes:
+    """ Encode a single packet based on it's type. """
+    option = PacketOption.PROTOCOL_V2 | PacketOption.FWD_ALLOW | PacketOption.IS_DEMAND
+
+    if packet_id == PacketID.REQUEST:
+        if isinstance(data[0], float):
+            raise ValueError("Request must be List of integer packet ID's")
+        
+        data = [data[0] & 0xFF, data[0] >> 8 & 0x7F]  
+
+    if PacketID.PacketType[packet_id] and PacketID.PacketType[packet_id] == float:
+        return encode_packet(device_id, packet_id, encode_floats(data), option)  # type: ignore check is sufficient 
+    else:
+        return encode_packet(device_id, packet_id, data, option)  # type: ignore check is sufficient 
+    
+def create_serial_connection(serial_port: str, BAUD_RATE:int=115200) -> serial.Serial:
+    return serial.Serial(serial_port, 
+                         baudrate=BAUD_RATE, 
+                         stopbits=serial.STOPBITS_ONE,
+                         parity=serial.PARITY_NONE, 
+                         bytesize=serial.EIGHTBITS, 
+                         timeout=0.1)
+
+def create_socket_connection() -> socket.socket:
+    _socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    _socket.setblocking(False)
+    return _socket
+
+
+class PacketReader:
+    """
+    Packet Reader
+    Helper class to read bytes, account for the possibility of incomplete packets on arrival.
+
+    Usage:
+        packet_reader = PacketReader()
+        data == .... receive data here as bytes ...
+        packets = packet_reader.receive_bytes()
+    """
+    incomplete_packets = b''
+
+    def receive_bytes(self, data: bytes) -> List[Tuple[int, int, bytes, Optional[None]]]:
+        ''' Receive data, and return a decoded packet '''
+        packet_list = []
+        encoded_packets, self.incomplete_packets = packet_splitter(self.incomplete_packets + data)
+        if not encoded_packets:
+            return packet_list
+        
+        for encoded_packet in encoded_packets:
+            if not encoded_packet:
+                continue
+            
+            decoded_packet = parse_packet(encoded_packet)
+            packet_list.append(decoded_packet)
+        
+        return packet_list
+
+class RSProtocol:
+    
+    def __init__(self, connection: Union[serial.Serial, socket.socket], address:tuple=("0.0.0.0", 0)) -> None:
+        self.packet_reader = PacketReader()
+        self.connection: Union[serial.Serial, socket.socket] = connection
+        self.address = address
+
+    async def _read_buff_async(self) -> bytes:
+        try:
+            if isinstance(self.connection, serial.Serial):
+                return self.connection.read(self.connection.in_waiting)
+            elif isinstance(self.connection, socket.socket):
+                recv_bytes = self.connection.recv(4096)
+                return recv_bytes
+            else:
+                raise ValueError("Invalid connection type")
+        except:
+            return b''
+    
+    
+    def _read_buff(self) -> bytes:
+        try:
+            if isinstance(self.connection, serial.Serial):
+                return self.connection.read(self.connection.in_waiting)
+            elif isinstance(self.connection, socket.socket):
+                recv_bytes = self.connection.recv(4096)
+                return recv_bytes
+            else:
+                raise ValueError("Invalid connection type")
+        except:
+            return b''
+
+    def _write_buff(self, packet: bytes):
+        if isinstance(self.connection, serial.Serial):
+            self.connection.write(packet)
+        elif isinstance(self.connection, socket.socket):
+            self.connection.sendto(packet, self.address)
+        else:
+            raise ValueError("Invalid connection type")
+    
+    def write(self, device_id: int, packet_id: int, data: Union[List[float], List[int], float, int]):
+        """ Write packet to the connected device """
+        if not isinstance(data, list):
+            data = [data]
+
+        packet = encode_single_packet(device_id, packet_id, data)
+        self._write_buff(packet)
+    
+    def read_raw(self) -> List[Tuple[int, int, bytes, Optional[None]]]:
+        """ Read raw packets from the connected device """
+        read_data = self._read_buff()
+
+        if not read_data:
+            return list()
+
+        return self.packet_reader.receive_bytes(read_data)
+    
+    def read(self):
+        """ Read decoded packets from the connected device """
+        raw_packets = self.read_raw()
+        if not raw_packets:
+            return list()
+
+        decoded_packets = list()
+        for packet in raw_packets:
+
+            read_device_id, read_packet_id, data_bytes, options = packet
+
+            if read_packet_id not in PacketID.PacketType:
+                continue
+
+            if data_bytes == b'\x00':
+                continue
+                
+            packet_type = PacketID.PacketType[read_packet_id]
+            
+            if packet_type and packet_type == float:
+                decoded_packets.append([read_device_id, read_packet_id, decode_floats(data_bytes), options])
+            elif packet_type and packet_type == int:
+                decoded_packets.append([read_device_id, read_packet_id, decode_ints(data_bytes), options])
+            
+        return decoded_packets
+
+    
+    def request(self, device_id: int, packet_id: int, read_attempts=10, write_attempts=2, timeout=RESPONSE_TIMEOUT) -> Union[List[int], List[float]]:
+        """ Request a single packet from the connected device """
+        
+        for _ in range(write_attempts):
+            self.write(device_id, PacketID.REQUEST, [packet_id])
+            for _ in range(read_attempts):
+                time.sleep(timeout)
+
+                packets = self.read_raw()
+                if not packets:
+                    continue
+
+                for packet in packets:
+                    read_device_id, read_packet_id, data_bytes, options = packet
+                    if read_device_id == device_id and read_packet_id == packet_id:
+                        if read_packet_id not in PacketID.PacketType:
+                            continue
+                        
+                        if data_bytes == b'\x00':
+                            continue
+                        
+                        packet_type = PacketID.PacketType[packet_id]
+
+                        if packet_type and packet_type == float:
+                            return decode_floats(data_bytes)
+                        elif packet_type and packet_type == int:
+                            return decode_ints(data_bytes)
+                        else:
+                            return list()
+                    
+        return list()
+    
+    def set(self, device_id: int, packet_id: int, data: Union[List[float], List[int], float, int]):
+        ''' Set value on the connected device and verify the recieved data againt the set value '''
+        if not isinstance(data, list):
+            data = [data]
+
+        self.write(device_id, packet_id, data)
+        recv_data = self.request(device_id, packet_id)
+
+        if data == recv_data:
+            return True, recv_data
+        else:
+            return False, recv_data

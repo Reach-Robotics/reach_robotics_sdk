@@ -1,21 +1,27 @@
-[![Logo](docsrc/source/images/Reach.Robotics-Logo.White.png)](#) 
+[![Logo](.docsrc/source/images/Reach.Robotics-Logo.Navy-01.png)](#) 
 
-The Reach Robotics SDK provides support for custom control of Reach Robotics products. Currently we offer support for Python, C and C++ as well as ROS/ROS 2 nodes. Follow the [instructions to get started](https://reach-robotics.github.io/reach_robotics_sdk/) and run some examples.
+The Reach Robotics SDK provides provides the implimentation of the Reach System Protocol [V1.12.1] in Python and C as well as a ROS 2 communication bridge. Additonally, the SDK provides some basic examples of how to use the Reach System Protocol to communicate with Reach Robotics hardware over serial and UDP connections. Follow the [instructions to get started](https://reach-robotics.github.io/reach_robotics_sdk/).
 
 <div align="center">
-    <img src="docsrc/source/images/python-logo-only.png" style="width: 10%;">
-    <img src="docsrc/source/images/C_Logo.png" style="width: 10%;">
-    <img src="docsrc/source/images/ISO_C++_Logo.png" style="width: 10%;">
-    <img src="docsrc/source/images/Ros_logo.png" style="width: 42%;">
+    <img src=".docsrc/source/images/python-logo-only.png" style="width: 10%;">
+    <img src=".docsrc/source/images/C_Logo.png" style="width: 10%;">
+    <img src=".docsrc/source/images/ISO_C++_Logo.png" style="width: 10%;">
+    <img src=".docsrc/source/images/Ros_logo.png" style="width: 42%;">
 </div>
 
 &nbsp;
 
-> **Note** Full access of this SDK is reserved for customers who have purchased a PRO package. If you are interested in our products or full access to the SDK, visit our [Website](https://reachrobotics.com/), or contact our sales team (sales@reachrobotics.com).
+> **Note:** Integration support is not included as part of this SDK. The software is supplied as-is, without warranty of any kind. Integration support may be purchased through one of Reach Robotics support packages. However, all services are subject to availability. For more information contact our sales team (sales@reachrobotics.com).
+
+>Reach Robotics provides the following support options:
+>- Python/C/C++ - 1 hour of engineering support included with any core or comprehensive support package.
+>- ROS2 Foxy - paid-for support only for Alpha 5, Bravo 5 and Bravo 7 standard configurations.  
+
+>The prices of supplementary support packages are dependent upon scope of request.
 
 ## Documentation
 Detailed SDK documentation is available on our GitHub pages
-https://reach-robotics.github.io/reach_robotics_sdk/. All Reach Robotics product documentation can be downloaded from our [website](https://reachrobotics.com/resources/documentation-and-software/).
+https://reach-robotics.github.io/reach_robotics_sdk/. All Reach Robotics product documentation can be downloaded from our [website](https://reachrobotics.com/resources/software-and-developer/).
 
 
 ## License

@@ -1,0 +1,42 @@
+{
+	"name": "ROS Development Environment",
+
+	// Sets the run context to one level up instead of the .devcontainer folder.
+	"context": "..",
+
+  // // ROS 2 dev environment
+	"dockerFile": "./foxy-dockerfile",
+
+  // Setup container for X11 forwarding.
+  // This is required for GUI applications to run inside the container.
+  // Note:
+  // - For Linux, you need to set the DISPLAY environment variable to the host's display.
+  // - For Windows, you need to set the DISPLAY environment variable to host.docker.internal:0.0.
+  // - For Windows, you also need to run an X server on the host machine (e.g., VcXsrv or Xming).
+  "runArgs": [
+    "--privileged",
+    "-e", "XDG_RUNTIME_DIR=/tmp",
+    // "-e", "DISPLAY=${env:DISPLAY}", // Set DISPLAY for Linux
+    "-e", "DISPLAY=host.docker.internal:0.0", // Set DISPLAY for Windows. 
+    "--network=host" // Required for X11 forwarding
+  ],
+
+  // Mount the development workspace and other required directories
+  "mounts": [
+    // "source=/tmp/.X11-unix,target=/tmp/.X11-unix,type=bind",  // Requred for X11 forwarding on Linux
+    "source=${localWorkspaceFolder},target=/root/workspace/src/reach_robotics_sdk,type=bind",
+    "source=/dev,target=/dev,type=bind"  // Required for accessing the host's devices (e.g., usb devices)
+  ],
+
+  // Forward the ports for UDP communciations 
+  "appPort": ["6789:6789/udp"],
+
+  // Install protocol  
+  "postCreateCommand": "./scripts/setup_linux.sh",
+  
+  // Make script use unix line endings 
+  "postStartCommand": "dos2unix ./.docsrc/*",
+  
+  // Connect to server root user
+  "remoteUser": "root"
+}

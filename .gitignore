@@ -1,16 +1,10 @@
 .idea/
 venv/
+
 *.pyc
+*.egg-info
+*/build
+*.o
 
-docsrc/build/
-
-C/packetID.h
-
-bplprotocol/bplprotocol/packetID.py
-
-bplprotocol/bplprotocol.egg-info
-bplprotocol/build
-
-bplprotocol/src27/bplprotocol/packetID.py
 
 
