@@ -1,12 +1,20 @@
 {
-	"name": "ROS Development Environment",
+	"name": "Reach Robotics ROS Development Environment",
 
 	// Sets the run context to one level up instead of the .devcontainer folder.
 	"context": "..",
 
   // // ROS 2 dev environment
 	"dockerFile": "./foxy-dockerfile",
-
+  "build": {
+    "context": "..",
+    "args": {
+      "PYREQ_TXT": "requirements.txt",
+      "PYREQ_SPHINX_TXT": ".docsrc/sphinx_requirements.txt",
+      "PYREQ_RS_PROTOCOL": "rs_protocol",
+      "PYREQ_BPLPROTOCOL": "bplprotocol"
+    }
+  },
   // Setup container for X11 forwarding.
   // This is required for GUI applications to run inside the container.
   // Note:
@@ -32,7 +40,7 @@
   "appPort": ["6789:6789/udp"],
 
   // Install protocol  
-  "postCreateCommand": "./scripts/setup_linux.sh",
+  //"postCreateCommand": "./scripts/setup_linux.sh",
   
   // Make script use unix line endings 
   "postStartCommand": "dos2unix ./.docsrc/*",

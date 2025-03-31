@@ -1,6 +1,6 @@
 [![Logo](.docsrc/source/images/Reach.Robotics-Logo.Navy-01.png)](#) 
 
-The Reach Robotics SDK provides provides the implimentation of the Reach System Protocol [V1.12.1] in Python and C as well as a ROS 2 communication bridge. Additonally, the SDK provides some basic examples of how to use the Reach System Protocol to communicate with Reach Robotics hardware over serial and UDP connections. Follow the [instructions to get started](https://reach-robotics.github.io/reach_robotics_sdk/).
+The Reach Robotics SDK provides the implementation of the Reach System Protocol [V1.12.1] in Python and C as well as a ROS 2 communication bridge. Additionally, the SDK provides some basic examples of how to use the Reach System Protocol to communicate with Reach Robotics hardware over serial and UDP connections. Follow the [instructions to get started](https://reach-robotics.github.io/reach_robotics_sdk/).
 
 <div align="center">
     <img src=".docsrc/source/images/python-logo-only.png" style="width: 10%;">

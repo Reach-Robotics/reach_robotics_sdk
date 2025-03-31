@@ -12,19 +12,19 @@ The instructions below describe how to export GUI application from a docker cont
 1. open sshd_config `vim /etc/ssh/sshd_config` and verify `X11Forwarding yes`
 2. run `xhost +Local:*` to authorise xhost over local connection
 3. run `xhost`and check for `LOCAL:`
-4. modify devcontainer.josn to correctly set the DISPLAY variable to `DISPLAY=${env:DISPLAY}`
+4. modify devcontainer.json to correctly set the DISPLAY variable to `DISPLAY=${env:DISPLAY}`
 4. mount the `/tmp/.x11-unix directory`
 
 ### Windows
-1. install xserver on the host windows machine (e.g., VcXsrv or Xming)
-2. start the xserver on the windowa machine
+1. install xserver on the host Windows machine (e.g., VcXsrv or Xming)
+2. start the xserver on the Windows machine
 2. modify devcontainer.json to correctly set the DISPLAY environment variable to `host.docker.internal:0.0`
 
 ## Enabling external UDP connections 
 1. Expose the UDP port (typically 6789) in the devcontainer by setting the 
 
 ## Enabling external serial connections 
-On linux machines, USB/hardware ports are simply mounted to the container as a volume by mapping the host `/dev/` to the container `/dev/`. On windows machines, this is not possible. You may follow the instructions here (https://docs.docker.com/desktop/features/usbip/) to enable USB connection via a network conneciton. 
+On Linux machines, USB/hardware ports are simply mounted to the container as a volume by mapping the host `/dev/` to the container `/dev/`. On Windows machines, this is not possible. You may follow the instructions here (https://docs.docker.com/desktop/features/usbip/) to enable USB connection via a network connection.
 
 ## Launching ROS 2 VS code container 
-To launch ROS 2 development environment set the dockerFile variable in devcontainer.json to `foxy-dockerfile`. Support for other ROS distributions may be added by modifying the DockerFile as required. 
+To launch ROS 2 development environment set the DockerFile variable in devcontainer.json to `foxy-dockerfile`. Support for other ROS distributions may be added by modifying the DockerFile as required. 
