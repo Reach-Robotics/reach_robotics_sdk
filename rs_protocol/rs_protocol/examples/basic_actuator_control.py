@@ -37,17 +37,13 @@ def initialise_rs_protocol() -> RSProtocol:
     # )
     return rs_protocol
 
-
-def main():
-    rs_protocol = initialise_rs_protocol()
-
-    # Demonstrate position control.
+def position_control_demo(rs_protocol: RSProtocol):
     print(f"\n--- Position Control Demo (Target: {TARGET_POSITION_RAD} rad) ---")
     rs_protocol.write(DEVICE_ID, PacketID.POSITION, -3.14)
     time.sleep(3)
     print(f"The device mode is: {rs_protocol.request(DEVICE_ID, PacketID.MODE)}")
 
-    # Demonstrate velocity control.
+def velocity_control_demo(rs_protocol: RSProtocol):
     print(f"\n--- Velocity Control Demo ({VELOCITY_RAD_PER_SEC} rad/s) ---")
     print(f"Sending velocity commands for {VELOCITY_COMMAND_DURATION_SEC} seconds...")
     for _ in range(int(VELOCITY_COMMAND_DURATION_SEC / VELOCITY_COMMAND_INTERVAL_SEC)):
@@ -56,22 +52,23 @@ def main():
     rs_protocol.write(DEVICE_ID, PacketID.VELOCITY, 0.0)
     print(f"The device mode is: {rs_protocol.request(DEVICE_ID, PacketID.MODE)}")
 
-    # Return the device to standby mode.
+def standby_mode_change_demo(rs_protocol: RSProtocol):
     print("\n--- Returning to Standby ---")
-    # rs_protocol.write(DEVICE_ID, PacketID.MODE, [Mode.STANDBY])
+    rs_protocol.write(DEVICE_ID, PacketID.MODE, [Mode.STANDBY])
     print(f"The device mode is: {rs_protocol.request(DEVICE_ID, PacketID.MODE)}")
 
-    # Request position, velocity, and current
+def request_feedback_demo(rs_protocol: RSProtocol):
     print("\n--- Requesting positon, velocity, and current ---")
     print(f"Position: {rs_protocol.request(DEVICE_ID, PacketID.POSITION)}")
     print(f"Velocity: {rs_protocol.request(DEVICE_ID, PacketID.VELOCITY)}")
     print(f"Current: {rs_protocol.request(DEVICE_ID, PacketID.CURRENT)}")  
 
-    # Request software version
+def request_software_version_demo(rs_protocol: RSProtocol):
     print("\n--- Requesting Software Version ---")
     print(f"Software Version: {rs_protocol.request(DEVICE_ID, PacketID.SOFTWARE_VERSION)}")
 
-    # Read packets continuously 
+def read_feedback_loop_demo(rs_protocol: RSProtocol):
+        # Read packets continuously 
     print("\n--- Read packets continously ---")
     next_req_time = time.time() + 1 # (1/REQUEST_FREQUENCY)
     position = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
@@ -93,6 +90,16 @@ def main():
             print(f"Position: {position}")
             # print(f"Velocity: {velocity}")  # Uncomment to print actuator velocities 
             # print(f"Current: {current}")  # Uncomment to print actuator velocities 
+
+def main():
+    rs_protocol = initialise_rs_protocol()
+    
+    position_control_demo(rs_protocol)
+    velocity_control_demo(rs_protocol)
+    standby_mode_change_demo(rs_protocol)
+    request_feedback_demo(rs_protocol)
+    request_software_version_demo(rs_protocol)
+    read_feedback_loop_demo(rs_protocol)
          
 
 if __name__ == '__main__':
