@@ -94,7 +94,7 @@ passthrough, run:
 
          .. code-block:: bash
 
-            ros2 run bpl_passthrough udp_passthrough --ros-args -p ip_address:=192.168.2.4 port:=6789
+            ros2 run bpl_passthrough udp_passthrough --ros-args -p ip_address:=192.168.2.4 -p port:=6789
          
          where,
 
