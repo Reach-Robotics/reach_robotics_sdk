@@ -32,7 +32,7 @@
   "appPort": ["6789:6789/udp"],
 
   // Install protocol  
-  "postCreateCommand": "./scripts/setup_linux.sh",
+  "postCreateCommand": "dos2unix ./scripts/setup_linux.sh && ./scripts/setup_linux.sh",
   
   // Make script use unix line endings 
   "postStartCommand": "dos2unix ./.docsrc/*",
