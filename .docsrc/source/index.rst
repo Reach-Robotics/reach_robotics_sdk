@@ -2,8 +2,8 @@ Reach Robotics SDK
 =======================================================================
 
 The `Reach Robotics SDK <https://github.com/Reach-Robotics/reach_robotics_sdk.git/>`_ provides 
-the implimentation of the `Reach System Protocol <https://github.com/Reach-Robotics/reach_robotics_sdk/tree/master/Reach%20System%20-%20Communication%20Protocol.pdf>`_ 
-in Python and C as well as a ROS 2 communication bridge. Additonally, the SDK provides some basic examples of how to use 
+the implementation of the `Reach System Protocol <https://github.com/Reach-Robotics/reach_robotics_sdk/tree/master/Reach%20System%20-%20Communication%20Protocol.pdf>`_ 
+in Python and C, as well as a ROS 2 communication bridge. Additionally, the SDK provides some basic examples of how to use 
 the Reach System Protocol to communicate with the Reach Robotics hardware over serial and UDP connections. 
 Follow the instructions to :ref:`Get Started<getting_started>`. 
 
@@ -39,7 +39,7 @@ Follow the instructions to :ref:`Get Started<getting_started>`.
    * Python/C/C++ - 1 hour of engineering support included with any core or comprehensive support package.
    * ROS2 Foxy - paid-for support only for Alpha 5, Bravo 5 and Bravo 7 standard configurations.
 
-   The prices of supplementary support packages are dependent upon scope of request.
+   The prices of supplementary support packages are dependent upon the scope of the request.
 
 Documentation
 =====================

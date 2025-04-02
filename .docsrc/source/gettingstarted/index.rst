@@ -17,8 +17,8 @@ for easy integration with ROS 2 applications. If you intend to use the ROS 2 nod
 repository is cloned into your ROS workspace src folder. 
 
 .. note::
-    The Reach System communication protocol is only compled/tested on the following 
-    platforms/operating system combinations, 
+    The Reach System communication protocol is only compiled/tested on the following 
+    platform/operating system combinations:
 
     * aarch-64 (Linux)
     * x86-64 (Linux & Windows)
@@ -26,7 +26,7 @@ repository is cloned into your ROS workspace src folder.
 Getting Started With Python
 ---------------------------
 
-To get started with the Reach System python protocol, install the ``rs_protocol`` package and 
+To get started with the Reach System Python protocol, install the ``rs_protocol`` package and 
 requirements using the provided setup script for your operating system.
 
 **Windows:**
@@ -52,7 +52,7 @@ examples provided in the  ``rs_protocol/examples`` folder.
 
 .. note::
 
-    The minimum supported python version for this package is 3.6. 
+    The minimum supported Python version for this package is 3.6. 
 
 Getting Started With C/C++
 ---------------------------

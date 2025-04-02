@@ -2,16 +2,16 @@ ROS 2
 ================================================
 
 This tutorial assumes you have either pre-installed `ROS 2 <http://wiki.ros.org/ROS/Installation/>`_
-or launched the included VS Code development container. For more detials please see ``.devcontainer/readme.md``.
+or launched the included VS Code development container. For more details, please see ``.devcontainer/readme.md``.
 
 .. note::
 
-   Before preceeding, please install the Reach Robotics SDK. Instructions
+   Before proceeding, please install the Reach Robotics SDK. Instructions
    for installation can found in the :ref:`Getting Started<getting_started>` section. 
 
 .. warning::
    
-   BPL Protocol will be depreciated in 2025 and replaced with Reach System protocol. 
+   BPL Protocol will be deprecated in 2025 and replaced with Reach System protocol. 
    The ROS 2 packages provided in this SDK are for the convenience of the user and are 
    not currently supported by the Reach Robotics team. If you need support with your 
    ROS 2 integration, please speak to your Reach Robotics sales representative for a quote 
@@ -20,7 +20,7 @@ or launched the included VS Code development container. For more detials please 
 Setup
 ---------------------
 
-First, source the ROS 2 underlay, 
+First, source the ROS 2 underlay:
 
 .. code-block:: bash
 
@@ -37,14 +37,14 @@ First, source the ROS 2 underlay,
    Keep in mind, if you have more than one ROS distribution installed, ~/.bashrc must only source 
    the setup.bash for the version you are currently using.
    
-build the ROS 2 packages,
+Build the ROS 2 packages:
 
 .. code-block:: bash
 
     cd ~/workspace
     colcon build
 
-source the ROS 2 overlay packages,
+Source the ROS 2 overlay packages:
 
 .. code-block:: bash
 
@@ -53,8 +53,8 @@ source the ROS 2 overlay packages,
 At this point the Reach Robotics nodes have been built and are ready to use. 
 
 .. note::
-   If you are using a ROS 2 distribution other than foxy you'll need to modify the source 
-   command accordingly i.e. ```source /opt/ros/humble/setup.bash```
+   If you are using a ROS 2 distribution other than Foxy, you'll need to modify the source 
+   command accordingly. I.e. ```source /opt/ros/humble/setup.bash```
 
 Packages
 ---------------------------
@@ -65,7 +65,7 @@ bpl_passthrough
 The BPL passthrough is the core package that facilitates communication to Reach 
 Robotics products. This passthrough converts ROS 2 messages into Serial or UDP
 packets that can be read by the connected product. Each node in the passthrough 
-uses :code:`bpl_msgs/Packet` for messaging. The packet construct is defined as, 
+uses :code:`bpl_msgs/Packet` for messaging. The packet construct is defined as:
  
 .. code-block::
 
@@ -73,9 +73,9 @@ uses :code:`bpl_msgs/Packet` for messaging. The packet construct is defined as,
    uint8 packet_id
    uint8[] data
 
-where, ``device_id`` is the device identifier, ``packet_id`` is the packet identifier, and 
+where ``device_id`` is the device identifier, ``packet_id`` is the packet identifier, and 
 ``data`` is a list of 8 bit integers representing the data to be sent. To launch the 
-passthrough run,
+passthrough, run:
 
 .. tabs::
 
@@ -101,17 +101,15 @@ passthrough run,
          * :code:`ip_address` (string) - IP Address of the arm. (Defaults to 192.168.2.3)
          * :code:`port` (int) - UDP Port of the arm. (Defaults to 6789)
 
-For both passthrough nodes the published topic, and subscribed topic are,
+For both passthrough nodes, the published topic and the subscribed topic, respectively, are:
 
 * :code:`/rx` (:code:`bpl_msgs/Packet`) - Received Packets from the manipulator
 * :code:`/tx` (:code:`bpl_msgs/Packet`) - Packets that will be sent to the manipulator
 
-respectively. 
-
 Examples
 """""""""
 This example demonstrates how to request read joint positions from joints on a manipulator.
-To launch this example run the launch file. 
+To launch this example, run the launch file. 
 
 .. tabs::
 
@@ -127,9 +125,9 @@ To launch this example run the launch file.
 
             ros2 launch bpl_passthrough udp_passthrough_example.launch.py ip_address:=192.168.2.4 port:=6789
 
-The script communicates the to passthrough node via the :code:`/tx` and :code:`/rx` topics.
+The script communicates to the passthrough node via the :code:`/tx` and :code:`/rx` topics.
 It publishes request packets to the :code:`/tx` topic at a set frequency.
-It subscribes the to :code:`/rx` topic and listens for positions packets.
+It subscribes the to :code:`/rx` topic and listens for position packets.
 
 .. note::
 
@@ -137,7 +135,7 @@ It subscribes the to :code:`/rx` topic and listens for positions packets.
 
 bpl_bravo_description
 ^^^^^^^^^^^^^^^^^^^^^^^^
-BPL Bravo Description package contains the Universal Robot description File (URDF) files for the bravo range of manipulators.
+BPL Bravo Description package contains the Universal Robot description File (URDF) files for the Bravo range of manipulators.
 
 Supported Products:
 
@@ -147,24 +145,24 @@ Supported Products:
 Examples
 """"""""""
 
-Examples on viewing URDFs in RVIZ.
+Examples of viewing URDFs in RVIZ.
 
 .. image:: ../images/rviz_bravo_7.png
    :width: 600
 
-Viewing a Bravo 7 URDF,
+Viewing a Bravo 7 URDF:
 
 .. code-block:: bash
 
    ros2 launch bpl_bravo_description view_bravo_7.launch.py
 
-Viewing a Bravo 5 URDF,
+Viewing a Bravo 5 URDF:
 
 .. code-block:: bash
 
    ros2 launch bpl_bravo_description view_bravo_5.launch.py
 
-Viewing a Bravo 5 and Bravo 7 URDF,
+Viewing a Bravo 5 and Bravo 7 URDF:
 
 .. code-block:: bash
 
@@ -173,7 +171,7 @@ Viewing a Bravo 5 and Bravo 7 URDF,
 
 .. bpl_control
 .. ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-.. The BPL Control is a package that provides control and feedback for a manipulator.
+.. BPL Control is a package that provides control and feedback for a manipulator.
 
 .. .. note::
 ..    The BPL Control Nodes are intended for use with a full duplex connection. (I.e not intended for use over 485 Serial)
@@ -182,16 +180,16 @@ Viewing a Bravo 5 and Bravo 7 URDF,
 .. joint_state_publisher
 .. """"""""""""""""""""""""""""""""""""""""
 .. The Joint state publisher node will request and publish the corresponding joint states (position/velocity) to ROS. The 
-.. published topics of ``joint_state_publisher`` are,
+.. published topics of ``joint_state_publisher`` are:
 
 .. * :code:`joints_states` (:code:`sensor_msgs/JointState`) - Joint State of the manipulator.
 .. * :code:`tx` (:code:`bpl_msgs/Packet`) - Packets to be sent to the manipulator.
 
-.. and the subscribed topics are,
+.. and the subscribed topics are:
 
 .. * :code:`rx` (:code:`bpl_msgs/Packet`) - Packets to be received from the manipulator
 
-.. with parameters,
+.. with parameters:
 
 .. * :code:`joints` (List) - List of the Joint Device IDs of the manipulator.
 .. * :code:`joint_names` (List) - List of the corresponding Joint Names of the manipulator.
@@ -201,33 +199,33 @@ Viewing a Bravo 5 and Bravo 7 URDF,
 .. end_effector_pose_publisher
 .. """""""""""""""""""""""""""""""""""""""""""
 .. The end effector pose publisher node will request the end effector pose from the manipulator and publish it to ROS. The 
-.. published topics of ``end_effector_pose_publisher`` are,
+.. published topics of ``end_effector_pose_publisher`` are:
 
 .. * :code:`end_effector_pose` (:code:`geometry_msgs/PoseStamped`) - End effector pose of the manipulator.
 .. * :code:`tx` (:code:`bpl_msgs/Packet`) - Packets to send the the manipulator.
 
-.. and the subscribed topics are,
+.. and the subscribed topics are:
 
 .. * :code:`rx` (:code:`bpl_msgs/Packet`) - Packets to receive from the manipulator.
 
-.. with parameters,
+.. with parameters:
 
 .. * :code:`frame_id` (String) - TF Frame ID of the maniulator base (default: :code:`bravo_base_link`).
 .. * :code:`frequency` (Float) - Frequency to Request / Publish the end effector pose (default: :code:`20`)
 
 .. control_node
 .. """""""""""""""""""""""""""""
-.. The BPL Control Node provides control of the manipulator. Control options include,
+.. The BPL Control Node provides control of the manipulator. Control options include:
 
 .. * Joint Velocity Control
 .. * Joint Position Control
 .. * End Effector Pose Control
 
-.. The published topics of ``end_effector_pose_publisher`` are,
+.. The published topics of ``end_effector_pose_publisher`` are:
 
 .. * :code:`tx` (:code:`bpl_msgs/Packet`) - Packets to send to the manipulator.
 
-.. and the subscribed topics are,
+.. and the subscribed topics are:
 
 .. * :code:`control/`
 
@@ -237,7 +235,7 @@ Viewing a Bravo 5 and Bravo 7 URDF,
 .. .. image:: ../images/bravo_5_bringup.png
 ..    :width: 600
 
-.. The launch file connects to a Bravo 5 over UDP and presents a live view on RVIZ.
+.. The launch file connects to a Bravo 5 over UDP and presents a live view in RVIZ.
 .. It also presents a visualisation of the current end effector pose.
 
 .. .. code-block:: bash
@@ -250,7 +248,7 @@ Viewing a Bravo 5 and Bravo 7 URDF,
 .. .. image:: ../images/bravo_7_bringup.png
 ..    :width: 600
    
-.. The launch file connects to a Bravo 7 over UDP and presents a live view on RVIZ.
+.. The launch file connects to a Bravo 7 over UDP and presents a live view in RVIZ.
 .. It also presents a visualisation of the current end effector pose.
 
 .. .. code-block:: bash
@@ -263,8 +261,8 @@ Viewing a Bravo 5 and Bravo 7 URDF,
 .. .. image:: ../images/bravo_double_bringup.png
 ..    :width: 600
    
-.. The launch file connects to a both a Bravo 7 and Bravo 5 over UDP and presents a live view on RVIZ.
-.. It also presents a visualisation of the current end effector poses of the manipulator.
+.. The launch file connects to a both a Bravo 7 and Bravo 5 over UDP and presents a live view in RVIZ.
+.. It also presents a visualisation of the current end effector poses of the manipulators.
 
 .. .. code-block:: bash
 
