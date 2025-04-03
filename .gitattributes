@@ -1,0 +1,18 @@
+*.sh    eol=lf
+*.bat   eol=crlf
+*.json  eol=lf
+*.yml   eol=lf
+*.yaml  eol=lf
+*.md    eol=lf
+*.txt   eol=lf
+*.xml   eol=lf
+*.py    eol=lf
+*.pyc   eol=lf
+
+/docs/*      text eol=lf
+/.docsrc/*   text eol=lf
+
+*.so    binary
+*.dll   binary
+*.exe   binary
+*.pdf   binary
