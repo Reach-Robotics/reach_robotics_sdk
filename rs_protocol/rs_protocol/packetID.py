@@ -4,15 +4,16 @@ class PacketID():
 
     # Request
     REQUEST = 0x60
-    HEARTBEAT_SET = 0x91
-    HEARTBEAT_FREQUENCY = 0x92
+    HEARTBEAT_PACKETS = 0x91
+    HEARTBEAT_FREQUENCY_HZ = 0x92
 
     PacketType[REQUEST] = int
-    PacketType[HEARTBEAT_SET] = int
-    PacketType[HEARTBEAT_FREQUENCY] = int
+    PacketType[HEARTBEAT_PACKETS] = int
+    PacketType[HEARTBEAT_FREQUENCY_HZ] = int
     
     # Control 
     MODE = 0x01
+    RESET = 0xFD
 
     VELOCITY = 0x02 
     POSITION = 0x03
@@ -25,6 +26,7 @@ class PacketID():
     INVERSE_KINEMATICS_LOCAL_VELOCITY = 0xCB
 
     PacketType[MODE] = int
+    PacketType[RESET] = int
     PacketType[VELOCITY] = float
     PacketType[POSITION] = float
     PacketType[CURRENT] = float

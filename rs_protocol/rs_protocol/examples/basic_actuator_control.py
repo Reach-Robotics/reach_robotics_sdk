@@ -91,15 +91,26 @@ def read_feedback_loop_demo(rs_protocol: RSProtocol):
             # print(f"Velocity: {velocity}")  # Uncomment to print actuator velocities 
             # print(f"Current: {current}")  # Uncomment to print actuator velocities 
 
+def set_heartbeat_demo(rs_protocol: RSProtocol, interval: int):
+    """Set the heartbeat interval for the device."""
+    if interval < 0 or interval > 255:
+        raise ValueError("Interval must be a positive integer between 0-255.")
+    
+    rs_protocol.write(DEVICE_ID, PacketID.RESET, 0)
+    time.sleep(0.5)
+    rs_protocol.write(DEVICE_ID, PacketID.HEARTBEAT_FREQUENCY_HZ, interval)
+    rs_protocol.write(DEVICE_ID, PacketID.HEARTBEAT_PACKETS, [PacketID.POSITION])
+
 def main():
     rs_protocol = initialise_rs_protocol()
-    
-    position_control_demo(rs_protocol)
-    velocity_control_demo(rs_protocol)
-    standby_mode_change_demo(rs_protocol)
-    request_feedback_demo(rs_protocol)
-    request_software_version_demo(rs_protocol)
-    read_feedback_loop_demo(rs_protocol)
+
+    # set_heartbeat_demo(rs_protocol, 1)
+    # position_control_demo(rs_protocol)
+    # velocity_control_demo(rs_protocol)
+    # standby_mode_change_demo(rs_protocol)
+    # request_feedback_demo(rs_protocol)
+    # request_software_version_demo(rs_protocol)
+    # read_feedback_loop_demo(rs_protocol)
          
 
 if __name__ == '__main__':

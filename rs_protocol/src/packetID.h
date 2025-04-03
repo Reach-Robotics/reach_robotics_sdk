@@ -14,11 +14,12 @@ extern "C" {
 typedef enum packetID{
 	/* Request */
     REQUEST = 0x60,
-    HEARTBEAT_SET = 0x91,
-    HEARTBEAT_FREQUENCY = 0x92,
+    HEARTBEAT_PACKETS = 0x91,
+    HEARTBEAT_FREQUENCY_HZ = 0x92,
 
     /* Control */
     MODE = 0x01,
+    RESET = 0xFD,
 	VELOCITY = 0X02,
 	POSITION = 0x03,
 	CURRENT = 0x05,
