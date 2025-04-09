@@ -182,16 +182,34 @@ def encode_floats(float_list: List[float]) -> bytes:
     data = struct.pack('%sf' % len(float_list), *float_list)
     return data
 
+def pack_protocol_v2_request_data(data):
+    """ Re-pack the V2 request data into the correct format """
+    packed_data = list()
+    for i, x in enumerate(data):
+        packed_data.append(x & 0xFF) 
+        packed_data.append(x >> 8 & 0x7F)
+    return packed_data
 
 def encode_single_packet(device_id: int, packet_id: int, data: Union[List[float], List[int]]) -> bytes:
-    """ Encode a single packet based on it's type. """
-    option = PacketOption.PROTOCOL_V2 | PacketOption.FWD_ALLOW | PacketOption.IS_DEMAND
+    """ 
+    Encode a single packet based on it's type. 
+        - Packet ID's > 0xFF will be encoded as a protocol V2 packet. Protocol V2 must be enabled to parse this packet. 
+        - Packet ID's <= 0xFF will be encoded as a (standard) protocol V1 packet. 
+    """
+    if (packet_id == PacketID.REQUEST) and any(isinstance(data[i], float) for i in range(len(data))):
+        raise ValueError("Request must be List of integer packet ID's")
+    
+    is_v2_packet = (packet_id > 0xFF)
+    is_v2_request = (packet_id == PacketID.REQUEST) and any(data[i] > 0xFF for i in range(len(data))) 
+    
 
-    if packet_id == PacketID.REQUEST:
-        if isinstance(data[0], float):
-            raise ValueError("Request must be List of integer packet ID's")
-        
-        data = [data[0] & 0xFF, data[0] >> 8 & 0x7F]  
+    if is_v2_request:
+        data = pack_protocol_v2_request_data(data)
+        option = PacketOption.PROTOCOL_V2 | PacketOption.FWD_ALLOW | PacketOption.IS_DEMAND
+    elif is_v2_packet:
+        option = PacketOption.PROTOCOL_V2 | PacketOption.FWD_ALLOW | PacketOption.IS_DEMAND
+    else:
+        option = None
 
     if PacketID.PacketType[packet_id] and PacketID.PacketType[packet_id] == float:
         return encode_packet(device_id, packet_id, encode_floats(data), option)  # type: ignore check is sufficient 
@@ -340,9 +358,7 @@ class RSProtocol:
                     read_device_id, read_packet_id, data_bytes, options = packet
                     if read_device_id == device_id and read_packet_id == packet_id:
                         if read_packet_id not in PacketID.PacketType:
-                            continue
-                        
-                        if data_bytes == b'\x00':
+                            logger.info(f"Recieved unknown packet: {hex(read_packet_id)}")
                             continue
                         
                         packet_type = PacketID.PacketType[packet_id]
