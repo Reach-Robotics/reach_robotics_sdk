@@ -372,15 +372,21 @@ class RSProtocol:
                     
         return list()
     
+    def is_close(self, data_1: List, data_2: List, tol=0.01) -> Tuple[bool, List]:
+        """ Check if two lists of data are equal """
+        if len(data_1) != len(data_2):
+            return False, data_2
+            
+        if len(data_1) != len(data_2) or any(abs(a - b) > tol for a, b in zip(data_1, data_2)):
+            return False, data_2
+        
+        return True, data_2
+    
     def set(self, device_id: int, packet_id: int, data: Union[List[float], List[int], float, int]):
         ''' Set value on the connected device and verify the recieved data againt the set value '''
-        if not isinstance(data, list):
-            data = [data]
-
+        data = data if isinstance(data, list) else [data]
+        
         self.write(device_id, packet_id, data)
         recv_data = self.request(device_id, packet_id)
-
-        if data == recv_data:
-            return True, recv_data
-        else:
-            return False, recv_data
+        
+        return self.is_close(data, recv_data)
