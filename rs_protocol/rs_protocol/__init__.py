@@ -390,3 +390,23 @@ class RSProtocol:
         recv_data = self.request(device_id, packet_id)
         
         return self.is_close(data, recv_data)
+    
+    def save(self, device_id: int) -> bool:
+        """Save the current configuration to the device's settings."""
+        self.set(device_id, PacketID.MODE, [0x08]) 
+        
+        initial_save_packet = self.request(device_id, PacketID.SAVE)
+        if initial_save_packet is None:
+            self.set(device_id, PacketID.MODE, [Mode.STANDBY]) 
+            logger.info("Failed to get initial save response.")
+            return False
+
+        self.write(device_id, PacketID.SAVE, [0])
+        save_packet = self.request(device_id, PacketID.SAVE)
+        if save_packet is None or save_packet[0] < initial_save_packet[0] + 1:
+            self.set(device_id, PacketID.MODE, [Mode.STANDBY]) 
+            logger.info("Failed to get final save response.")
+            return False
+        
+        self.set(device_id, PacketID.MODE, [Mode.STANDBY]) 
+        return True
