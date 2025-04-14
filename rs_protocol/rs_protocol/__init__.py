@@ -341,34 +341,42 @@ class RSProtocol:
             
         return decoded_packets
 
+    def find_request_packet(self, packets, device_id, packet_id) -> Union[List[int], List[float]]:
+        """ 
+        Finds the requested packet from a list of packets.
+        NOTE: All other pending packets will be discarded when this method is called.
+        """
+        for packet in packets:
+            read_device_id, read_packet_id, data_bytes, _ = packet
+            if read_device_id != device_id:
+                continue
+            if read_packet_id != packet_id:
+                continue
+                
+            if read_packet_id not in PacketID.PacketType:
+                logger.info(f"Recieved unknown packet type: {hex(read_packet_id)}. Decoding packet as integers.")
+                return decode_ints(data_bytes)
+            
+            packet_type = PacketID.PacketType[packet_id]
+
+            if packet_type and packet_type == float:
+                return decode_floats(data_bytes)
+            elif packet_type and packet_type == int:
+                return decode_ints(data_bytes)
+            else:
+                raise ValueError(f"Invalid packet type: {packet_type}")
+        
+        return list()    
+    
     
     def request(self, device_id: int, packet_id: int, read_attempts=10, write_attempts=2, timeout=RESPONSE_TIMEOUT) -> Union[List[int], List[float]]:
-        """ Request a single packet from the connected device """
+        """ Request a single packet from the connected device and return the result """
         
         for _ in range(write_attempts):
             self.write(device_id, PacketID.REQUEST, [packet_id])
             for _ in range(read_attempts):
                 time.sleep(timeout)
-
-                packets = self.read_raw()
-                if not packets:
-                    continue
-
-                for packet in packets:
-                    read_device_id, read_packet_id, data_bytes, options = packet
-                    if read_device_id == device_id and read_packet_id == packet_id:
-                        if read_packet_id not in PacketID.PacketType:
-                            logger.info(f"Recieved unknown packet: {hex(read_packet_id)}")
-                            continue
-                        
-                        packet_type = PacketID.PacketType[packet_id]
-
-                        if packet_type and packet_type == float:
-                            return decode_floats(data_bytes)
-                        elif packet_type and packet_type == int:
-                            return decode_ints(data_bytes)
-                        else:
-                            return list()
+                return self.find_request_packet(self.read_raw(), device_id, packet_id)
                     
         return list()
     
