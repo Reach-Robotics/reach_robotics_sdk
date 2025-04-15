@@ -11,6 +11,10 @@ Note:
 import time
 from rs_protocol import RSProtocol, PacketID, Mode, create_socket_connection, create_serial_connection
 
+import logging
+logging.basicConfig()
+logging.getLogger().setLevel(logging.INFO)
+
 # Device configuration
 DEVICE_ID = 0x02
 MANIPULATOR_IP_ADDRESS = '192.168.1.5'

@@ -17,7 +17,7 @@ from .mode import Mode
 DATA_BYTES_PER_PACKET = 64
 RESPONSE_TIMEOUT = 0.001
 
-logger = logging.getLogger()
+logger = logging.getLogger(__name__)
 drivers = None
 
 
@@ -56,7 +56,7 @@ elif platform.system() == "Linux":
 
 
 def import_drivers():
-    logger.info("IMPORTING RS1 DRIVERS")
+    logger.debug(f"Importing rs_protocol driver from: {lib_path}")
     global drivers
     drivers = c.cdll.LoadLibrary(lib_path)
 
