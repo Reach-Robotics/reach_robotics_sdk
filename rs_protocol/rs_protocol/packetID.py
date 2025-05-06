@@ -28,6 +28,9 @@ class PacketID():
     CURRENT = 0x05
     PacketType[CURRENT] = float
 
+    TORQUE = 0x0B
+    PacketType[TORQUE] = float
+
     INDEXED_RELATIVE_POSITION = 0x0D
     PacketType[INDEXED_RELATIVE_POSITION] = float
 

@@ -3,7 +3,7 @@ from distutils.core import setup
 
 setup(
     name='rs_protocol',
-    version='2.0.0',
+    version='2.0.1',
     packages=['rs_protocol'],
     install_requires=['cobs', 'crcmod'],
     package_data={

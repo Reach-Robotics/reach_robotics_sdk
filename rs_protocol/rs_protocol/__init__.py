@@ -9,6 +9,7 @@ import time
 import logging
 import socket
 
+from types import FunctionType
 from typing import Union, Tuple, List, Optional
 
 from .packetID import PacketID
@@ -264,20 +265,11 @@ class RSProtocol:
         self.packet_reader = PacketReader()
         self.connection: Union[serial.Serial, socket.socket] = connection
         self.address = address
+        self.callbacks = dict()
 
-    async def _read_buff_async(self) -> bytes:
-        try:
-            if isinstance(self.connection, serial.Serial):
-                return self.connection.read(self.connection.in_waiting)
-            elif isinstance(self.connection, socket.socket):
-                recv_bytes = self.connection.recv(4096)
-                return recv_bytes
-            else:
-                raise ValueError("Invalid connection type")
-        except:
-            return b''
-    
-    
+    def close_connection(self):
+        pass
+
     def _read_buff(self) -> bytes:
         try:
             if isinstance(self.connection, serial.Serial):
@@ -323,22 +315,23 @@ class RSProtocol:
 
         decoded_packets = list()
         for packet in raw_packets:
-
             read_device_id, read_packet_id, data_bytes, options = packet
 
             if read_packet_id not in PacketID.PacketType:
-                continue
+                logger.info(f"Recieved unknown packet type: {hex(read_packet_id)}. Decoding packet as integers.")
+                data = decode_ints(data_bytes)
 
-            if data_bytes == b'\x00':
-                continue
-                
-            packet_type = PacketID.PacketType[read_packet_id]
+            packet_type = PacketID.PacketType.get(read_packet_id)
+            if packet_type == float:
+                data = decode_floats(data_bytes)
+            elif packet_type == int:
+                data = decode_ints(data_bytes)
+            else:
+                raise ValueError(f"Invalid or unknown packet type: {packet_type}")
             
-            if packet_type and packet_type == float:
-                decoded_packets.append([read_device_id, read_packet_id, decode_floats(data_bytes), options])
-            elif packet_type and packet_type == int:
-                decoded_packets.append([read_device_id, read_packet_id, decode_ints(data_bytes), options])
-            
+            self.run_callback(read_device_id, read_packet_id, data)    
+            decoded_packets.append([read_device_id, read_packet_id, data])
+        
         return decoded_packets
 
     def find_request_packet(self, packets, device_id, packet_id) -> Union[List[int], List[float]]:
@@ -356,15 +349,14 @@ class RSProtocol:
             if read_packet_id not in PacketID.PacketType:
                 logger.info(f"Recieved unknown packet type: {hex(read_packet_id)}. Decoding packet as integers.")
                 return decode_ints(data_bytes)
-            
-            packet_type = PacketID.PacketType[packet_id]
 
-            if packet_type and packet_type == float:
+            packet_type = PacketID.PacketType.get(read_packet_id)
+            if packet_type == float:
                 return decode_floats(data_bytes)
-            elif packet_type and packet_type == int:
+            elif packet_type == int:
                 return decode_ints(data_bytes)
             else:
-                raise ValueError(f"Invalid packet type: {packet_type}")
+                raise ValueError(f"Invalid or unknown packet type: {packet_type}")
         
         return list()    
     
@@ -418,3 +410,33 @@ class RSProtocol:
         
         self.set(device_id, PacketID.MODE, [Mode.STANDBY]) 
         return True
+    
+    def register_callback(self, device_id, packet_id, callback):
+        """ Register a packet callback """
+        if device_id not in self.callbacks:
+            self.callbacks[device_id] = {}
+        if packet_id not in self.callbacks[device_id]:
+            self.callbacks[device_id][packet_id] = []
+        self.callbacks[device_id][packet_id].append(callback)
+
+    def remove_callback(self, device_id, packet_id, callback=None):
+        """ Remove a packet callback """
+        if device_id in self.callbacks and packet_id in self.callbacks[device_id]:
+            if callback:
+                if callback in self.callbacks[device_id][packet_id]:
+                    self.callbacks[device_id][packet_id].remove(callback)
+                if not self.callbacks[device_id][packet_id]:  # Remove the packet_id if no callbacks remain
+                    del self.callbacks[device_id][packet_id]
+            else:
+                del self.callbacks[device_id][packet_id]  # Remove all callbacks for the packet_id
+            if not self.callbacks[device_id]:  # Remove the device_id if no packet_ids remain
+                del self.callbacks[device_id]
+
+    def run_callback(self, device_id, packet_id, data):
+        """ Run the packet callbacks """
+        callbacks = self.callbacks.get(device_id, {}).get(packet_id, [])
+        if callbacks:
+            for callback in callbacks:
+                callback(device_id, packet_id, data)
+        else:
+            logger.debug(f"No callbacks registered for device_id={device_id}, packet_id={packet_id}")
