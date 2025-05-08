@@ -42,12 +42,11 @@ requirements using the provided setup script for your operating system.
     ./scripts/setup_linux.sh
 
 Once the setup script has been executed, you can run the
-examples provided in the  ``rs_protocol/examples`` folder.
+examples provided in the  ``examples`` folder.
 
 .. code-block:: python
 
-   cd ./rs_protocol/examples/
-   python3 basic_actuator_control.py
+   python3 ./examples/basic_actuator_control.py
 
 
 .. note::

@@ -13,11 +13,11 @@ from rs_protocol import RSProtocol, PacketID, Mode, create_socket_connection, cr
 
 import logging
 logging.basicConfig()
-logging.getLogger().setLevel(logging.INFO)
+logging.getLogger().setLevel(logging.ERROR)
 
 # Device configuration
 DEVICE_ID = 0x02
-MANIPULATOR_IP_ADDRESS = '192.168.1.5'
+MANIPULATOR_IP_ADDRESS = '192.168.2.3'
 MANIPULATOR_UDP_PORT = 6789
 MANIPULATOR_SERIAL_PORT = "COM14"
 
@@ -32,13 +32,14 @@ REQUEST_FREQUENCY = 100
 def initialise_rs_protocol() -> RSProtocol:
     """Create and return a connection to the device."""
     # Uncomment the appropriate connection method
-    rs_protocol = RSProtocol(
-        create_socket_connection(), 
-        (MANIPULATOR_IP_ADDRESS, MANIPULATOR_UDP_PORT)
-    )
     # rs_protocol = RSProtocol(
-    #     create_serial_connection(MANIPULATOR_SERIAL_PORT)
+    #     create_socket_connection(), 
+    #     (MANIPULATOR_IP_ADDRESS, MANIPULATOR_UDP_PORT)
     # )
+    rs_protocol = RSProtocol(
+        create_serial_connection(MANIPULATOR_SERIAL_PORT),
+        half_duplex=True
+    )
     return rs_protocol
 
 def position_control_demo(rs_protocol: RSProtocol):
