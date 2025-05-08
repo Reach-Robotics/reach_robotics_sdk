@@ -9,7 +9,6 @@ import time
 import logging
 import socket
 
-from types import FunctionType
 from typing import Union, Tuple, List, Optional
 
 from .packetID import PacketID
@@ -17,6 +16,9 @@ from .mode import Mode
 
 DATA_BYTES_PER_PACKET = 64
 RESPONSE_TIMEOUT = 0.001
+HALF_DUPLEX_TIMEOUT = 0.02
+
+RS_485_NOTE = "Note: for RS-485 (Half-Duplex) connections, data can not be transmitted and recived simultaniously."
 
 logger = logging.getLogger(__name__)
 drivers = None
@@ -113,13 +115,13 @@ def parse_packet(packet_in: bytes) -> Tuple[int, int, bytes, Optional[int]]:
     buffLength = (packet_in[-3] & 0x7F) + 2
     packetStart = len(packet_in)-buffLength
     if (packetStart < 0):
-        logger.warning(f"parse_packet(): missing data in packet. Data is corrupt.")
+        logger.warning(f" Missing data in packet. {RS_485_NOTE}")
         return 0, 0, b'', None
     packet_in = packet_in[len(packet_in)-buffLength:]
 
     # Check if packets in are in a valid range
     if len(packet_in) > DATA_BYTES_PER_PACKET:
-        logger.warning(f"parse_packet(): packet_in is too large to parse. packet_in: {packet_in}")
+        logger.warning(f" packet_in is too large to parse. packet_in: {packet_in}. {RS_485_NOTE}")
         return 0, 0, b'', None
 
     # Generate packet and unpack data into buffer
@@ -133,27 +135,27 @@ def parse_packet(packet_in: bytes) -> Tuple[int, int, bytes, Optional[int]]:
         options = p.option if p.useOption else None
         return p.address, p.code, out_data, options
     elif ret == -1:
-        logger.warning(f"parse_packet(): length ({p.length}) is less than PKT_HEADER_LEN ({4}). packet_in: {packet_in}")
+        logger.warning(f" length ({p.length}) is less than PKT_HEADER_LEN ({4}). packet_in: {packet_in}. {RS_485_NOTE}")
         return 0, 0, b'', None
     elif ret == -2:
-        logger.warning(f"parse_packet(): length ({p.length}) is greater than MAX_PACKET_DATA_SIZE ({DATA_BYTES_PER_PACKET}). packet_in: {packet_in}")
+        logger.warning(f" length ({p.length}) is greater than MAX_PACKET_DATA_SIZE ({DATA_BYTES_PER_PACKET}). packet_in: {packet_in}. {RS_485_NOTE}")
         return 0, 0, b'', None
     elif ret == -3:
-        logger.warning(f"parse_packet(): COBS decoding error. packet_in: {packet_in}")
+        logger.warning(f" COBS decoding error. packet_in: {packet_in}. {RS_485_NOTE}")
         return 0, 0, b'', None
     elif ret == -4:
-        logger.warning(f"parse_packet(): CRC error. packet_in: {packet_in}")
+        logger.warning(f" CRC error. packet_in: {packet_in}. {RS_485_NOTE}")
         return 0, 0, b'', None
     elif ret == -6:
-        logger.warning(f"parse_packet(): packet does not end with PKT_TERMINATING_BYTE. packet_in: {packet_in}")
+        logger.warning(f" packet does not end with PKT_TERMINATING_BYTE. packet_in: {packet_in}. {RS_485_NOTE}")
         return 0, 0, b'', None
     elif ret == -7:
         zeroIndex = len(packet_in) - 1
         length = buffer[zeroIndex-2] & 0x7F    
-        logger.warning(f"parse_packet(): length ({len(packet_in)}) does not match buff length ({length}). packet_in: {packet_in}")
+        logger.warning(f" length ({len(packet_in)}) does not match buff length ({length}). packet_in: {packet_in}. {RS_485_NOTE}")
         return 0, 0, b'', None
     else:
-        logger.warning(f"parse_packet(): unknown error code {ret}. packet_in: {packet_in}")
+        logger.warning(f" unknown error code {ret}. packet_in: {packet_in}. {RS_485_NOTE}")
         return 0, 0, b'', None
 
 
@@ -261,11 +263,13 @@ class PacketReader:
 
 class RSProtocol:
     
-    def __init__(self, connection: Union[serial.Serial, socket.socket], address:tuple=("0.0.0.0", 0)) -> None:
+    def __init__(self, connection: Union[serial.Serial, socket.socket], address:tuple=("0.0.0.0", 0), half_duplex:bool=False) -> None:
         self.packet_reader = PacketReader()
         self.connection: Union[serial.Serial, socket.socket] = connection
         self.address = address
         self.callbacks = dict()
+        self.half_duplex = half_duplex
+        self.half_duplex_timer = time.perf_counter()
 
     def close_connection(self):
         pass
@@ -284,7 +288,11 @@ class RSProtocol:
 
     def _write_buff(self, packet: bytes):
         if isinstance(self.connection, serial.Serial):
+            if self.half_duplex:
+                while time.perf_counter() < self.half_duplex_timer:
+                    time.sleep(0.001)
             self.connection.write(packet)
+            self.half_duplex_timer = time.perf_counter() + HALF_DUPLEX_TIMEOUT
         elif isinstance(self.connection, socket.socket):
             self.connection.sendto(packet, self.address)
         else:
@@ -318,7 +326,7 @@ class RSProtocol:
             read_device_id, read_packet_id, data_bytes, options = packet
 
             if read_packet_id not in PacketID.PacketType:
-                logger.info(f"Recieved unknown packet type: {hex(read_packet_id)}. Decoding packet as integers.")
+                logger.info(f" Recieved unknown packet type: {hex(read_packet_id)}. Decoding packet as integers.")
                 data = decode_ints(data_bytes)
 
             packet_type = PacketID.PacketType.get(read_packet_id)
@@ -326,8 +334,6 @@ class RSProtocol:
                 data = decode_floats(data_bytes)
             elif packet_type == int:
                 data = decode_ints(data_bytes)
-            else:
-                raise ValueError(f"Invalid or unknown packet type: {packet_type}")
             
             self.run_callback(read_device_id, read_packet_id, data)    
             decoded_packets.append([read_device_id, read_packet_id, data])
@@ -347,7 +353,7 @@ class RSProtocol:
                 continue
                 
             if read_packet_id not in PacketID.PacketType:
-                logger.info(f"Recieved unknown packet type: {hex(read_packet_id)}. Decoding packet as integers.")
+                logger.info(f" Recieved unknown packet type: {hex(read_packet_id)}. Decoding packet as integers.")
                 return decode_ints(data_bytes)
 
             packet_type = PacketID.PacketType.get(read_packet_id)
@@ -355,20 +361,20 @@ class RSProtocol:
                 return decode_floats(data_bytes)
             elif packet_type == int:
                 return decode_ints(data_bytes)
-            else:
-                raise ValueError(f"Invalid or unknown packet type: {packet_type}")
         
         return list()    
     
     
-    def request(self, device_id: int, packet_id: int, read_attempts=10, write_attempts=2, timeout=RESPONSE_TIMEOUT) -> Union[List[int], List[float]]:
+    def request(self, device_id: int, packet_id: int, read_attempts=25, write_attempts=2, timeout=RESPONSE_TIMEOUT) -> Union[List[int], List[float]]:
         """ Request a single packet from the connected device and return the result """
         
         for _ in range(write_attempts):
             self.write(device_id, PacketID.REQUEST, [packet_id])
             for _ in range(read_attempts):
                 time.sleep(timeout)
-                return self.find_request_packet(self.read_raw(), device_id, packet_id)
+                packets = self.find_request_packet(self.read_raw(), device_id, packet_id)
+                if packets:
+                    return packets
                     
         return list()
     
@@ -398,14 +404,14 @@ class RSProtocol:
         initial_save_packet = self.request(device_id, PacketID.SAVE)
         if initial_save_packet is None:
             self.set(device_id, PacketID.MODE, [Mode.STANDBY]) 
-            logger.info("Failed to get initial save response.")
+            logger.info(" Failed to get initial save response.")
             return False
 
         self.write(device_id, PacketID.SAVE, [0])
         save_packet = self.request(device_id, PacketID.SAVE)
         if save_packet is None or save_packet[0] < initial_save_packet[0] + 1:
             self.set(device_id, PacketID.MODE, [Mode.STANDBY]) 
-            logger.info("Failed to get final save response.")
+            logger.info(" Failed to get final save response.")
             return False
         
         self.set(device_id, PacketID.MODE, [Mode.STANDBY]) 
@@ -439,4 +445,4 @@ class RSProtocol:
             for callback in callbacks:
                 callback(device_id, packet_id, data)
         else:
-            logger.debug(f"No callbacks registered for device_id={device_id}, packet_id={packet_id}")
+            logger.debug(f" No callbacks registered for device_id={device_id}, packet_id={packet_id}")
