@@ -16,7 +16,7 @@ from .mode import Mode
 
 DATA_BYTES_PER_PACKET = 64
 RESPONSE_TIMEOUT = 0.001
-HALF_DUPLEX_TIMEOUT = 0.02
+HALF_DUPLEX_TIMEOUT = 0.1
 
 RS_485_NOTE = "Note: for RS-485 (Half-Duplex) connections, data can not be transmitted and recived simultaniously."
 
@@ -270,6 +270,7 @@ class RSProtocol:
         self.callbacks = dict()
         self.half_duplex = half_duplex
         self.half_duplex_timer = time.perf_counter()
+        self._bytes_buffer = b''
 
     def close_connection(self):
         pass
@@ -286,17 +287,27 @@ class RSProtocol:
         except:
             return b''
 
+    def half_duplex_locked(self):
+        status = False
+        if self.half_duplex:
+            status = time.perf_counter() < self.half_duplex_timer
+        return status
+    
     def _write_buff(self, packet: bytes):
+        self._bytes_buffer += packet
+        if self.half_duplex_locked():
+            return
+        
         if isinstance(self.connection, serial.Serial):
-            if self.half_duplex:
-                while time.perf_counter() < self.half_duplex_timer:
-                    time.sleep(0.001)
-            self.connection.write(packet)
-            self.half_duplex_timer = time.perf_counter() + HALF_DUPLEX_TIMEOUT
+            self.connection.write(self._bytes_buffer)
         elif isinstance(self.connection, socket.socket):
-            self.connection.sendto(packet, self.address)
+            self.connection.sendto(self._bytes_buffer, self.address)
         else:
             raise ValueError("Invalid connection type")
+        
+        self._bytes_buffer = b''
+        self.half_duplex_timer = time.perf_counter() + HALF_DUPLEX_TIMEOUT        
+        time.sleep(0.0001)  # HACK: back write calls will fail without a sleep
     
     def write(self, device_id: int, packet_id: int, data: Union[List[float], List[int], float, int]):
         """ Write packet to the connected device """
