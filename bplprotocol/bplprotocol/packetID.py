@@ -70,3 +70,11 @@ class PacketID(IntEnum):
     VOLTAGE_THRESHOLD_PARAMETERS = 0x99
     "4 floats - Parameters to define the voltage threshold parameters. Enabled (0 or 1), V_Min (V), V_Max (V), time (seconds)."
 
+    REQUEST_JAW_CALIBRATION = 0x38
+    "2 floats - Request the jaw calibration routine. Data fields are max current (mA) and max velocity (rad/s)."
+
+    INTERNAL_HUMIDITY = 0x65
+    "1 float - The internal humidity in %"
+
+    INTERNAL_PRESSURE = 0x6E
+    "1 float - The internal pressure in Bar"
