@@ -21,6 +21,7 @@ HALF_DUPLEX_TIMEOUT = 0.1
 RS_485_NOTE = "Note: for RS-485 (Half-Duplex) connections, data can not be transmitted and recived simultaniously."
 
 logger = logging.getLogger(__name__)
+logger.setLevel('WARNING')
 drivers = None
 
 
@@ -300,6 +301,7 @@ class RSProtocol:
         
         if isinstance(self.connection, serial.Serial):
             self.connection.write(self._bytes_buffer)
+            time.sleep(0.0001)  # HACK: back-to-back write calls will fail without a sleep
         elif isinstance(self.connection, socket.socket):
             self.connection.sendto(self._bytes_buffer, self.address)
         else:
@@ -307,7 +309,6 @@ class RSProtocol:
         
         self._bytes_buffer = b''
         self.half_duplex_timer = time.perf_counter() + HALF_DUPLEX_TIMEOUT        
-        time.sleep(0.0001)  # HACK: back write calls will fail without a sleep
     
     def write(self, device_id: int, packet_id: int, data: Union[List[float], List[int], float, int]):
         """ Write packet to the connected device """
