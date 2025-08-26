@@ -1,12 +1,13 @@
 """
-Request Jaw Calibration Example
+Monitor Internal Climate Example
 
 Description:
-This script demonstrates how to request a jaw calibration for a Reach Robotics manipulator.
+This script demonstrates how to monitor the internal climate of a Reach Robotics manipulator.
 
 Supported Products:
 - Reach Bravo (All Variants)
 - Reach X (All Variants)
+- Reach Alpha (All Variants)
 
 """
 import argparse
