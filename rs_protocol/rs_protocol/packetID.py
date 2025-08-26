@@ -43,6 +43,9 @@ class PacketID():
     INVERSE_KINEMATICS_LOCAL_VELOCITY = 0xCB
     PacketType[INVERSE_KINEMATICS_LOCAL_VELOCITY] = float
 
+    FIND_JAW_ZERO_POSITION = 0x38
+    PacketType[FIND_JAW_ZERO_POSITION] = float
+
     # Preset Positions
     POSITION_PRESET_GO = 0x55
     PacketType[POSITION_PRESET_GO] = int
@@ -87,8 +90,17 @@ class PacketID():
     CURRENT_LIMITS = 0x12
     PacketType[CURRENT_LIMITS] = float
 
-    ETH_PARAMETER = 0x46
-    PacketType[ETH_PARAMETER] = int
+    COMPUTE_IP_ADDRESS = 0x33 # TODO: add to protocol documentation
+    PacketType[COMPUTE_IP_ADDRESS] = int
+
+    ROUTER_ETH_PARAMETERS = 0x46 # TODO: add to prototol documentation
+    PacketType[ROUTER_ETH_PARAMETERS] = int
+
+    MOUNT_TRANSFORM = 0xB4  # TODO: add to protocol documentation
+    PacketType[MOUNT_TRANSFORM] = float
+
+    DEVICE_TYPE = 0x67  # TODO: add to protocol documentation
+    PacketType[DEVICE_TYPE] = int
 
     # Workspace Restrictions
     BOX_OBSTACLE_02 = 0xA5
@@ -125,7 +137,7 @@ class PacketID():
     INTERNAL_TEMPERATURE = 0x66
     PacketType[INTERNAL_TEMPERATURE] = float
 
-    INTERNAL_PRESSURE = 0x67
+    INTERNAL_PRESSURE = 0x6E
     PacketType[INTERNAL_PRESSURE] = float
 
     FACTORY_CLIMATE = 0x28
@@ -133,6 +145,12 @@ class PacketID():
 
     SOFTWARE_VERSION = 0x6C
     PacketType[SOFTWARE_VERSION] = int
+
+    FORCE_TORQUE_SENSOR_READING = 0xD8
+    PacketType[FORCE_TORQUE_SENSOR_READING] = float
+
+    DEVICE_ID = 0x64  # TODO: add to protocol documentation
+    PacketType[DEVICE_ID] = int
 
     HARDWARE_STATUS_FLAG = 0x68
     PacketType[HARDWARE_STATUS_FLAG] = int
