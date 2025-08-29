@@ -277,16 +277,22 @@ class RSProtocol:
         pass
 
     def _read_buff(self) -> bytes:
+        _bytes_buffer = b''
+        
         try:
             if isinstance(self.connection, serial.Serial):
                 return self.connection.read(self.connection.in_waiting)
             elif isinstance(self.connection, socket.socket):
                 recv_bytes = self.connection.recv(4096)
-                return recv_bytes
+                _bytes_buffer = recv_bytes
+                while recv_bytes != b'':
+                    recv_bytes = self.connection.recv(4096)
+                    _bytes_buffer += recv_bytes
+                return _bytes_buffer
             else:
                 raise ValueError("Invalid connection type")
         except:
-            return b''
+            return _bytes_buffer
 
     def half_duplex_locked(self):
         status = False
