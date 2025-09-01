@@ -10,12 +10,13 @@ Supported Products:
 - Reach Alpha (All Variants)
 
 """
+import logging
 import argparse
 from rs_protocol import RSProtocol, PacketID, Mode, create_socket_connection, create_serial_connection
 
-import logging
-logging.basicConfig()
-logging.getLogger().setLevel(logging.ERROR)
+
+logging.basicConfig(level=logging.ERROR)
+
 
 def get_rs_protocol_connection():
     parser = argparse.ArgumentParser(description="Select connection type and parameters.")

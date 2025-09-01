@@ -1,0 +1,61 @@
+import sys
+import argparse
+import logging
+from PyQt5 import QtWidgets
+
+from device.manipulator import Manipulator
+from ui.kinemaitc_control_ui import KinematicControlUI
+from rs_protocol import RSProtocol, create_socket_connection, create_serial_connection
+
+
+logging.basicConfig(level=logging.ERROR)
+
+STARTUP_MESSAGE = (
+    "\n\n============================================\n"
+    " Reach Robotics Kinematic Control Application\n"
+    "============================================\n\n"
+    "An example application for kinematic control of a Reach Robotics manipulator.\n\n"
+
+    "This application provides a graphical interface for controlling and monitoring\n"
+    "Reach Robotics manipulators using either serial or UDP (Ethernet) communication.\n"
+    "Please ensure your manipulator is connected and powered on before starting.\n"
+
+    "Usage:\n"
+    "  Serial (RS-232): python3 ./examples/kinematic_control_app.py -c serial -sp COM8\n"
+    "  Serial (RS-485): python3 ./examples/kinematic_control_app.py -c serial -sp COM8 --half_duplex\n"
+    "  Ethernet (UDP):  python3 ./examples/kinematic_control_app.py -c udp -ip 192.168.1.5 -up 6789\n\n"
+
+    "DISCLAIMER: this application is for demonstrations purposes only and is not intended\n"
+    "to be a complete solution. \n"
+)
+
+
+def get_rs_protocol_connection() -> RSProtocol:
+    parser = argparse.ArgumentParser(description="Select connection type and parameters.")
+    parser.add_argument('-c', '--connection', choices=['serial', 'udp'], default='udp')
+    parser.add_argument('-sp', '--serial_port', type=str, default="COM15")
+    parser.add_argument('--half_duplex', action='store_true')
+    parser.add_argument('-ip', '--ip_address', type=str, default="192.168.1.5")
+    parser.add_argument('-up', '--udp_port', type=int, default=6789)
+    args = parser.parse_args()
+
+    if args.connection == 'serial':
+        return RSProtocol(create_serial_connection(args.serial_port), half_duplex=args.half_duplex)
+    else:
+        return RSProtocol(create_socket_connection(), (args.ip_address, args.udp_port))
+
+
+def main() -> None:
+    rs_protocol = get_rs_protocol_connection()
+    manipulator = Manipulator(rs_protocol)
+
+    app = QtWidgets.QApplication(sys.argv)
+    visualizer = KinematicControlUI(manipulator)
+    visualizer.show()
+
+    print(STARTUP_MESSAGE)
+
+    sys.exit(app.exec_())
+
+if __name__ == '__main__':
+    main()
