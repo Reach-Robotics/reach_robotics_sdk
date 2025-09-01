@@ -18,3 +18,4 @@ class Mode(IntEnum):
     POSITION_VELOCITY = 0x1C
     POSITION_HOLD = 0x1D
     PASSIVE = 0x26 
+    NULL = 0xFF
