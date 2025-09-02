@@ -10,23 +10,28 @@ from rs_protocol import RSProtocol, create_socket_connection, create_serial_conn
 logging.basicConfig(level=logging.ERROR)
 
 STARTUP_MESSAGE = (
-    "\n\n============================================\n"
-    " Reach Robotics Joint Control Application\n"
-    "============================================\n\n"
-
-    "An example application for joint-level control of a Reach Robotics manipulator.\n\n"
-    "This application provides a graphical interface for controlling and monitoring\n"
-    "Reach Robotics manipulators using either serial or UDP (Ethernet) communication.\n"
-    "Please ensure your manipulator is connected and powered on before starting.\n\n"
-
-    "Usage:\n"
-    "  7FN Serial (RS-232): python3 ./examples/joint_control_app.py -c serial -sp COM8 -n 7\n"
-    "  7FN Serial (RS-485): python3 ./examples/joint_control_app.py -c serial -sp COM8 --half_duplex -n 7\n"
-    "  7FN Ethernet (UDP):  python3 ./examples/joint_control_app.py -c udp -ip 192.168.1.5 -up 6789 -n 7\n\n"
-
-    "DISCLAIMER: this application is for demonstration purposes only and is not intended\n"
-    "to be a complete solution.\n"
+    "\n"
+    "\n================================================================================"
+    "\nReach Robotics Joint Control Application"
+    "\n================================================================================"
+    "\n"
+    "\nThis application provides a graphical interface for controlling and monitoring"
+    "\nReach Robotics manipulators using either serial or UDP (Ethernet) communication."
+    "\nPlease ensure your manipulator is connected and powered on before starting."
+    "\n"
+    "\nUsage:"
+    "\n  Serial (RS-232):"
+    "\n    python3 ./examples/joint_control_app.py -c serial -sp COM8 -n 7"
+    "\n  Serial (RS-485):"
+    "\n    python3 ./examples/joint_control_app.py -c serial -sp COM8 --half_duplex"
+    "\n  Ethernet (UDP):"
+    "\n    python3 ./examples/joint_control_app.py -c udp -ip 192.168.1.5 -up 6789"
+    "\n"
+    "\nDISCLAIMER: this application is for demonstration purposes only and is not"
+    "\nintended to be a complete solution."
+    "\n"
 )
+
 
 def get_rs_protocol_connection() -> RSProtocol:
     parser = argparse.ArgumentParser(description="Select connection type and parameters.")
@@ -40,8 +45,6 @@ def get_rs_protocol_connection() -> RSProtocol:
                         help="IP address for UDP connection (default: 192.168.1.5)")
     parser.add_argument('-up', '--udp_port', type=int, default=6789,
                         help="UDP port for Ethernet connection (default: 6789)")
-    parser.add_argument('-n', '--num_actuators', type=int, default=7,
-                        help="Number of actuators (default: 7)")
     args = parser.parse_args()
 
     if args.connection == 'serial':
@@ -49,13 +52,10 @@ def get_rs_protocol_connection() -> RSProtocol:
     else:
         return RSProtocol(create_socket_connection(), (args.ip_address, args.udp_port))
 
-def main() -> None:
-    parser = argparse.ArgumentParser(add_help=False)
-    parser.add_argument('-n', '--num_actuators', type=int, default=7)
-    args, _ = parser.parse_known_args()
 
+def main() -> None:
     rs_protocol = get_rs_protocol_connection()
-    manipulator = Manipulator(rs_protocol, num_actuators=args.num_actuators)
+    manipulator = Manipulator(rs_protocol)
 
     app = QtWidgets.QApplication(sys.argv)
     visualizer = JointControlUI(manipulator)

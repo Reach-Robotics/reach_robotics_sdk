@@ -11,26 +11,32 @@ from rs_protocol import RSProtocol, create_socket_connection, create_serial_conn
 logging.basicConfig(level=logging.ERROR)
 
 STARTUP_MESSAGE = (
-    "\n\n============================================\n"
-    " Reach Robotics Kinematic Control Application\n"
-    "============================================\n\n"
-    
-    "An example application for kinematic control of a Reach Robotics 5FN/7FN manipulator."
-    "Note: this application is supported by Reach Robotics products with 5 or more functions."
-    "For products with fewer than 5 functions, kinematics requests/demands are not supported."
-    "Additionally, for products with less than 7FN, only translational control is available.\n\n"
-
-    "This application provides a graphical interface for controlling and monitoring\n"
-    "Reach Robotics manipulators using either serial or UDP (Ethernet) communication.\n"
-    "Please ensure your manipulator is connected and powered on before starting.\n"
-
-    "Usage:\n"
-    "  Serial (RS-232): python3 ./examples/kinematic_control_app.py -c serial -sp COM8\n"
-    "  Serial (RS-485): python3 ./examples/kinematic_control_app.py -c serial -sp COM8 --half_duplex\n"
-    "  Ethernet (UDP):  python3 ./examples/kinematic_control_app.py -c udp -ip 192.168.1.5 -up 6789\n\n"
-
-    "DISCLAIMER: this application is for demonstrations purposes only and is not intended\n"
-    "to be a complete solution. \n"
+    "\n"
+    "\n================================================================================"
+    "\nReach Robotics Kinematic Control Application"
+    "\n================================================================================"
+    "\n"
+    "\nAn example application for kinematic control of a Reach Robotics 5FN/7FN"
+    "\nmanipulator. "
+    "\n"
+    "\nNotes: "
+    "\n  [1] This application is supported by Reach Robotics products with 5 or more "
+    "\n      functions. For products with fewer than 5 functions, kinematics "
+    "\n      requests/demands are not supported. Additionally, for products with less "
+    "\n      than 7FN, orbit controls will be ignored."
+    "\n  [2] Inverse kinematics must be enabled on the manipulator to use this app. To"
+    "\n      check if inverse kinematics is enabled, email support@reachrobotics.com."
+    "\n"
+    "\nUsage:"
+    "\n  Serial (RS-232): "
+    "\n     python3 ./examples/kinematic_control_app.py -c serial -sp COM8"
+    "\n  Serial (RS-485): "
+    "\n     python3 ./examples/kinematic_control_app.py -c serial -sp COM8 --half_duplex"
+    "\n  Ethernet (UDP):  "
+    "\n     python3 ./examples/kinematic_control_app.py -c udp -ip 192.168.1.5 -up 6789"
+    "\n"
+    "\nDISCLAIMER: this application is for demonstrations purposes only and is not "
+    "\nintended to be a complete solution."
 )
 
 
@@ -46,6 +52,7 @@ def get_rs_protocol_connection() -> RSProtocol:
                         help="IP address for UDP connection (default: 192.168.1.5)")
     parser.add_argument('-up', '--udp_port', type=int, default=6789,
                         help="UDP port for Ethernet connection (default: 6789)")
+
     args = parser.parse_args()
 
     if args.connection == 'serial':

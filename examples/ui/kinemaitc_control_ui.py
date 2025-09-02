@@ -12,6 +12,8 @@ from device.manipulator import Manipulator
 TRANSLATE_VELOCITY_SCALE = 400.0  # Scale factor for translational velocity (mm/s)
 ROTATE_VELOCITY_SCALE = 1.0 # Scale factor for rotational velocity (rad/s)
 
+UPDATE_FREQUENCY = 10  # Hz
+
 
 def create_triad(T: np.ndarray, size: float = 0.1) -> List[gl.GLLinePlotItem]:
     origin = T[:3, 3]
@@ -172,7 +174,7 @@ class KinematicControlUI(QtWidgets.QWidget):
     def _init_update_loop(self) -> None:
         self.loop_timer = QTimer()
         self.loop_timer.timeout.connect(self._update_loop)
-        self.loop_timer.start(10)  # ms
+        self.loop_timer.start(int(1000 / UPDATE_FREQUENCY))
 
     def _update_loop(self) -> None:
         self.manipulator.update()
@@ -181,7 +183,7 @@ class KinematicControlUI(QtWidgets.QWidget):
 
     def update_visualization(self) -> None:
         T_eg = self.manipulator.get_end_effector_transform()
-        T_bg = self.manipulator.get_base_transform()
+        T_bg = self.manipulator.get_mount_transform()
 
         update_triad(self.triad_arrows['EndEffector'], T_eg)
         update_triad(self.triad_arrows['Base'], T_bg)

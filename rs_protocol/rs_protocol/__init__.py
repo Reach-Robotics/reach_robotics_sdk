@@ -16,7 +16,7 @@ from .mode import Mode
 
 DATA_BYTES_PER_PACKET = 64
 RESPONSE_TIMEOUT = 0.001
-HALF_DUPLEX_TIMEOUT = 0.1
+HALF_DUPLEX_TIMEOUT = 0.05
 
 RS_485_NOTE = "Note: for RS-485 (Half-Duplex) connections, data can not be transmitted and recived simultaniously."
 

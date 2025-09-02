@@ -1,9 +1,15 @@
 from PyQt5 import QtWidgets, QtCore
 from rs_protocol import PacketID, Mode
-from typing import List
+
+from device.manipulator import Manipulator
+from device.device import Actuator
+
+
+UPDATE_FREQUENCY = 10  # Hz
+
 
 class JointControlUI(QtWidgets.QWidget):
-    def __init__(self, manipulator):
+    def __init__(self, manipulator: Manipulator):
         super().__init__()
         self.manipulator = manipulator
         self.setWindowTitle("Joint Control UI")
@@ -128,9 +134,9 @@ class JointControlUI(QtWidgets.QWidget):
         self.setLayout(layout)
         self.timer = QtCore.QTimer()
         self.timer.timeout.connect(self.update)
-        self.timer.start(20)
+        self.timer.start(int(1000 / UPDATE_FREQUENCY))
 
-    def register_callbacks(self, actuator):
+    def register_callbacks(self, actuator: Actuator):
         actuator.protocol.register_callback(actuator.device_id, PacketID.POSITION, self.position_callback)
         actuator.protocol.register_callback(actuator.device_id, PacketID.VELOCITY, self.velocity_callback)
         actuator.protocol.register_callback(actuator.device_id, PacketID.TORQUE, self.torque_callback)
