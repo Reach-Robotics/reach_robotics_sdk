@@ -23,6 +23,11 @@ repository is cloned into your ROS workspace src folder.
     * aarch-64 (Linux)
     * x86-64 (Linux & Windows)
 
+.. warning::
+   
+   BPL Protocol (bplprotocol) has been deprecated (August 2025) and replaced with Reach System 
+   protocol (rs_protocol). 
+
 Getting Started With Python
 ---------------------------
 
@@ -44,9 +49,37 @@ requirements using the provided setup script for your operating system.
 Once the setup script has been executed, you can run the
 examples provided in the  ``examples`` folder.
 
-.. code-block:: python
+.. tabs::
 
-   python3 ./examples/basic_actuator_control.py
+    .. tab:: UDP
+
+        To connect using UDP, update your example script to use the UDP connection parameters. For example:
+
+        .. code-block:: python
+
+            python3 ./examples/joint_control_app.py --connection udp --ip <MANIPULATOR_IP> --udp_port <PORT>
+
+        Replace ``<MANIPULATOR_IP>`` (e.g. ``192.168.2.3``) and ``<PORT>`` (e.g. ``6789``) with your robot's IP address and port.
+
+    .. tab:: RS-232
+
+        To connect using RS-232, use the following command, specifying the correct port:
+
+        .. code-block:: python
+
+            python3 ./examples/joint_control_app.py --connection serial --serial_port <SERIAL_PORT>
+
+        Replace ``<SERIAL_PORT>`` (e.g., ``COM3`` or ``/dev/ttyUSB0``) as appropriate.
+
+    .. tab:: RS-485
+
+        For RS-485 connections, use the following command, specifying the correct port:
+
+        .. code-block:: python
+
+            python3 ./examples/joint_control_app.py --connection serial --port <SERIAL_PORT> --half_duplex
+
+        Replace ``<SERIAL_PORT>`` (e.g., ``COM3`` or ``/dev/ttyUSB0``) as appropriate.
 
 
 .. note::
@@ -56,7 +89,7 @@ examples provided in the  ``examples`` folder.
 Getting Started With C/C++
 ---------------------------
 
-To get started with the Reach System C/C++ communications protocol, navigate to the src folder.
+To get started with the Reach System C/C++ communications protocol, navigate to the src folder. 
 
 .. code-block:: none
 
@@ -81,3 +114,8 @@ examples using the GCC toolchain as shown below.
 
    # To run the example
    ./decode_example.o
+
+.. note::
+
+   C src files can be cross compiled for C++ using the appropriate toolchain. For example, you can 
+   use `g++` to compile C++ code that includes C headers. 

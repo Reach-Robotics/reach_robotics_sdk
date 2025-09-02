@@ -6,20 +6,22 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Getting Started &mdash; Reach Robotics SDK 1.1.0 documentation</title>
+  <title>Getting Started &mdash; Reach Robotics SDK 3.0.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
       <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=3fb7a366" />
+      <link rel="stylesheet" type="text/css" href="../_static/tabs.css?v=a5c4661c" />
 
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=def9ab29"></script>
+      <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=8ebd99bd"></script>
       <script src="../_static/doctools.js?v=888ff710"></script>
       <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
       <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
       <script src="../_static/copybutton.js?v=f281be69"></script>
+      <script src="../_static/tabs.js?v=3030b3cb"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -102,6 +104,11 @@ platform/operating system combinations:</p>
 <li><p>x86-64 (Linux &amp; Windows)</p></li>
 </ul>
 </div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>BPL Protocol (bplprotocol) has been deprecated (August 2025) and replaced with Reach System
+protocol (rs_protocol).</p>
+</div>
 <section id="getting-started-with-python">
 <h2>Getting Started With Python<a class="headerlink" href="#getting-started-with-python" title="Permalink to this heading"></a></h2>
 <p>To get started with the Reach System Python protocol, install the <code class="docutils literal notranslate"><span class="pre">rs_protocol</span></code> package and
@@ -116,9 +123,23 @@ requirements using the provided setup script for your operating system.</p>
 </div>
 <p>Once the setup script has been executed, you can run the
 examples provided in the  <code class="docutils literal notranslate"><span class="pre">examples</span></code> folder.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">python3</span> <span class="o">./</span><span class="n">examples</span><span class="o">/</span><span class="n">basic_actuator_control</span><span class="o">.</span><span class="n">py</span>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-0-0-0" aria-selected="true" class="sphinx-tabs-tab" id="tab-0-0-0" name="0-0" role="tab" tabindex="0">UDP</button><button aria-controls="panel-0-0-1" aria-selected="false" class="sphinx-tabs-tab" id="tab-0-0-1" name="0-1" role="tab" tabindex="-1">RS-232</button><button aria-controls="panel-0-0-2" aria-selected="false" class="sphinx-tabs-tab" id="tab-0-0-2" name="0-2" role="tab" tabindex="-1">RS-485</button></div><div aria-labelledby="tab-0-0-0" class="sphinx-tabs-panel" id="panel-0-0-0" name="0-0" role="tabpanel" tabindex="0"><p>To connect using UDP, update your example script to use the UDP connection parameters. For example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">python3</span> <span class="o">./</span><span class="n">examples</span><span class="o">/</span><span class="n">joint_control_app</span><span class="o">.</span><span class="n">py</span> <span class="o">--</span><span class="n">connection</span> <span class="n">udp</span> <span class="o">--</span><span class="n">ip</span> <span class="o">&lt;</span><span class="n">MANIPULATOR_IP</span><span class="o">&gt;</span> <span class="o">--</span><span class="n">udp_port</span> <span class="o">&lt;</span><span class="n">PORT</span><span class="o">&gt;</span>
 </pre></div>
 </div>
+<p>Replace <code class="docutils literal notranslate"><span class="pre">&lt;MANIPULATOR_IP&gt;</span></code> (e.g. <code class="docutils literal notranslate"><span class="pre">192.168.2.3</span></code>) and <code class="docutils literal notranslate"><span class="pre">&lt;PORT&gt;</span></code> (e.g. <code class="docutils literal notranslate"><span class="pre">6789</span></code>) with your robot’s IP address and port.</p>
+</div><div aria-labelledby="tab-0-0-1" class="sphinx-tabs-panel" hidden="true" id="panel-0-0-1" name="0-1" role="tabpanel" tabindex="0"><p>To connect using RS-232, use the following command, specifying the correct port:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">python3</span> <span class="o">./</span><span class="n">examples</span><span class="o">/</span><span class="n">joint_control_app</span><span class="o">.</span><span class="n">py</span> <span class="o">--</span><span class="n">connection</span> <span class="n">serial</span> <span class="o">--</span><span class="n">serial_port</span> <span class="o">&lt;</span><span class="n">SERIAL_PORT</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>Replace <code class="docutils literal notranslate"><span class="pre">&lt;SERIAL_PORT&gt;</span></code> (e.g., <code class="docutils literal notranslate"><span class="pre">COM3</span></code> or <code class="docutils literal notranslate"><span class="pre">/dev/ttyUSB0</span></code>) as appropriate.</p>
+</div><div aria-labelledby="tab-0-0-2" class="sphinx-tabs-panel" hidden="true" id="panel-0-0-2" name="0-2" role="tabpanel" tabindex="0"><p>For RS-485 connections, use the following command, specifying the correct port:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">python3</span> <span class="o">./</span><span class="n">examples</span><span class="o">/</span><span class="n">joint_control_app</span><span class="o">.</span><span class="n">py</span> <span class="o">--</span><span class="n">connection</span> <span class="n">serial</span> <span class="o">--</span><span class="n">port</span> <span class="o">&lt;</span><span class="n">SERIAL_PORT</span><span class="o">&gt;</span> <span class="o">--</span><span class="n">half_duplex</span>
+</pre></div>
+</div>
+<p>Replace <code class="docutils literal notranslate"><span class="pre">&lt;SERIAL_PORT&gt;</span></code> (e.g., <code class="docutils literal notranslate"><span class="pre">COM3</span></code> or <code class="docutils literal notranslate"><span class="pre">/dev/ttyUSB0</span></code>) as appropriate.</p>
+</div></div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>The minimum supported Python version for this package is 3.6.</p>
@@ -147,6 +168,11 @@ gcc<span class="w"> </span>decodePacketExample.c<span class="w"> </span>-I<span 
 <span class="c1"># To run the example</span>
 ./decode_example.o
 </pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>C src files can be cross compiled for C++ using the appropriate toolchain. For example, you can
+use <cite>g++</cite> to compile C++ code that includes C headers.</p>
 </div>
 </section>
 </section>

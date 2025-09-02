@@ -12,7 +12,7 @@
 #
 import os
 import sys
-sys.path.insert(0, os.path.abspath('../../bplprotocol'))  # TODO: update this path to the rs_protocol module
+# sys.path.insert(0, os.path.abspath('../../rs_protocol'))  # in case reference to rs_protocol is required
 import sphinx_rtd_theme
 
 
@@ -23,7 +23,7 @@ copyright = 'Reach Robotics PTY LTD'
 author = 'Reach Robotics'
 
 # The full version, including alpha/beta/rc tags
-release = '1.1.0'
+release = '3.0.0'
 
 
 # -- General configuration ---------------------------------------------------

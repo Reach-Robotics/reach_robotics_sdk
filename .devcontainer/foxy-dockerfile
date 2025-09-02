@@ -18,18 +18,15 @@ RUN python3 -m pip install --upgrade pip
 ARG PYREQ_TXT
 ARG PYREQ_SPHINX_TXT
 ARG PYREQ_RS_PROTOCOL
-ARG PYREQ_BPLPROTOCOL
 
-COPY $PYREQ_TXT /tmp/requirements.txt
-COPY $PYREQ_SPHINX_TXT /tmp/sphinx_requirements.txt
-COPY $PYREQ_RS_PROTOCOL /tmp/rs_protocol
-COPY $PYREQ_BPLPROTOCOL /tmp/bplprotocol
+COPY $PYREQ_TXT /requirements.txt
+COPY $PYREQ_SPHINX_TXT /sphinx_requirements.txt
+COPY $PYREQ_RS_PROTOCOL /rs_protocol
 
-RUN python3 -m pip install --timeout=1000 -r /tmp/sphinx_requirements.txt
-RUN python3 -m pip install --timeout=1000 -r /tmp/requirements.txt
+RUN python3 -m pip install --timeout=1000 -r /sphinx_requirements.txt
+RUN python3 -m pip install --timeout=1000 -r /requirements.txt
 
-RUN python3 -m pip install /tmp/rs_protocol
-RUN python3 -m pip install /tmp/bplprotocol  # TODO: Remove this when bplprotocol is depreciated 
+# RUN python3 -m pip install /rs_protocol
 
 RUN ln -sf /bin/bash /bin/sh
 

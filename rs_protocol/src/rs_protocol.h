@@ -30,8 +30,8 @@
 
 #include "packetID.h"
 
-#ifndef BPL_PROTOCOL_H
-#define BPL_PROTOCOL_H
+#ifndef RS_PROTOCOL_H
+#define RS_PROTOCOL_H
 
 #ifdef __cplusplus
 extern "C" {
@@ -41,7 +41,7 @@ extern "C" {
 #define HEADER_SIZE 4
 
 /**
- * @brief BPL Packet Structure
+ * @brief RS Packet Structure
  */
 struct Packet {
     uint8_t packetID;
@@ -345,4 +345,4 @@ int decodePacket(struct Packet* packet, uint8_t* inputData, size_t inputDataleng
 }
 #endif
 
-#endif  /* BPL_PROTOCOL_H */
+#endif  /* RS_PROTOCOL_H */

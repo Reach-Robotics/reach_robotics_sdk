@@ -9,14 +9,6 @@ or launched the included VS Code development container. For more details, please
    Before proceeding, please install the Reach Robotics SDK. Instructions
    for installation can found in the :ref:`Getting Started<getting_started>` section. 
 
-.. warning::
-   
-   BPL Protocol will be deprecated in 2025 and replaced with Reach System protocol. 
-   The ROS 2 packages provided in this SDK are for the convenience of the user and are 
-   not currently supported by the Reach Robotics team. If you need support with your 
-   ROS 2 integration, please speak to your Reach Robotics sales representative for a quote 
-   (all services are subject to availability). 
-
 Setup
 ---------------------
 
@@ -60,22 +52,27 @@ Packages
 ---------------------------
 The ROS 2 folder is split into several packages. Each package is briefly described below.
 
-bpl_passthrough
+rs_passthrough
 ^^^^^^^^^^^^^^^^^^^^^^^^
-The BPL passthrough is the core package that facilitates communication to Reach 
+The RS passthrough is the core package that facilitates communication to Reach 
 Robotics products. This passthrough converts ROS 2 messages into Serial or UDP
 packets that can be read by the connected product. Each node in the passthrough 
-uses :code:`bpl_msgs/Packet` for messaging. The packet construct is defined as:
+uses :code:`rs_msgs/Packet` for messaging. The packet construct is defined as:
  
 .. code-block::
 
    uint8 device_id
-   uint8 packet_id
-   uint8[] data
+   uint16 packet_id
+   uint8[] int_data
+   float32[] float_data
 
-where ``device_id`` is the device identifier, ``packet_id`` is the packet identifier, and 
-``data`` is a list of 8 bit integers representing the data to be sent. To launch the 
-passthrough, run:
+where ``device_id`` is the device identifier, ``packet_id`` is the packet identifier, 
+``int_data`` is a list of 8 bit integers representing the integer data to be sent, and
+``float_data`` is a list of 32 bit floating point numbers representing the floating point data 
+to be sent. It's important to note, that only one of ``int_data`` or ``float_data`` should be
+populated in a given packet. 
+
+To launch the passthrough, run:
 
 .. tabs::
 
@@ -83,7 +80,7 @@ passthrough, run:
 
          .. code-block:: bash
 
-            ros2 run bpl_passthrough serial_passthrough --ros-args -p serial_port:=/dev/ttyUSB0
+            ros2 run rs_passthrough serial_passthrough --ros-args -p serial_port:=</dev/ttyUSB0>
 
          where,
 
@@ -94,7 +91,7 @@ passthrough, run:
 
          .. code-block:: bash
 
-            ros2 run bpl_passthrough udp_passthrough --ros-args -p ip_address:=192.168.2.4 -p port:=6789
+            ros2 run rs_passthrough udp_passthrough --ros-args -p ip_address:=192.168.2.4 -p port:=6789
          
          where,
 
@@ -103,12 +100,13 @@ passthrough, run:
 
 For both passthrough nodes, the published topic and the subscribed topic, respectively, are:
 
-* :code:`/rx` (:code:`bpl_msgs/Packet`) - Received Packets from the manipulator
-* :code:`/tx` (:code:`bpl_msgs/Packet`) - Packets that will be sent to the manipulator
+* :code:`/rx` (:code:`rs_msgs/Packet`) - Received Packets from the manipulator
+* :code:`/tx` (:code:`rs_msgs/Packet`) - Packets that will be sent to the manipulator
 
 Examples
 """""""""
-This example demonstrates how to request read joint positions from joints on a manipulator.
+This example demonstrates how to request read actuator telemetry from a manipulator.
+
 To launch this example, run the launch file. 
 
 .. tabs::
@@ -117,25 +115,21 @@ To launch this example, run the launch file.
 
         .. code-block:: bash
 
-            ros2 launch bpl_passthrough serial_passthrough_example.launch.py serial_port:="/dev/ttyUSB0"
+            ros2 launch rs_passthrough serial_passthrough_example.launch.py serial_port:="/dev/ttyUSB0"
             
     .. tab:: UDP
 
         .. code-block:: bash
 
-            ros2 launch bpl_passthrough udp_passthrough_example.launch.py ip_address:=192.168.2.4 port:=6789
+            ros2 launch rs_passthrough udp_passthrough_example.launch.py ip_address:=192.168.2.4 port:=6789
 
 The script communicates to the passthrough node via the :code:`/tx` and :code:`/rx` topics.
 It publishes request packets to the :code:`/tx` topic at a set frequency.
 It subscribes the to :code:`/rx` topic and listens for position packets.
 
-.. note::
-
-    This script has been tested to work at 400 Hz over a UDP Connection to the Base MCU.
-
-bpl_bravo_description
+reach_bravo_description
 ^^^^^^^^^^^^^^^^^^^^^^^^
-BPL Bravo Description package contains the Universal Robot description File (URDF) files for the Bravo range of manipulators.
+Reach Bravo Description package contains the Universal Robot description File (URDF) files for the Bravo range of manipulators.
 
 Supported Products:
 
@@ -154,27 +148,27 @@ Viewing a Bravo 7 URDF:
 
 .. code-block:: bash
 
-   ros2 launch bpl_bravo_description view_bravo_7.launch.py
+   ros2 launch reach_bravo_description view_bravo_7.launch.py
 
 Viewing a Bravo 5 URDF:
 
 .. code-block:: bash
 
-   ros2 launch bpl_bravo_description view_bravo_5.launch.py
+   ros2 launch reach_bravo_description view_bravo_5.launch.py
 
 Viewing a Bravo 5 and Bravo 7 URDF:
 
 .. code-block:: bash
 
-   ros2 launch bpl_bravo_description view_bravo_double.launch.py
+   ros2 launch reach_bravo_description view_bravo_double.launch.py
 
 
-.. bpl_control
+.. reach_control
 .. ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-.. BPL Control is a package that provides control and feedback for a manipulator.
+.. RS Control is a package that provides control and feedback for a manipulator.
 
 .. .. note::
-..    The BPL Control Nodes are intended for use with a full duplex connection. (I.e not intended for use over 485 Serial)
+..    The RS Control Nodes are intended for use with a full duplex connection. (I.e not intended for use over 485 Serial)
 
 
 .. joint_state_publisher
@@ -183,11 +177,11 @@ Viewing a Bravo 5 and Bravo 7 URDF:
 .. published topics of ``joint_state_publisher`` are:
 
 .. * :code:`joints_states` (:code:`sensor_msgs/JointState`) - Joint State of the manipulator.
-.. * :code:`tx` (:code:`bpl_msgs/Packet`) - Packets to be sent to the manipulator.
+.. * :code:`tx` (:code:`reach_msgs/Packet`) - Packets to be sent to the manipulator.
 
 .. and the subscribed topics are:
 
-.. * :code:`rx` (:code:`bpl_msgs/Packet`) - Packets to be received from the manipulator
+.. * :code:`rx` (:code:`reach_msgs/Packet`) - Packets to be received from the manipulator
 
 .. with parameters:
 
@@ -202,11 +196,11 @@ Viewing a Bravo 5 and Bravo 7 URDF:
 .. published topics of ``end_effector_pose_publisher`` are:
 
 .. * :code:`end_effector_pose` (:code:`geometry_msgs/PoseStamped`) - End effector pose of the manipulator.
-.. * :code:`tx` (:code:`bpl_msgs/Packet`) - Packets to send the the manipulator.
+.. * :code:`tx` (:code:`reach_msgs/Packet`) - Packets to send the the manipulator.
 
 .. and the subscribed topics are:
 
-.. * :code:`rx` (:code:`bpl_msgs/Packet`) - Packets to receive from the manipulator.
+.. * :code:`rx` (:code:`reach_msgs/Packet`) - Packets to receive from the manipulator.
 
 .. with parameters:
 
@@ -215,7 +209,7 @@ Viewing a Bravo 5 and Bravo 7 URDF:
 
 .. control_node
 .. """""""""""""""""""""""""""""
-.. The BPL Control Node provides control of the manipulator. Control options include:
+.. The RS Control Node provides control of the manipulator. Control options include:
 
 .. * Joint Velocity Control
 .. * Joint Position Control
@@ -223,7 +217,7 @@ Viewing a Bravo 5 and Bravo 7 URDF:
 
 .. The published topics of ``end_effector_pose_publisher`` are:
 
-.. * :code:`tx` (:code:`bpl_msgs/Packet`) - Packets to send to the manipulator.
+.. * :code:`tx` (:code:`reach_msgs/Packet`) - Packets to send to the manipulator.
 
 .. and the subscribed topics are:
 
@@ -240,7 +234,7 @@ Viewing a Bravo 5 and Bravo 7 URDF:
 
 .. .. code-block:: bash
 
-..    ros2 launch bpl_bringup bravo_5_udp.launch.py ip_address:=192.168.2.4 port:=6789
+..    ros2 launch reach_bringup bravo_5_udp.launch.py ip_address:=192.168.2.4 port:=6789
 
 .. Bravo 7 Example
 .. """""""""""""""""""""""
@@ -253,7 +247,7 @@ Viewing a Bravo 5 and Bravo 7 URDF:
 
 .. .. code-block:: bash
 
-..    ros2 launch bpl_bringup bravo_7_udp.launch.py ip_address:=192.168.2.4 port:=6789
+..    ros2 launch reach_bringup bravo_7_udp.launch.py ip_address:=192.168.2.4 port:=6789
 
 .. Bravo 7 and Bravo 5 Example
 .. """""""""""""""""""""""""""""""""""""""
@@ -266,4 +260,4 @@ Viewing a Bravo 5 and Bravo 7 URDF:
 
 .. .. code-block:: bash
 
-..    ros2 launch bpl_bringup bravo_double_udp_launch.py ip_address_a:=192.168.2.4 port_a:=6789 ip_address_b:=192.168.2.8 port_b:=6789
+..    ros2 launch reach_bringup bravo_double_udp_launch.py ip_address_a:=192.168.2.4 port_a:=6789 ip_address_b:=192.168.2.8 port_b:=6789

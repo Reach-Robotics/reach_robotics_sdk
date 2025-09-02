@@ -21,7 +21,7 @@ STARTUP_MESSAGE = (
     "\n"
     "\nUsage:"
     "\n  Serial (RS-232):"
-    "\n    python3 ./examples/joint_control_app.py -c serial -sp COM8 -n 7"
+    "\n    python3 ./examples/joint_control_app.py -c serial -sp COM8"
     "\n  Serial (RS-485):"
     "\n    python3 ./examples/joint_control_app.py -c serial -sp COM8 --half_duplex"
     "\n  Ethernet (UDP):"
