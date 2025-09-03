@@ -5,7 +5,7 @@ import numpy as np
 from typing import List
 from scipy.spatial.transform import Rotation as R
 
-from rs_protocol import RSProtocol, PacketID, DeviceType
+from rs_protocol import RSProtocol, PacketID
 from device.device import Actuator, Router, Compute
 
 logging.basicConfig()
