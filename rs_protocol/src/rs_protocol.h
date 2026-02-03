@@ -87,8 +87,8 @@ uint8_t cobs_decode(const uint8_t* input, uint8_t length, uint8_t* output)
     while(read_index < length) {
         code = input[read_index];
         if(read_index + code > length && code != 1) { 
-            return 0 
-        };
+            return 0;
+        }
 
         read_index++;
         for(i = 1; i < code; i++) { 
