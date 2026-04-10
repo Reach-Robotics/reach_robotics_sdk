@@ -50,9 +50,9 @@ typedef enum packetID{
 
     /* Workspace restrictions */
     KM_BOX_OBSTACLE_02 = 0xA5,
-    KM_BOX_OBSTACLE_03 = 0xA5,
-    KM_BOX_OBSTACLE_04 = 0xA5,
-    KM_BOX_OBSTACLE_05 = 0xA5,
+    KM_BOX_OBSTACLE_03 = 0xA6,
+    KM_BOX_OBSTACLE_04 = 0xA7,
+    KM_BOX_OBSTACLE_05 = 0xA8,
 
     KM_CYLINDER_OBSTACLE_02 = 0xAB,
     KM_CYLINDER_OBSTACLE_03 = 0xAC,
