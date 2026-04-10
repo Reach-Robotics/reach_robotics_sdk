@@ -155,6 +155,12 @@ class PacketID():
     HARDWARE_STATUS_FLAG = 0x68
     PacketType[HARDWARE_STATUS_FLAG] = int
 
+    COLLISION_FLAG = 0xAF
+    PacketType[COLLISION_FLAG] = int
+
+    COLLISION_COORDINATES = 0xB1
+    PacketType[COLLISION_COORDINATES] = float
+
 
 
 

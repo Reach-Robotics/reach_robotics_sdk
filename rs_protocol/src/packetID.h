@@ -66,7 +66,9 @@ typedef enum packetID{
     INTERNAL_PRESSURE = 0x67,
     FACTORY_CLIMATE = 0x28,
     SOFTWARE_VERSION = 0x6C, 
-    HARDWARE_STATUS_FLAG = 0x68
+    HARDWARE_STATUS_FLAG = 0x68,
+    COLLISION_FLAG = 0xAF,
+    COLLISION_COORDINATES = 0xB1
 }packetID;
 
 #ifdef __cplusplus
