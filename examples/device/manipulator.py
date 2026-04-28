@@ -130,6 +130,21 @@ class Manipulator:
         T_bg[0:3, 0:3] = R.from_euler('zyx', data[3:6]).as_matrix()
         self.T_bg = T_bg
     
+    def ee_position_global(self, T_eg) -> None:
+        """ 
+        Send end-effector position command in global frame [X, Y, Z, RX, RY, RZ] (m, rad)
+        
+        WARNING: This method will command the manipulator to move to the specified 
+        end-effector pose using a local controller. This method does not generate a plan 
+        or perform any checks for reachability. It is the caller's responsibility to 
+        ensure the commanded pose is safe and reachable.
+        """
+        t_eg = np.array(T_eg[0:3, 3]) * 1000
+        r_eg = R.from_matrix(T_eg[0:3, 0:3]).as_euler('ZYX') # 'ZYX' for extrinsic rotations for YPR axes
+        self.protocol.write(self.compute.device_id, 
+                            PacketID.INVERSE_KINEMATICS_GLOBAL_POSITION, 
+                            list(t_eg)+list(r_eg))
+    
     def ee_velocity_global(self, V_eg) -> None:
         """ Send end-effector velocity command in global frame [X, Y, Z, RX, RY, RZ] (mm/s, rad/s)"""
         self.protocol.write(self.compute.device_id, 
