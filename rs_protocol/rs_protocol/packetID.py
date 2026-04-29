@@ -161,6 +161,19 @@ class PacketID():
     COLLISION_COORDINATES = 0xB1
     PacketType[COLLISION_COORDINATES] = float
 
+    @classmethod
+    def add(cls, *packet_classes):
+        """Merge packet IDs and PacketType mappings from one or more classes."""
+        for packet_class in packet_classes:
+            packet_types = getattr(packet_class, 'PacketType', {})
+            cls.PacketType.update(packet_types)
+
+            for name, value in vars(packet_class).items():
+                if name.isupper() and isinstance(value, int):
+                    setattr(cls, name, value)
+
+    
+
 
 
 
