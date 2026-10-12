@@ -69,6 +69,7 @@ typedef enum packetID{
     HARDWARE_STATUS_FLAG = 0x68,
     COLLISION_FLAG = 0xAF,
     COLLISION_COORDINATES = 0xB1
+    HALL_FLUX_DENSITY = 0x110
 }packetID;
 
 #ifdef __cplusplus

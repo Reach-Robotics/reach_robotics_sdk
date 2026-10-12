@@ -1,5 +1,6 @@
-class PacketID():
-    ''' Please read the **Reach System - Communication Protocol** documentation for more information '''
+class PacketID:
+    """Please read the **Reach System - Communication Protocol** documentation for more information"""
+
     PacketType = dict()
 
     # Request
@@ -90,10 +91,10 @@ class PacketID():
     CURRENT_LIMITS = 0x12
     PacketType[CURRENT_LIMITS] = float
 
-    COMPUTE_IP_ADDRESS = 0x33 # TODO: add to protocol documentation
+    COMPUTE_IP_ADDRESS = 0x33  # TODO: add to protocol documentation
     PacketType[COMPUTE_IP_ADDRESS] = int
 
-    ROUTER_ETH_PARAMETERS = 0x46 # TODO: add to prototol documentation
+    ROUTER_ETH_PARAMETERS = 0x46  # TODO: add to prototol documentation
     PacketType[ROUTER_ETH_PARAMETERS] = int
 
     MOUNT_TRANSFORM = 0xB4  # TODO: add to protocol documentation
@@ -161,20 +162,16 @@ class PacketID():
     COLLISION_COORDINATES = 0xB1
     PacketType[COLLISION_COORDINATES] = float
 
+    HALL_FLUX_DENSITY = 0x110
+    PacketType[HALL_FLUX_DENSITY] = float
+
     @classmethod
     def add(cls, *packet_classes):
         """Merge packet IDs and PacketType mappings from one or more classes."""
         for packet_class in packet_classes:
-            packet_types = getattr(packet_class, 'PacketType', {})
+            packet_types = getattr(packet_class, "PacketType", {})
             cls.PacketType.update(packet_types)
 
             for name, value in vars(packet_class).items():
                 if name.isupper() and isinstance(value, int):
                     setattr(cls, name, value)
-
-    
-
-
-
-
-
